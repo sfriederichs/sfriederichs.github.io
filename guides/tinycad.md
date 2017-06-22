@@ -53,7 +53,7 @@ This directory contains many .TCLib files.  Create a new directory under My Docu
 
 Now you need to add all of these new libraries to TinyCAD and remove the old ones.  Start up TinyCAD and you should see a screen like this:
 
-![Initial TinyCAD screen](img/tinycad/Editing%20Tools%20%C2%B7%20angryeelight-costume%20Wiki%20-%20Google%20Chrome_2013-01-19_10-57-32.png)
+![Initial TinyCAD screen](img/tinycad/Tinycad_Initial_Screen.png)
 
 The mouse pointer is centered on the _Libraries_ button - click it to open this dialog:
 
