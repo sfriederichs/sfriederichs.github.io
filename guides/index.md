@@ -11,3 +11,12 @@ I'm a collector. I collect step-by-step instructions for doing 'makey' things. F
 
 # Miscellaneous How-To's#
 
+<ul class="post-list">
+    {% for post in site.posts %}
+	{% if post.categories contains 'how-to' %}
+	<li>
+		<a href="{{ post.url }}">{{ post.title }}</a>
+	</li>
+	{% endif %}
+    {% endfor %}
+  </ul>
