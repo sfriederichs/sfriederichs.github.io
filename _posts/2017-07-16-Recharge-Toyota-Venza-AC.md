@@ -32,7 +32,7 @@ They really don't make this process easy, do they? My dad always threatened tort
 
 1. The low-pressure recharge port is stuck way down under the hood and it's *right next to the main fan* **AND** it's nestled among things that get really hot when the car is running. See the picture below. Considering that you have to recharge the refrigerant while the car is running, this is problematic for your hands.
 ![Indiana-Jones levels of danger]({{site.basepath}}/img/IMG_20170717_203356645.jpg)
-2. Since the recharge port is so far down under the hood, there's no room to rock the can back and forth as they recommend in the videos and there's barely enough hose on the caniser to reach the port anyway.
+2. Since the recharge port is so far down under the hood, there's no room to rock the can back and forth as they recommend in the videos and there's barely enough hose on the canister to reach the port anyway.
 3. For the life of me I couldn't be 100% sure of which of the spinny things under the hood was the compressor. I saw lots of spinny things and saw spinny things near where the refrigerant lines went and I assume one of them was the compressor and it was spinny, but they were all spinny all the time so I was a bit lost.
 
 Once you remove the protector tab from the refrigerant canister and put the gauge on it you CANNOT unscrew the gauge from the canister until the canister is empty because all of the remaining refrigerant will escape into the atmosphere (I'm told this is an illegal thing to do).
@@ -91,7 +91,11 @@ The canister of refrigerant was $30 and the A/C service from the shop was $60. T
 
 All in all, this is a win.
 
+UPDATE:
 
+So it seems this is less of a win, maybe something of a vindication?
+
+After all of this, my wife was driving her car today and the A/C didn't work. Then she drove it again and it did work. Definitely intermittent, very likely something preventing the compressor from running. My vindication is that I didn't break it when I added refrigerant.
 
 ## Resources ##
 
