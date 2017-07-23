@@ -9,6 +9,11 @@ I'm a collector. I collect step-by-step instructions for doing 'makey' things. F
 
 [TinyCad Installation and Schematic Capture Tutorial]({{ site.baseurl }}/guides/tinycad.html)
 
+
+# Embedded Development #
+
+[Installing and Using WinAVR with the AVR Dragon and ATMega328-PU on Windows 7]({{ site.baseurl }}/guides/WinAVR.html)
+
 # Miscellaneous How-To's#
 
 <ul class="post-list">
