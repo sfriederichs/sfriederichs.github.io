@@ -9,7 +9,7 @@ This document describes the processing of installing WinAVR 20100110 on a Window
 
 Size: 18 MB
 
-[Installer File](http://sourceforge.net/pro jects/winavr/files/WinAVR/20100110/WinAVR-20100110-install.exe/download)
+[Installer File](https://sourceforge.net/projects/winavr/files/WinAVR/20100110/WinAVR-20100110-install.exe/download)
 
 ## Installation Steps##
 
@@ -100,8 +100,8 @@ download libusb-win32 from here:
 
 2) Within that directory there are two subdirectories which both contain an 'install-filter.exe' file. Run the 'install-filter-win.exe' program from the directory appropriate for your architecture:
 
-	* 64-bit Windows - 'amd64'
-	* 32-bit Windows - 'x86'
+* 64-bit Windows - 'amd64'
+* 32-bit Windows - 'x86'
 	
 3) Ensure that 'Install a Device Driver' is selected and click 'Next'
 
