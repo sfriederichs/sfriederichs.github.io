@@ -2,7 +2,7 @@
 layout: post
 title:  "How To Raise an Issue When a Jenkins Build Fails"
 date:   2017-07-26 8:51
-categories: how-to Jekyll
+categories: how-to Jenkins
 ---
 My adventure with Jenkins continues: today I had my first legitimate build failure after I updated a few input files. Unfortunately, the only way I knew that it had failed (because I don't watch Jenkins like a hawk) was to notice that the status reports hadn't been updated since yesterday. Sure enough, build failures. I wish it would tell me.
 
