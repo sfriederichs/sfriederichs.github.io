@@ -113,10 +113,57 @@ And here's the output:
 
 Now, apart from the difficulties with the order of what gets printed and when, you'll see something else interesting in this example. The main thread signals exit after its 11s wait, but *myThread* manages to sleep for 5 seconds three times for a total of 15 seconds instead of 11. This is because *myThread* can't exit while it's *sleep*ing because *sleep* is a blocking command - the thread will do no work while it's waiting for *sleep* to finish. That means that even though the main thread signals exit after 11 seconds, the whole application will only exit after *myThread* stops being blocked and recognizes the *exit* flag after 15 seconds. Thus, the *myThread.join()* call will cause the main thread to block for about 4 seconds - until *myThread* recognizes and acts on the flag. You'll see this behavior often in threads that involve blocking calls.
 
+## Compartmentalized Threads ##
+
+One trick that occurred to me as I was developing a more complex application was that I will probably want to package all of the functions and variables pertaining to a particular thread in its own Python file and import it into the main Python file instead of putting everything in one big file. The problem with this is that the *exit* flag becomes useless as it's a file global variable that doesn't get exported to the imported files. The workaround for this is to add an attribute to the thread that signals it to end. The code looks like this:
+
+{% highlight python %}
+
+from time import sleep
+import threading
+
+def myThread():
+    t = threading.currentThread()
+ 
+    while getattr(t, "do_run", True):
+        sleep(1)         
+    print "Exiting myThread..."
+
+threadHandle = threading.Thread(target=myThread,args=(,))
+threadHandle.start()
+try:
+    while True:
+        sleep(.1)
+except KeyboardInterrupt:
+    threadHandle.do_run = False
+    threadHandle.join()
+        
+{% endhighlight %}
+
+For any thread handle you can access the *do_run* attribute and set it *False* to end the thread. This lets you end threads individually and also lets you compartmentalize the code in its own file so you can do this:
+
+{% highlight python %}
+
+from myThreadFile import myThread
+import threading
+from time import sleep
+threadHandle = threading.Thread(target=myThread,args=(,))
+threadHandle.start()
+
+try:
+    while True:
+        sleep(.1)
+except KeyboardInterrupt:
+    threadHandle.do_run = False
+    threadHandle.join()
+{% endhighlight %}
+
+
+
 ## Resources ##
 
 * [Simplistic Python Thread Example](https://www.saltycrane.com/blog/2008/09/simplistic-python-thread-example/)
-
+* [Compartmentalized thread example StackOverflow answer](https://stackoverflow.com/a/36499538)
 
 
 
