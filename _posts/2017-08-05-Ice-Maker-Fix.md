@@ -11,7 +11,8 @@ The refrigerator model is an Electrolux FGHB2866PF2 which is apparently branded 
 
 ## Possibilities##
 
-1. Poor water pressure - check your filter, check the pressure from the wall, etc.
+1. Is the water on?
+2. Poor water pressure - check your filter, check the pressure from the wall, etc.
 2. Needs to be defrosted - apparently this may need to be done every few months? There is supposed to be a defrost cycle but a design flaw causes the drain to ice up and renders it useless. There's an updated insulation kit that is supposed to address this issue.
 
 ## Complaining ##
@@ -20,12 +21,13 @@ Complaining should always be your first step in getting things fixed. It works w
 
 ## Defrosting the Icemaker ##
 
-This process involves removing the icemaker so that the ice buildup behind the unit can 
+This process involves removing the icemaker so that the ice buildup behind the unit can be removed and icemaker performance increased.
 
 ### Tools Needed###
 
 * 1/4" socket
 * Philips screwdriver
+* Hair dryer/Heat gun
 
 ###Steps###
 
