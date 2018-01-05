@@ -56,8 +56,30 @@ Once the plugins are installed you'll have to enter information for an admin acc
 
 Done!
 
+### Updating the SVN Workspace Version ###
+
+By default, Jenkins uses an *old* version of the Subversion client and checks out its workspaces in that version. The version it uses is incompatible with the command-line client that would be used when you put SVN commands in the build instructions. To fix this, perform the following steps:
+
+1. Open [Jenkins](http://localhost:8080) and log in
+2. Click on *Manage Jenkins*
+3. Find *Configure System* and click on it
+4. Find *Subversion Workspace Version* and set it to the appropriate version. The maximum I have is 1.8 - I hope it's enough (it is!).
+5. Click *Save*
+
+### Moving the Default Workspace Location ###
+
+The default workspace location (where SVN files used in builds are checked out) is located within the Program Files directory on your PC. This is less than ideal because you might not by default have write permissions to that when you execute scripts. Plus, it's going to put a lot of *stuff* in your Program Files directory which will make it huge and complicated. 
+
+1. Create a folder where you want your workspace to be. I chose C:\Jenkins-Workspace
+2. Open [Jenkins](http://localhost:8080) and log in
+3. Click on *Manage Jenkins*
+4. Under *Home Directory* click the *Advanced* button.
+5. Set the *Workspace Root Directory* to the folder you created for this purpose.
+6. Click *Save*
+
 ## Resources ##
 
 * [Jenkins Download Page](https://jenkins.io/download/)
 * [Jenkins Windows Download](https://jenkins.io/download/thank-you-downloading-windows-installer-stable)
 * [Jenkins Post-Installer Page](https://wiki.jenkins.io/display/JENKINS/Thanks+for+using+Windows+Installer)
+* [Jenkins SVN Workspace Update Stackoverflow answer](https://stackoverflow.com/a/15163931)

@@ -97,6 +97,10 @@ So it seems this is less of a win, maybe something of a vindication?
 
 After all of this, my wife was driving her car today and the A/C didn't work. Then she drove it again and it did work. Definitely intermittent, very likely something preventing the compressor from running. My vindication is that I didn't break it when I added refrigerant.
 
+UPDATE... UPDATE:
+
+The final word on this was that there was a refrigerant leak. When they recharged the A/C they used refrigerant with a dye in it so they could track any leaks with a blacklight. When it stopped working, we took it back in, they fixed the leak, recharged it and charged us nothing for it. It worked consistently after this to my wife's satisfaction and I was glad I didn't have to pay any more for a final fix. 
+
 ## Resources ##
 
 * [YourMechanic.com](https://www.yourmechanic.com/article/how-to-recharge-the-air-conditioning-in-your-car)
