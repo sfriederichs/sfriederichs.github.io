@@ -13,25 +13,68 @@ The difference changed my life: I much prefered the bolder,spicier ginger taste 
 
 ## Recipe ##
 
-I've generated this recipe as an amalgamation of the various sources below.
+The recipe below is primarily Alton Brown's Recipe with modifications that I've made.
+
+### Hardware ###
+
+* [2L jug](http://amzn.to/2CTdVUh)
+* Funnel
+* Fine mesh strainer
+* 2 quart saucepan
 
 ### Ingredients ###
 
-* 3/4 cup packed brown sugar (you can adjust to taste)
-* 1 1/2 cups peeled and minced fresh ginger
-* 2 quarts cold water, divided
-* 2/3 cup freshly squeezed lime juice
-* 1/4 teaspoon dried [champagne yeast](http://amzn.to/2zjUDVa)
+* 5 oz sugar
+* 2.3 oz fresh finely minced fresh ginger
+* 2 quarts cold water, divided into: 1/2 and 7 and 1/2 cups
+* Juice of 1/2 lemon
+* 1/8 teaspoon dried [champagne yeast](http://amzn.to/2zjUDVa)
 
 ### Directions ###
 
-1. Mix sugar, ginger, and 4 cups water in saucepan. Bring to boil, stirring to dissolve sugar. Remove from heat, cover, and let stand 1 hour to steep.
+1. Mix sugar, ginger, and 1/2 cup water in 2 quart saucepan. Heat over medium-high heat until sugar is dissolved. Remove from heat, cover, and let stand 1 hour to steep.
 
-2. Strain syrup through strainer and funnel into 2-liter soda bottle. Add lime juice. Fill with cold water to within 2 inches of top. Cap and cool in refrigerator or ice bath until about 65°F.
+2. Strain syrup through a fine strainer into a bowl. Cool the bowl to 68F-73F. 
 
-3. Add 1/4 teaspoon champagne yeast. (Reserve remaining yeast for next batch.) Cap bottle and let stand at room temperature for about 2 days, checking bottle pressure intermittently by squeezing it or releasing the cap slightly and briefly.
+3. Funnel the syrup into the 2L jug, then add the lemon juice and the yeast.
 
-4. When ginger beer has achieved desired carbonation level, refrigerate. Serve and enjoy!
+4. Cap bottle and let stand at room temperature for about 2 days, checking bottle pressure intermittently by squeezing it or releasing the cap slightly and briefly.
+
+5. When ginger beer has achieved desired carbonation level, refrigerate. Serve and enjoy!
+
+## As-Made Recipe - 1/7/2018 ##
+
+I actually got the chance to make this tonight, so I decided to document how I made it.
+
+First off, some hardware talk. All of the guides have said to ferment the ginger beer in a 2L soda bottle. For the life of me, I don't have one of those in my house. My wife ferments things in quart-sized mason jars and my dad brews beer in big glass carbouys, so initially I was looking for more mason jars to do fermenting in. Sadly, you can't buy less than like, 8 of those at a time. That's too expensive for my tastes and I have nowhere to put that many unused jars, so I wanted a better solution. I took a leisurely stroll around Wal-Mart and although it took at least a half hour of looking, I found something great:
+
+![The holy grail of containers]({{site.basepath}}/img/IMG_20180107_203559023.jpg)
+
+This thing was perfecxt:
+
+* The size was correct
+* It was cheap
+* It has a built-in valve at the top 
+
+I really think the only way I could do better is to buy at least $30 worth of equipment. For a single-batch of brewing, this is a pretty useful container. Luckily, they sell this on [Amazon](http://amzn.to/2CTdVUh) too.
+
+I'll see how this thing works out, but I'm optimistic.
+
+The first step was to make the syrup that would be the base of the ginger beer.
+
+I brought my postage scale into the kitchen to measure the weight of the sugar and ginger. For the ginger, I just put a sheet of saran wrap on the scale top and put my cheese grater on top before zeroing the scale out.  I didn't cut the skin off of the ginger - none of that will go in the actual ginger beer anyway. I just started grating it on to the scale, every once in a while stopping to see how many ounces I had. I went with 2.3 oz of ginger because I like a lot of ginger. After grating the ginger I put it in a saucepan and put that on top of the scale again, zero'd it out and started pouring in the sugar. I used pure cane sugar. Other potential options include:
+
+* Refined white sugar
+* Brown sugar
+* Something called 'Sucanat' which claims to be a 1:1 replacement for white or brown sugar
+* Molasses
+
+I tend to like the lighter ginger beers, so I avoided the brown sugar, molasses and Sucanat (which looks pretty dark to me). I didn't have refined white sugar, so I went with pure cane sugar. I used only 5oz because I don't like my ginger beer too sweet. We'll see what happens with that. 
+
+Once I had the sugar and ginger measured out I added the 1/2 cup of water and put it on the stove. ( FYI, for the water, I'm using reverse-osmosis filtered water ) I put the heat up to 7 and the sugar dissolved rather quickly. Once that happened, I took it off the heat and let it sit for an hour before pouring it into a bowl through a strainer and mashing the liquid out of the ginger with a spoon. I used a non-contact thermometer to measure the temperature of the syrup as I put it in the fridge: It was 77F. It only needed to be in the refrigerator about 15 minutes or so to reach 68F. 
+
+I cleaned the 2L bottle out with soap and water, then juiced half of a lemon and set it aside. Next, I filled a small cup with filtered water. I poured the syrup into the 2L bottle through a funnel, then poured the lemon juice in through a very fine strainer. I used the cup of filtered water to rinse the syrup and lemon juice reside out of the strainer and funnel. Then, I added half of a 1/4 teaspoon of champagne yeast to the jug, then filled it up 90% of the way to the top with filtered water, gave it a good shake and put it on a shelf. Theoretically, on Tuesday night I should be able to check it for carbonation.
+
 
 ## Resources ##
 
@@ -40,6 +83,6 @@ I've generated this recipe as an amalgamation of the various sources below.
 * [Homebrew Talk Spiced Ginger Beer Discussion](https://www.homebrewtalk.com/forum/threads/spiced-ginger-beer.72301/)
 * [How to Make Ginger Beer - The Roasted Root](https://www.theroastedroot.net/how-to-make-ginger-beer/)
 * [Serious Eats Ginger Beer Recipe](http://www.seriouseats.com/recipes/2012/01/homebrewing-recipe-how-to-brew-ginger-beer-at-home.html)
-
+* [Alton Brown's Ginger Beer Recipe](http://www.foodnetwork.com/recipes/alton-brown/ginger-ale-recipe-1944722)
 
 
