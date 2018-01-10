@@ -50,7 +50,7 @@ First off, some hardware talk. All of the guides have said to ferment the ginger
 
 ![The holy grail of containers]({{site.basepath}}/img/IMG_20180107_203559023.jpg)
 
-This thing was perfecxt:
+This thing was perfect:
 
 * The size was correct
 * It was cheap
@@ -75,6 +75,21 @@ Once I had the sugar and ginger measured out I added the 1/2 cup of water and pu
 
 I cleaned the 2L bottle out with soap and water, then juiced half of a lemon and set it aside. Next, I filled a small cup with filtered water. I poured the syrup into the 2L bottle through a funnel, then poured the lemon juice in through a very fine strainer. I used the cup of filtered water to rinse the syrup and lemon juice reside out of the strainer and funnel. Then, I added half of a 1/4 teaspoon of champagne yeast to the jug, then filled it up 90% of the way to the top with filtered water, gave it a good shake and put it on a shelf. Theoretically, on Tuesday night I should be able to check it for carbonation.
 
+## 1-9-18 Update ##
+
+Today is the day that the ginger beer was supposed to be done. I had monitored the temperature of the jug and it varied from 68F to 80F, all of which is in the desirable range for the champagne yeast. The morning after I started fermenting I tried relieving pressure in the jug but to my dismay I found there was no pressure to relieve. The same happened the next day too so I didn't have high hopes going in to the taste testing.
+The ginger beer tasted okay - certainly not bad. It was a little too sweet for my liking and didn't have that ginger spice that I love so much. However, I detected only the barest hint of carbonation. This thing hadn't been fermenting in the past two days. 
+
+I have [researched](https://www.homebrewtalk.com/forum/threads/help-ginger-ale-fermenting-slow.211632/) several potential reasons:
+
+* White sugar just ferments really slowly
+* It's not warm enough
+
+To get white sugar to ferment faster, you're supposed to 'invert' it by boiling it with an acid. I may do this next time: add the lemon juice to the syrup before dissolving the sugar in it, then let it get it to boil and then simmer for 20 minutes.
+
+That is something that I can do next time. For this time, I just added another 1/8 tsp of champagne yeast. We'll see where that goes.
+
+I think I will also need a more temperature-consistent place to ferment the ginger beer.
 
 ## Resources ##
 
@@ -84,5 +99,5 @@ I cleaned the 2L bottle out with soap and water, then juiced half of a lemon and
 * [How to Make Ginger Beer - The Roasted Root](https://www.theroastedroot.net/how-to-make-ginger-beer/)
 * [Serious Eats Ginger Beer Recipe](http://www.seriouseats.com/recipes/2012/01/homebrewing-recipe-how-to-brew-ginger-beer-at-home.html)
 * [Alton Brown's Ginger Beer Recipe](http://www.foodnetwork.com/recipes/alton-brown/ginger-ale-recipe-1944722)
-
+* [Slow fermenting ginger beer](https://www.homebrewtalk.com/forum/threads/help-ginger-ale-fermenting-slow.211632/)
 
