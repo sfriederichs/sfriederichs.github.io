@@ -91,6 +91,17 @@ That is something that I can do next time. For this time, I just added another 1
 
 I think I will also need a more temperature-consistent place to ferment the ginger beer.
 
+## 1-16-18 Update ##
+
+I moved the jug to a place that had a more consistent and higher temperature: a cabinet above my fridge. Most temperature readings since have been in the 73F-75F range. This is a pretty solid temperature for those yeast, so no concerns there. Unfortunately, I've had little or no movement on fermentation. I've had no pressure to release and no hint of carbonation. It could still be fermenting - just very slowly. Some of the people on the homebrew boards have said it takes weeks. Still, I know more now than I did before, so maybe I should try a new batch. The things I would do differently in the next batch:
+
+* Add more ginger and I would blend it for a long time in a food processor. This should increase the ginger flavor.
+* Add the lemon juice to the sugar and water and ginger in the saucepan before heating it. This will invert the sugar and make it easier for the yeast to digest it.
+* Bring the sugar/water/ginger/lemon mixutre to a boil, then reduce heat and let it simmer for 20-30 minutes. This should increase the ginger flavor and ensure the sugars are inverted.
+* Keep the jug above the refrigerator from the start. This should keep the yeast happy and fermenting.
+
+For the mean time I'll keep the jug where it is doing whatever it's doing. Patience.
+
 ## Resources ##
 
 * [How do I make my ginger beer spicy?](https://homebrew.stackexchange.com/q/7713)
