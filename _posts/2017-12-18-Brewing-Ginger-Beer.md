@@ -102,6 +102,19 @@ I moved the jug to a place that had a more consistent and higher temperature: a 
 
 For the mean time I'll keep the jug where it is doing whatever it's doing. Patience.
 
+## 1-21-18 Update ##
+
+Okay, now we have motion and movement on this thing. Currently, it is definitely fermenting - I know this because I hear the pressure escaping when I open the valve. I can do it a few times a day and still have pressure on it, plus I see the little bubbles rising to the surface. Bottom line: there's activity. I did two things a few days ago that might have moved things along:
+
+* Added another 1/8 tsp of yeast
+* Screwed the cap on tighter
+
+I figure if the cap wasn't on tight then the gasses might have escaped. Maybe that happened, or maybe the yeast just took off this time. 
+
+Either way, it doesn't a sad fact about this attempt: it's a failure. I don't like the way the ginger beer tastes: it's not gingery enough and there's too much lemon. The sweetness is gone: fermented mostly away by the yeast. It definitely tastes fermented, but not sour or skunky. That's okay, but the whole point was *ginger* and it's just not there. I can try again and see if I can improve the taste somehow. 
+
+I wonder if it would be permissible to leave the ginger in the jug while it ferments? would that make it too obnoxiously gingery?
+
 ## Resources ##
 
 * [How do I make my ginger beer spicy?](https://homebrew.stackexchange.com/q/7713)
