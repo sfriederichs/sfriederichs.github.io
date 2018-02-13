@@ -133,6 +133,51 @@ if __name__=="__main__":
 > RX: hello world  
 > TX: Received Ctrl+C... initiating exit  
 
+## Blocking Sockets ##
+
+Often in multi-threaded programming you'll *want* a blocking socket so that you can let other tasks run until there's data available for you to play with. You can modify the RX thread to do so:
+
+{% highlight python %}
+
+def rxThread(portNum):
+    global exit
+    
+    #Generate a UDP socket
+    rxSocket = socket.socket(socket.AF_INET, #Internet
+                             socket.SOCK_DGRAM) #UDP
+                             
+    #Bind to any available address on port *portNum*
+    rxSocket.bind(("",portNum))
+    
+    #Prevent the socket from blocking until it receives all the data it wants
+    #Note: Instead of blocking, it will throw a socket.error exception if it
+    #doesn't get any data
+    
+    rxSocket.settimeout(.1)
+    
+    print "RX: Receiving data on UDP port " + str(portNum)
+    print ""
+    
+    while not exit:
+        try:
+            #Attempt to receive up to 1024 bytes of data
+            data,addr = rxSocket.recvfrom(1024) 
+            #Echo the data back to the sender
+            rxSocket.sendto(str(data),addr)
+        except socket.timeout:
+            pass
+        except socket.error:
+            #If no data is received, you get here, but it's not an error
+            #Ignore and continue
+            pass
+    
+
+
+{% endhighlight %}
+
+
+clientsocket.settimeout(5)
+
 ## Resources ##
 
 * [Python Socket Library Documentation](https://docs.python.org/2/library/socket.html)

@@ -302,6 +302,77 @@ $if(title)$
 
 This produces a PDF including the title page formatting from titlePage.tex intact with the content from the Markdown file in the PDF. This is what I wanted (other than DOCX output... and a pony...).
 
+## LaTeX Template Variables and Modifications ##
+
+Okay, so the whole goal of this is to have professional-looking documents with a minimum of effort, right? Seems to me I have to start customizing the hell out of these templates and this process. I'm going to work one setting at a time until I have something I wouldn't mind submitting for credit in front of an auditor. I've done it before, I'll do it again. Except this time I'll document it.
+
+I'm going to start with the front matter YAML settings that I can change that work with the existing template. 
+
+Here's a list of settings that I've changed:
+
+| Setting               | Description                           | Desired Value                         | Other settings                    |
+|-----------------------|---------------------------------------|---------------------------------------|-----------------------------------|
+| fontfamily            | Picks the 
+| headerincludes        | 
+
+### Generating Figure References ###
+
+This code example creates a figure anchor and reference in the final PDF document:
+
+{% highlight markdown %}
+---
+header-includes:
+  - \usepackage{cleveref}
+---
+# Section
+![A Markdown logo\label{markdown}](img\markdown.png)
+
+See \cref{markdown}.
+
+The following command line will generate the appropriate PDF:
+
+> pandoc -o ..\pdf\output.pdf txt\cleverref.md
+
+{% endhighlight %}
+
+Execute the Pandoc command above and the resulting PDF will have a figure reference after the 'See'.
+
+### Generating Formatted Code Snippets ###
+
+{% highlight markdown %}
+You can either use a tab at the beginning of each line to denote a code block:
+
+    if (a > 3) {
+        moveShip(6*gravity,DOWN);
+    }
+    
+Spaces or tabs works for this method.
+
+This is a fenced code block - the most basic kind (no highlighting):
+
+~~~~~~~ 
+if (a > 3) {
+  moveShip(5 * gravity, DOWN);
+}
+~~~~~~~
+
+This fenced code snippet has a language specifier, so it will have appropriate highlighting:
+
+~~~~~~~ c
+if (a > 3) {
+  moveShip(5 * gravity, DOWN);
+}
+~~~~~~~
+
+This code snippet has attributes: it will number the lines of source starting at 100 and highlight the source as if it were Haskell:
+
+~~~~ {#mycode .haskell .numberLines startFrom="100"}
+qsort []     = []
+qsort (x:xs) = qsort (filter (< x) xs) ++ [x] ++
+               qsort (filter (>= x) xs)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{% endhighlight %}
+
 
 ## Resources ##
 
@@ -310,3 +381,4 @@ This produces a PDF including the title page formatting from titlePage.tex intac
 * [Stackoverflow answer on generating a Pandoc LaTeX template](https://superuser.com/a/356044)
 * [Setting variables in Pandoc LaTeX template](https://tex.stackexchange.com/q/102873)
 * [LaTeX to DOCX conversion with templates](https://tex.stackexchange.com/q/197998)
+* [Easy LaTeX with Markdown and Pandoc](http://tech.lauritz.me/easy-latex-with-markdown-pandoc/)

@@ -120,9 +120,26 @@ These steps assume that your Markdown file is stored in Subversion. Jenkins will
 20. You should now be at the page for the job that you just created. Click the *Build Now* link on the left-hand side of the page. 
 21. The job should run (successfully I hope). The output can be found in the Jenkins a and you should find *test.docx* generated 
 
+### Additions to the Jenkins Build ###
 
+There are a few tricks I've learned to make generating documents a little easier. Most of these tricks should work directly in any document build.
+
+#### Generating Images Automatically ####
+
+At first, when I needed to generate an image from a .gv file or a .msc file I hardcoded the file name and build command line directly. In Windows batch files, it turns out that you can automate this. The following command line will take all .msc files in the *msc* subdirectory and generate images for them:
+
+{% highlight batch %}
+
+for %%i in (msc/*.msc) do mscgen -Tpng -i msc/%%i -o img/%%~ni.png
+
+{% endhighlight %}
+
+You can extend this to any *.gv* file or anything else that you can use a command-line to generate.
 
 ## Resources ##
 
 * [Wikipedia Markdown Article](https://en.wikipedia.org/wiki/Markdown)
 * [Pandoc Homepage](http://pandoc.org)
+* [Stackoverflow - Batch iterating over files](https://stackoverflow.com/a/138538)
+* [Stackoverflow - Removing extensions from files names in iteration](https://stackoverflow.com/a/3215539)
+* [PP - A generic preprocessor for Pandoc](http://cdsoft.fr/pp/)
