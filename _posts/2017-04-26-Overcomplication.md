@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Overcomplication"
-date:   2017-04-26 10:2
+date:   2017-04-26 10:20
 categories: professional
 ---
 

@@ -305,8 +305,8 @@ This produces a PDF including the title page formatting from titlePage.tex intac
 ## LaTeX Template Variables and Modifications ##
 
 Okay, so the whole goal of this is to have professional-looking documents with a minimum of effort, right? Seems to me I have to start customizing the hell out of these templates and this process. I'm going to work one setting at a time until I have something I wouldn't mind submitting for credit in front of an auditor. I've done it before, I'll do it again. Except this time I'll document it.
-
 I'm going to start with the front matter YAML settings that I can change that work with the existing template. 
+
 
 Here's a list of settings that I've changed:
 
@@ -314,6 +314,60 @@ Here's a list of settings that I've changed:
 |-----------------------|---------------------------------------|---------------------------------------|-----------------------------------|
 | fontfamily            | Picks the 
 | headerincludes        | 
+
+I've generated a 'raw' list of variables that can be configured in the YAML front matter by exporting the Pandoc LaTeX template and grep'ing out all of the variables. Here's the list:
+
+| YAML LaTeX Variable   | Type      | Description                                   | Desired Value         |                
+|-----------------------|-----------|-----------------------------------------------|-----------------------|
+| abstract              | Text      | Document abstract                             |                       |
+| author                | Text      | Author name                                   |                       |
+| author-meta           | Text      | Hyperlink author meta-information             |                       |    
+| biblatex              | Yes/No    | Include *biblatex* and produce bibliography   |                       |
+| biblio-files          | List      | List of files included for bibliography       |                       |    
+| biblio-style          | Text      | Content of *\bibliographystyle* command       |                       |
+| biblio-title          | Text      | Bibliography title                            |
+| body                  | Text      | Document body                                 |
+| book-class            | Yes/No    | Document is a book-class                      |    
+| citecolor             | Text      |
+| classoption           | List      | List of options for the *documentclass*       |
+| date                  | Date      | Content of the *\date* command                |
+| documentclass         |
+| euro                  |
+| fontfamily            |
+| fontsize              |
+| geometry              |
+| graphics              |
+| header-includes       |
+| highlighting-macros   |
+| include-after         |
+| include-before        |
+| lang                  |
+| lhs                   |
+| linestretch           |
+| linkcolor             |
+| links-as-notes        |
+| listings              |
+| lof                   |
+| lot                   |
+| mainfont              |
+| mainlang              |
+| mathfont              |
+| monofont              |
+| natbib                |
+| numbersections        |
+| papersize             |
+| sansfont              |
+| sep                   |
+| strikeout             |
+| subtitle              |
+| tables                |
+| title                 |
+| title-meta            |
+| toc                   |
+| toc-depth             |
+| urlcolor              |
+| verbatim-in-note      |
+
 
 ### Generating Figure References ###
 
@@ -373,6 +427,9 @@ qsort (x:xs) = qsort (filter (< x) xs) ++ [x] ++
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 {% endhighlight %}
 
+The list of languages that can be highlighted with Pandoc can be found by executing this command-line:
+
+    
 
 ## Resources ##
 

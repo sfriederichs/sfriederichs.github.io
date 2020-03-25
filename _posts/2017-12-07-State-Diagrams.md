@@ -68,10 +68,95 @@ And it produces this output:
 
 All of the tedium of laying out the states, drawing connections, etc. is done for you. Trust me: it's not always this pretty or easy. Sometimes you get some downright insane diagrams from this process - especially for complex diagrams with lots of states, transitions and labels. There are methods you can use to tame the madness but they're all beyond the scope of this article. Additionally, there are plenty of options for prettying up the graphs with colors, different node and edge styles, etc. Those are similarly beyond the scope of this article. Check out the link to the offical documentation in the Resources section below for full (and I do mean FULL) documentation on Graphviz and the DOT language.
 
+## Additional Constructs ##
+
+This section contains information on how to generate other constructs within GraphViz.
+
+### Clusters ###
+
+Clusters are groups of nodes that are all grouped, optionally with a border surrounding them and a label.
+
+Here's what a cluster looks like:
+
+
+And how to create one:
+
+{% highlight dot %}
+
+digraph finite_state_machine {
+
+	node [shape=point,label=""]ENTRY,EXIT;
+	
+   	//The A,B and C nodes are all grouped within a cluster
+    //Note: In order to get the border and label, your subgraph name MUST begin with 'cluster'
+	subgraph cluster1 {
+        label="cluster1";
+        node [shape=circle];
+	    color=blue;
+        A[label="A"];		//Label attributes are placed inside the node
+	    B[label="Node\nB"];	//Newlines are allowed in labels
+	    C[label="C"];
+    }
+
+	 ENTRY->A [label="Initialization"];
+	 A->B; 
+	 B->A;
+	 A->C;
+	 C->EXIT[label="Shutdown"];
+
+}
+}
+{% endhighlight %}
+
+### Points With Labels ###
+
+For entry and exits from my graphs, I like to use the 'point' style node. However, you can't add a label to point nodes. You'll have to do this:
+
+{% highlight dot %}
+
+digraph finite_state_machine {
+
+	node [shape=circle,style=filled,color=black,width=.05,fixedsize=true]
+    ENTRY[xlabel="Entry"];
+    EXIT[xlabel="Exit"];
+	ENTRY->EXIT
+
+}
+{% endhighlight %}
+
+Note the use of 'xlabel' on those nodes is due to the fact that a regular 'label' will attempt to place the label text *inside* of the node, which is not really possible for a point.
+
+
+### Moving Labels ###
+
+
+Sometimes the labels (especially on the points with labels above) can be in a bad place. 
+
+#### xlabel ####
+
+If the label is an xlabel, there's really no good way to move it. You might have luck adding some newlines before or after the label, or some spaces, but that's about it.
+
+#### Cluster Label ####
+As per [this](https://stackoverflow.com/a/35839526) SO answer, you can use a location command (labelloc) to change the location of the label:
+
+{% highlight dot %}
+
+digraph finite_state_machine {
+
+	subgraph cluster1 {
+        label="myLabel" labelloc="b"];
+        node [shape=circle,style=filled,color=black,width=.05,fixedsize=true]
+        ENTRY[xlabel="Entry"];
+        EXIT[xlabel="Exit"];
+        ENTRY->EXIT
+
+}
+{% endhighlight %}
+If the 
 ## Resources ##
 
 * [Graphviz Official Documentation](http://www.graphviz.org/documentation/)
-
+* [Labeling point nodes](http://graphviz.996277.n3.nabble.com/how-to-make-node-shape-point-label-visible-td791.html)
 
 
 
