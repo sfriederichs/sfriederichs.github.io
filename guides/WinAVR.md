@@ -3,15 +3,15 @@ layout: default
 ---
 This document describes the processing of installing WinAVR 20100110 on a Windows 7 PC and configuring it for use with an AVR Dragon programmer for an ATMega328-PU target..
 
-# Installing WinAVR#
+# Installing WinAVR #
 
-## Downloading##
+## Downloading ##
 
 Size: 18 MB
 
 [Installer File](https://sourceforge.net/projects/winavr/files/WinAVR/20100110/WinAVR-20100110-install.exe/download)
 
-## Installation Steps##
+## Installation Steps ##
 
 1) Run the installer you downloaded (WinAVR-20100110-install.exe)
 
@@ -41,7 +41,7 @@ Size: 18 MB
 
 8) When the installation is complete, click on 'Finish'
 
-## Verifying Installation##
+## Verifying Installation ##
 
 1) Open a Command Prompt as an Administrator by:
 	1) Clicking on the Start Menu
@@ -60,7 +60,7 @@ Size: 18 MB
 
 ![Installation success](img/WinAVR/2015-08-29 21_10_52-Administrator_ Command Prompt.png)
 
-# Using avrdude#
+# Using avrdude #
 
 avrdude is the utility that allows you to program AVR chips.
 This is the command line that I use to program the ATMega328P with an AVR Dragon programmer:
@@ -74,21 +74,21 @@ The options are:
 * -P usb - Specifies that the AVR Dragon is connected via USB
 * -v - Verbose output
 
-## Using the AVR Dragon with avrdude##
+## Using the AVR Dragon with avrdude ##
 
 It is not straightforward to use the AVR Dragon with avrdude for two reasons:
 
 * The drivers will need to be installed
 * A libusb-win32 INF filter will need to be installed
 
-### AVR Dragon Drivers###
+### AVR Dragon Drivers ###
 
 The AVR Dragon USB drivers can be downloaded from Atmel's site after providing your contact information. 
 The URL is [http://www.atmel.com/System/BaseForm.aspx?target=tcm:26-66206](http://www.atmel.com/System/BaseForm.aspx?target=tcm:26-66206)
 
 The driver shouldn't pose any issues when installing, but you may need to reboot.
 
-###libusb-win32 Driver Filter###
+###libusb-win32 Driver Filter ###
 
 Even after the driver is installed avrdude will not be able to access the Dragon. This is because 
 avrdude uses libusb to access the Dragon. To allow avrdude to access the Dragon you will have to
@@ -150,7 +150,7 @@ You should see a screen with text similar to this (there may be more text, but a
 > 	Serial number:                   00:a2:00:00:62:30
 > 	Device ID:                       AVRDRAGON
 
-## Fixing the ATMega328P Chip ID##
+## Fixing the ATMega328P Chip ID ##
 
 Apparently the ATMega328-PU has a slightly different device signature from the 
 ATMega328P. If you don't use the -F option on the avrdude command line then you
@@ -174,7 +174,7 @@ The steps to fix this are:
 
 To undo the steps, switch the two HEX signatures and save the file.
 
-## Working With Fuse Bits##
+## Working With Fuse Bits ##
 
 Do not attempt to configure fuses without this site: [http://www.engbedded.com/fusecalc/](http://www.engbedded.com/fusecalc/)
 
@@ -202,7 +202,7 @@ rather than 0xFF. This is actually fine, but to prevent the error, use this comm
 
 	-U lfuse:w:0xe2:m -U hfuse:w:0xd9:m -U efuse:w:0x07:m
 
-## Using avrdude in a Makefile##
+## Using avrdude in a Makefile ##
 
 The one issue I've seen using avrdude in a makefile is that the Dragon needs a 'recovery' time
 after an operation with it. If it is not allow 1-2 seconds between avrdude calls, the second
@@ -213,4 +213,4 @@ In Windows, this can be accomplished by adding the following line between any av
 	sleep 2
 
 Keep in mind that multiple write and reads can be chained in one avrdude command line via multiple
--U switches being passed to avrdude. This often mitigates this issue with.
+-U switches being passed to avrdude. This often mitigates this issue.
