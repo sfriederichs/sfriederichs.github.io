@@ -88,7 +88,7 @@ The URL is [http://www.atmel.com/System/BaseForm.aspx?target=tcm:26-66206](http:
 
 The driver shouldn't pose any issues when installing, but you may need to reboot.
 
-###libusb-win32 Driver Filter ###
+### libusb-win32 Driver Filter ###
 
 Even after the driver is installed avrdude will not be able to access the Dragon. This is because 
 avrdude uses libusb to access the Dragon. To allow avrdude to access the Dragon you will have to
@@ -214,3 +214,30 @@ In Windows, this can be accomplished by adding the following line between any av
 
 Keep in mind that multiple write and reads can be chained in one avrdude command line via multiple
 -U switches being passed to avrdude. This often mitigates this issue.
+
+
+## Potential Issues with the Dragon ##
+
+The Dragon can be a rather finicky piece of hardware. It has frustrated me several times. Below are some of the issues I've had with it and how they were fixed. If you're having difficulty getting avrdude to connect with the Dragon, check here.
+
+### Power ###
+
+The Dragon uses lots of power. A non-powered USB hub won't do the trick to connect it to your computer. You need to connect it directly or use a powered hub. 
+
+It doesn't help that the Dragon can be, apparently, *half* powered - there are lights on, but not enough. One good check is: if you only see the yellow LED on, it's insufficiently powered.
+
+### Just Plain Broken ###
+ 
+Sadly, the Dragon could just be broken. It's not the most robust piece of electronic hardware I've worked with. I hear lots of stories online about ESD damage - to the point that people had to put the thing in an enclosure to keep it safe. It's certainly best to be hands-off with the Dragon as much as possible.
+
+If you think your Dragon is broken, take a look at it. Are lights on? Normal operation is one green and one red light. And it should show up in Device Manager somewhere if it's operational.
+
+If you can't verify any of the above, it might just be broken.
+
+### Firmware ### 
+
+It's possible you need a firmware update. I needed one when I started using it, but sadly I do not know that process as I was using AVR Studio at the time - it automatically updated the firmware for me.
+
+### Drivers ###
+
+The Dragon (and AVRISP mkII) use something called the Jungo WinDriver. So do other devices in the market - not just AVR products, anything can. It's possible that if you have another device using this same driver, you'll have to do some juggling to get both of them to work at the same time. Try reinstalling the software for the device that doesn't work (whichever it is) and then 
