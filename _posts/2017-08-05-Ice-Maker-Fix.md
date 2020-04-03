@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "How To Fix a Slow-Filling Ice Maker on an Electrolux FGHB2866PF2"
+updated: 2017-08-05 15:02
 date:   2017-08-05 15:02
 categories: how-to repair 
 ---

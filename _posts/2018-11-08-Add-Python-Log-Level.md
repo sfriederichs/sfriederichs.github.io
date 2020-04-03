@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "How to Add a Custom Log Level in Python"
+updated: 2018-11-08 2:12
 date:   2018-11-08 2:12
 categories: python logging how-to
 

@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "How To Install a Jenkins Server"
+updated: 2017-11-09 8:42
 date:   2017-11-09 8:42
 categories: how-to jenkins
 ---
@@ -76,6 +77,42 @@ The default workspace location (where SVN files used in builds are checked out) 
 4. Under *Home Directory* click the *Advanced* button.
 5. Set the *Workspace Root Directory* to the folder you created for this purpose.
 6. Click *Save*
+
+## Exporting and Importing Projects ##
+
+I'm in a situation where I'm trying to migrate Jenkins Projects that are on my local laptop Jenkins to a more permanent server.
+
+I found [this](https://stackoverflow.com/questions/8424228/export-import-jobs-in-jenkins) Stackoverflow question which has a lot of good answers.
+
+It looks like it can be done with built-in tools, as described [here](https://wiki.jenkins.io/display/JENKINS/Administering+Jenkins#AdministeringJenkins-Moving%2Fcopying%2Frenamingjobs)
+
+There's also a plugin that allows jobs to be defined as text files - could be very useful for storing in CM. See more [here](https://plugins.jenkins.io/job-dsl/).
+
+I'm going to go with the built-in method. It doesn't look too bad. Here's what it says:
+
+{% highlight text %}
+
+You can:
+
+Move a job from one installation of Jenkins to another by simply copying the corresponding job directory.
+Make a copy of an existing job by making a clone of a job directory by a different name.
+Rename an existing job by renaming a directory. Note that the if you change a job name you will need to change any other job that tries to call the renamed job.
+Those operations can be done even when Jenkins is running. For changes like these to take effect, you have to click "reload config" to force Jenkins to reload configuration from the disk.
+
+{% endhighlight %}
+
+So where are those jobs stored?
+
+On my Windows machine, they were stored here: C:\\Program Files (x86)\\Jenkins\\jobs
+
+And on the CentOS machine, they were stored in /var/lib/jenkins/jobs
+
+So.... just copy them.
+Easy enough.
+
+Ah, except they're huge - they've got all the old builds as well.
+
+Wow, that's big. Oh well.
 
 ## Resources ##
 

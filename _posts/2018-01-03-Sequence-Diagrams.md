@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "How To Generate Sequence Diagrams with Mscgen"
+updated: 2018-1-3 7:00
 date:   2018-1-3 7:00
 categories: how-to mscgen dox
 ---

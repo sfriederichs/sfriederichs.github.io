@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Less Power"
+updated: 2017-06-28 09:40
 date:   2017-06-28 09:40
 categories: Hurricane-Planning
 ---
