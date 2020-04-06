@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "How To Profile Python Scripts"
+updated: 2017-08-25 9:27
 date:   2017-08-25 9:27
 categories: how-to Python profiling
 ---

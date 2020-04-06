@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Adventures in Products - Ruthless Cost-Cutting"
+updated: 2016-01-14 21:17
 date:   2016-01-14 21:17
 categories: products bom costs
 ---

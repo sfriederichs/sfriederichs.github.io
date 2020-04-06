@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "How To Return Errors from Windows Batchfiles"
+updated: 2017-07-24 8:06
 date:   2017-07-24 8:06
 categories: how-to Jenkins
 ---

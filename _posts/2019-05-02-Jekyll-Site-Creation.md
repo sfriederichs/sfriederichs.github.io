@@ -2,6 +2,7 @@
 layout: post
 title:  "How To Create Jekyll Website"
 date:   2019-05-02 10:39
+updated: 2019-05-02 10:39
 categories: how-to jekyll
 ---
 
@@ -103,7 +104,6 @@ I already have a jekyll running on one port so I can't run on that port. It does
 Yes, use:
 
 > ./jekyll serve --port 4001 --source <path>
-
 
 ## Resources ##
 * [Jekyll Quickstart](https://jekyllrb.com/docs/)

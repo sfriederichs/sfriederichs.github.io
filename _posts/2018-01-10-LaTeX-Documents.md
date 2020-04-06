@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "How To Create Documents with LaTeX"
+updated: 2018-1-10 8:06
 date:   2018-1-10 8:06
 categories: how-to latex dox pandoc
 ---

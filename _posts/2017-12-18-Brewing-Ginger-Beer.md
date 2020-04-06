@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "How To Brew Ginger Beer"
+updated: 2017-12-18 8:24
 date:   2017-12-18 8:24
 categories: how-to brewing ginger-beer
 ---

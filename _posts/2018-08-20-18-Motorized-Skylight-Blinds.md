@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "How to Select 06and Install Motorized Skylight Blinds"
+title:  "How to Select and Install Motorized Skylight Blinds"
 date:   2018-08-20 8:59
 updated: 2018-10-11 9:17
 update-abstract: "Described ordering and installation"
@@ -179,12 +179,15 @@ Neither is annoying so far, but I've been getting up before the sun.
 
 ## Questions ##
 
-Do I want solar motorized or battery-powered motorized?
-Do I want any home automation integration?s
+Q. Do I want solar motorized or battery-powered motorized?
+A. Knowing what I know now I'd still go with solar motorized. Sometimes the south facing ones lose charge in winter, but it's not bad.
+
+Q. Do I want any home automation integration?s
+A. It's nice.
 
 ## Resources ##
-[ZebraBlinds.com Motorized Blackout Blind](https://www.zebrablinds.com/motorized-electric-automatic-skylight-blackout-cellular-shades-crown)
-[Blinds.com Motorized Blackout Blind](https://www.blinds.com/p/blindscom-motorized-blackout-cellular-skylight/518209)
-loc
-[Blinds.com measuring guide](https://www.blinds.com/i/measure/how-to-measure-for-skylights)
-[ZebraBlinds.com installation instructions](https://www.zebrablinds.com/media/installation_pdf/crown-prm-mez-skylight-install.pdf)
+
+* [ZebraBlinds.com Motorized Blackout Blind](https://www.zebrablinds.com/motorized-electric-automatic-skylight-blackout-cellular-shades-crown)
+* [Blinds.com Motorized Blackout Blind](https://www.blinds.com/p/blindscom-motorized-blackout-cellular-skylight/518209)
+* [Blinds.com measuring guide](https://www.blinds.com/i/measure/how-to-measure-for-skylights)
+* [ZebraBlinds.com installation instructions](https://www.zebrablinds.com/media/installation_pdf/crown-prm-mez-skylight-install.pdf)

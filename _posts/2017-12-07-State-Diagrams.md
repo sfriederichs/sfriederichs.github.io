@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "How To Create State Diagrams with Graphviz"
+updated: 2017-12-07 6:58
 date:   2017-12-07 6:58
 categories: how-to graphviz
 ---
