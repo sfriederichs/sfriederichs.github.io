@@ -1,7 +1,6 @@
 ---
 layout: post
 title:  "How To Inherit Classes in Python"
-updated: 2018-01-18 9:25
 date:   2018-01-18 9:25
 categories: how-to python classes oop
 ---

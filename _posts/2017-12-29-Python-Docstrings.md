@@ -1,7 +1,6 @@
 ---
 layout: post
 title:  "How To Document Python Code With Docstrings"
-updated: 2017-12-29 21:44
 date:   2017-12-29 21:44
 categories: how-to python dox
 ---

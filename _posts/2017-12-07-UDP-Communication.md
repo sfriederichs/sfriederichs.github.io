@@ -1,7 +1,6 @@
 ---
 layout: post
 title:  "How To Send and Receive UDP Data in Python"
-updated: 2017-12-07 10:58
 date:   2017-12-07 10:58
 categories: how-to python udp
 ---

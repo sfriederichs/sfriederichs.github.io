@@ -1,7 +1,6 @@
 ---
 layout: post
 title:  "Rusty Skills"
-updated: 2017-04-24 9:56
 date:   2017-04-24 9:56
 categories: personal
 ---

@@ -1,7 +1,6 @@
 ---
 layout: post
 title:  "How To Drain and Refill a Hot Tub"
-updated: 2017-12-19 9:48
 date:   2017-12-19 9:48
 categories: how-to hot-tub
 ---

@@ -1,7 +1,6 @@
 ---
 layout: post
 title:  "How To Raise an Issue When a Jenkins Build Fails"
-updated: 2017-07-26 8:51
 date:   2017-07-26 8:51
 categories: how-to Jenkins
 ---

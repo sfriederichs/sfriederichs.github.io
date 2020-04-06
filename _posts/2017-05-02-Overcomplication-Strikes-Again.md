@@ -1,7 +1,6 @@
 ---
 layout: post
 title:  "Overcomplication Strikes Again"
-updated: 2017-05-02 21:59
 date:   2017-05-02 21:59
 categories: professional
 ---

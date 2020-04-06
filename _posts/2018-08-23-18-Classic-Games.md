@@ -1,7 +1,6 @@
 ---
 layout: post
 title:  "Running Classic Games on Windows 7"
-updated: 2018-08-23 22:03
 date:   2018-08-23 22:03
 categories: gaming
 ---

@@ -1,7 +1,6 @@
 ---
 layout: post
 title:  "Best Practices - Use SVN Branches With Jenkins"
-updated: 2017-08-04 9:40
 date:   2017-08-04 9:40
 categories: best-practices Jenkins
 ---

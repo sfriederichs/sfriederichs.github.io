@@ -1,7 +1,6 @@
 ---
 layout: post
 title:  "Transferring Outlook Settings Between Computers"
-updated: 2018-09-05 2:23
 date:   2018-09-05 2:23
 categories: reinstall outlook
 ---

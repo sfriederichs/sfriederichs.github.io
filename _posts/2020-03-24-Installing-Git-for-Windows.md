@@ -1,7 +1,6 @@
 ---
 layout: post
 title:  "Installing Git for Windows"
-updated: 2020-03-24 21:47
 date:   2020-03-24 21:47
 categories: how-to git windows
 
@@ -38,7 +37,7 @@ Then click 'Next'.
 ![Start Menu Folder]({{site.basepath}}/img/2020-03-24 21_44_26-Git 2.26.0 Setup.png)
 6. I switched the default editor to Notepad++ and clicked 'Next'
 ![Default Editor]({{site.basepath}}/img/2020-03-24 21_48_03-Git 2.26.0 Setup.png)
-7. I changed the PATH option to utilize Git and additional tools from the command line, then clicked 'Next'.  
+7. I changed the PATH option to utilize Git and additional tools from the command line, then clicked 'Next'.
 ![PATH Options]({{site.basepath}}/img/2020-03-24 21_48_50-Git 2.26.0 Setup.png)
 8. I left the OpenSSL option for the HTTPS Transport Back End and clicked 'Next'.
 ![HTTPS Transport Backend]({{site.basepath}}/img/2020-03-24 21_49_49-Git 2.26.0 Setup.png)
@@ -111,16 +110,6 @@ concept guides. See 'git help <command>' or 'git help <concept>'
 to read about a specific subcommand or concept.
 See 'git help git' for an overview of the system.
 {% endhighlight %}
-
-## Git Configuration ##
-
-The following steps can be performed to configure Git with your name and email address:
-
-1. Open a command interpreter from which you can call git
-2. Provide Git your email and name with these command line:
-> git config --global user.email "hahaha.no@waywillItellthis.fin"
-> git config --global user.name "Stephen Friederichs"
-
 
 ## Resources ##
 * [Git for Windows Installer Download](https://github.com/git-for-windows/git/releases/download/v2.26.0.windows.1/Git-2.26.0-64-bit.exe)
