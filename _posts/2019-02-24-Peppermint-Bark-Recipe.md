@@ -1,7 +1,6 @@
 ---
 layout: post
 title:  "How to Make Peppermint Bark"
-updated: 2019-02-24 11:57
 date:   2019-02-24 11:57
 categories: recipes
 

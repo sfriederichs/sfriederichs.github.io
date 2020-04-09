@@ -1,7 +1,6 @@
 ---
 layout: post
 title:  "How to get a log of SVN activity between two dates"
-updated: 2017-06-19 11:01
 date:   2017-06-19 11:01
 categories: how-to
 ---

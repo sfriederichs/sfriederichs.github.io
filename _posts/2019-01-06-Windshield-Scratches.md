@@ -1,8 +1,7 @@
----
+!---
 layout: post
 title:  "How to Remove Scratches From a Car Windshield"
-updated: 2019-01-06 17:04
-dated: 2019-01-06 17:04
+date:   2019-01-06 17:04
 categories: auto
 
 ---

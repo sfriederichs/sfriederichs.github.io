@@ -1,7 +1,6 @@
 ---
 layout: post
 title:  "Headboard Initial Measurements"
-updated: 2017-05-18 22:35
 date:   2017-05-18 22:35
 categories: headboard
 ---

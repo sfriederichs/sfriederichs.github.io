@@ -1,7 +1,6 @@
 ---
 layout: post
 title:  "How To Write Unit Tests with Unity"
-updated: 2019-07-10 9:25
 date:   2019-07-10 9:25
 categories: how-to unity unit-test
 ---

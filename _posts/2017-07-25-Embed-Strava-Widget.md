@@ -1,7 +1,6 @@
 ---
 layout: post
 title:  "How To Embed a Strava Widget in your Jekyll Website"
-updated: 2017-07-25 8:11
 date:   2017-07-25 8:11
 categories: how-to Jekyll
 ---

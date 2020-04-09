@@ -1,7 +1,6 @@
 ---
 layout: post
 title:  "How To Add Logging to Python Scripts"
-updated: 2017-12-08 10:58
 date:   2017-12-08 10:58
 categories: how-to python logging
 ---

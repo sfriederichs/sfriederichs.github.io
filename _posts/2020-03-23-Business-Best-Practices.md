@@ -1,10 +1,8 @@
----
+!---
 layout: post
 title:  "Business Best Practices"
-updated: 2020-03-23 21:47
 date:   2020-03-23 21:47
 categories: best-practices business 
----
 
 ## Introduction ##
 
@@ -28,5 +26,9 @@ Methods for collecting money:
 ### Open Source Support ###
 
 Yearly donations should be made to open source projects that the company benefits from.
+
+
+
+---
 
 ## Resources ##

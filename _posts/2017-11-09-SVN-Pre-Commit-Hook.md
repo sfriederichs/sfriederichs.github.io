@@ -1,7 +1,6 @@
 ---
 layout: post
 title:  "How To Create an SVN Pre-Commit Hook"
-updated: 2017-11-09 10:42
 date:   2017-11-09 10:42
 categories: how-to jenkins
 ---

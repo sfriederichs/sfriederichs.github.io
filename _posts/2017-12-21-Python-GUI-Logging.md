@@ -1,7 +1,6 @@
 ---
 layout: post
 title:  "How To Create a Tk Logging Widget in Python"
-updated: 2017-12-21 7:19
 date:   2017-12-21 7:19
 categories: how-to python gui logging
 ---

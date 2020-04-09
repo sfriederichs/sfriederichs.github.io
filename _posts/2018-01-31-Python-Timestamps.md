@@ -1,7 +1,6 @@
 ---
 layout: post
 title:  "How To Work With Timestamps in Python"
-updated: 2018-01-31 9:07
 date:   2018-01-31 9:07
 categories: how-to python timestamps 
 ---
