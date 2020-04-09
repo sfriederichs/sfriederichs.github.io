@@ -7,7 +7,7 @@ I make lots of mistakes - but so does everyone right? The first step to learning
 
 So, this is a collection of mistakes I've made and the solutions: I call it my 'Best Practices'. You might also call it 'Lessons Learned' or 'Hey Idiot Don't Do This Dumb Thing Again' but I prefer to stay positive.
 
-# Miscellaneous Best-Practices#
+# Miscellaneous Best-Practices #
 
 <ul class="post-list">
     {% for post in site.posts %}

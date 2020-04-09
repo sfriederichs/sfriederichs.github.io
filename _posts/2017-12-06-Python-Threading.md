@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "How To Create Threads in Python Scripts"
+updated: 2017-12-06 8:35
 date:   2017-12-06 8:35
 categories: how-to python multithreading
 ---

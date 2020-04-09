@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "How To Automatically Wrap Text in Python"
+updated: 2017-08-07 9:05
 date:   2017-08-07 9:05
 categories: how-to Python
 ---
