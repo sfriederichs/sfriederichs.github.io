@@ -7,6 +7,7 @@ categories: how-to Python
 ---
 
 I'm doing a lot of work with command-line Python scripts, so I need to format my text all pretty-like. One particular example of this is the 'help' function for command-line tools which generally produces something like this:
+
 {% highlight console %}
 Generic Tool v0.1
 
@@ -69,37 +70,30 @@ Yes, that line is waaaaay too long now. If you write your code like this then yo
 
 In Python, there is. There's a library called *textwrap*. With *textwrap* you can write your message as one long string which can then be auto-wrapped by *textwrap*, like this:
 
-> import textwrap
->
-> myMessage = "This script is a script that does things. Important things. USEFUL things. Don't question this script - it was made with love and hate in equal measure, but mostly with bits, bytes, nibbles and the souls of cute kittens - the orange ones are the tastiest don't you know? Oops this line is waaaay too long now isn't it? Doesn't matter, it will be auto-wrapped by *textwrap* - just you watch! This script will change your life for the better or end it completely, leaving you a hollowed-out, useless husk of a person. Use at your own risk."
->
-> print(textwrap.fill(myMessage, width=50))
+{% highlight python %}
+import textwrap
+
+myMessage = "This script is a script that does things. Important things. USEFUL things. Don't question this script - it was made with love and hate in equal measure, but mostly with bits, bytes, nibbles and the souls of cute kittens - the orange ones are the tastiest don't you know? Oops this line is waaaay too long now isn't it? Doesn't matter, it will be auto-wrapped by *textwrap* - just you watch! This script will change your life for the better or end it completely, leaving you a hollowed-out, useless husk of a person. Use at your own risk."
+
+print(textwrap.fill(myMessage, width=50))
+{% endhighlight %}
 
 This produces a nice, well-wrapped output:
 
-> This script is a script that does things.
->
-> Important things. USEFUL things. Don't question
->
-> this script - it was made with love and hate in
->
-> equal measure, but mostly with bits, bytes,
->
-> nibbles and the souls of cute kittens - the orange
->
-> ones are the tastiest don't you know? Oops this
->
-> line is waaaay too long now isn't it? Doesn't
->
-> matter, it will be auto-wrapped by *textwrap* -
->
-> just you watch! This script will change your life
->
-> for the better or end it completely, leaving you a
->
-> hollowed-out, useless husk of a person. Use at
->
-> your own risk.
+{% highlight console %}
+This script is a script that does things.
+Important things. USEFUL things. Don't question
+this script - it was made with love and hate in
+equal measure, but mostly with bits, bytes,
+nibbles and the souls of cute kittens - the orange
+ones are the tastiest don't you know? Oops this
+line is waaaay too long now isn't it? Doesn't
+matter, it will be auto-wrapped by *textwrap* -
+just you watch! This script will change your life
+for the better or end it completely, leaving you a
+hollowed-out, useless husk of a person. Use at
+your own risk.
+{% endhighlight %}
 
 Ta da!
 
