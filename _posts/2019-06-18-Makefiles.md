@@ -100,7 +100,7 @@ obj/%.o: subdir2/%.c:
 
 ### Filtering out an item from a list based on an implicit rule ###
 
-Okay, so imagine you're creating unit tests and you have 20 different source files in your application and you want to write tests the function in one source file at a time. You will mock out the remaining functions for testing purposes.
+Okay, so imagine you're creating unit tests and you have 20 different source files in your application and you want to test the functions in one source file at a time. You will mock out the remaining functions for testing purposes.
 However, when you generate the mocks, you generate mocks for all source files. You can't link the mock object file in the same executable as the actual source object file because all of the functions in the source file are
 repeated in the mock. So, you have to remove the mock object file from being linked into the unit test executable. Let's say you have a rule to generate the executable from object files - this is how you structure the rule
 to remove the mock object file from being linked. Assume $(MOCK_OBJ_FILES) contains all of the mock object files and ut_%.o is the unit test object file for the source file you want to test.
