@@ -79,9 +79,6 @@ logging.basicConfig(filename=logFilePath,filemode='a',level=logLevel)
 logging.debug("Logging is configured - Log Level %s , Log File: %s",str(logLevel),logFilePath) 
 {% endhighlight %}
 
-## Logging to a File and the Console Simultaneously ##
-
-
 ## Formatting Log Messages ## 
 
 The default log format is pretty bland - it's just the log level, name of the logger and the message. One nice thing to add is the time. You can update the format for the log message by adding a 'format' option to the call to initialize the logger. The code looks like this:
@@ -152,6 +149,35 @@ logging.getLogger('').addHandler(console)
 #This will now show up on the console and in the log file
 logging.debug("Logging is configured - Log Level %s , Log File: %s",str(logLevel),logFilePath) 
 {% endhighlight %}
+
+## Logging to a Time/Date Stamped File ##
+
+If you want to log to a new and unique file based on the current time and date, use this code example:
+
+{% highlight python %}
+
+import datetime
+
+logFilePath = datetime.datetime.now().strftime('../logs/log_%H_%M_%d_%m_%Y.log')
+
+{% endhighlight %}
+
+Now, this won't work if the file doesn't exist - you'll get an error like this:
+{% highlight console %}
+Traceback (most recent call last):
+  File "src\invoiceParser.py", line 110, in <module>
+    main()
+  File "src\invoiceParser.py", line 92, in main
+    logging.basicConfig(filename=logFilePath,filemode='a',level=logLevel,format=formatStr)
+  File "C:\Users\sfrie\AppData\Local\Programs\Python\Python38-32\lib\logging\__init__.py", line 1976, in basicConfig
+    h = FileHandler(filename, mode)
+  File "C:\Users\sfrie\AppData\Local\Programs\Python\Python38-32\lib\logging\__init__.py", line 1143, in __init__
+    StreamHandler.__init__(self, self._open())
+  File "C:\Users\sfrie\AppData\Local\Programs\Python\Python38-32\lib\logging\__init__.py", line 1172, in _open
+    return open(self.baseFilename, self.mode, encoding=self.encoding)
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\sfrie\\Dropbox\\Projects\\logs\\alogfile_22_27_15_04_2020.log'
+{% endhighlight %}
+
 
 ## Resources ##
 

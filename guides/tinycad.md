@@ -2,15 +2,17 @@
 layout: default
 ---
 
-## Downloads
+## Introduction
+
+TinyCAD is my preferred schematic capture program.  This is entirely a personal preference and doesn't match the preferences as a whole of the 'Maker' community, professional engineers or sane people.  That being said I have a process that allows me to make things and TinyCAD is a part of it.  If you want to make things like I do then follow these steps to get on your way.
+
+
+## Downloads ##
 
 **[TinyCAD Latest Version Download Page](http://sourceforge.net/projects/tinycad/files/latest/download)**
 
 **[Alternate TinyCAD Libraries](https://github.com/sfriederichs/TinyCAD-Libraries/archive/master.zip)**
 
-## Introduction
-
-TinyCAD is my preferred schematic capture program.  This is entirely a personal preference and doesn't match the preferences as a whole of the 'Maker' community, professional engineers or sane people.  That being said I have a process that allows me to make things and TinyCAD is a part of it.  If you want to make things like I do then follow these steps to get on your way.
 
 ## Installation
 

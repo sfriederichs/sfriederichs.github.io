@@ -92,7 +92,7 @@ You can optionally omit the --global option if you only want git to use the info
 
 You'lll need an SSH key  to be able to push data to a github repo. Here's how to generate one;
 
-(Here](https://help.github.com/articles/generating-ssh-keys/) is a good resource from Github.
+[Here](https://help.github.com/articles/generating-ssh-keys/) is a good resource from Github.
 
 1. Start git bash from the start menu
 2. Type:
@@ -110,7 +110,7 @@ drwxr-xr-x 1 sfrie 197609   0 Mar 24 22:03 ../
 
 You'll see no files of the form *.pub - this means there are no existing SSH keys. 
 3. In the bash window, type:
-> ssh-keygen -t rsa -b 4096 - C "\<your email address used on Github\>"
+> ssh-keygen -t rsa -b 4096 -C "\<your email address used on Github\>"
 	
 This is what happens:
 
