@@ -14,18 +14,18 @@ It must be noted that your A/C shouldn't ever be low on refrigerant - it's a clo
 
 These steps are specific to my make and model of car but might provide some pointers to you for doing it yourself.
 
-## Parts Needed##
+## Parts Needed ##
 
 * [A/C Pro Refrigerant Refill Canister](http://amzn.to/2tv4cue)
 * Car (duh)
 
-## Tools Needed##
+## Tools Needed ##
 
 * Gloves
 * Thermometer
 * Headlamp
 
-## Notes#
+## Notes #
 
 The refrigerant in cars is R-134a since ~1993-1995. Freon was in use before but you can't get that anymore.
 
@@ -40,20 +40,20 @@ Once you remove the protector tab from the refrigerant canister and put the gaug
 
 The gauge that comes with the canister can be reused - you can buy gauge-less cans of refrigerant at Harbor Freight and probably elsewhere.
 
-## Warnings##
+## Warnings ##
 
 DO NOT OVERFILL THE A/C SYSTEM WITH REFRIGERANT - You'll have to take the car to the mechanic to fix that for sure.
 
 Lots of things under the hood of a car are hot! They'll burn you! Other things are moving fast and may cut you/break your fingers. Please practice safety!
 
-## Pre-Steps##
+## Pre-Steps ##
 
 Pop your hood and identify the following:
 
 * Low pressure charging port - It's on a coolant line (metal pipe) and has an 'L' on it. 
 * Compressor - This is a belt-driven thingy that spins when the A/C is on. The coolant lines should converge on it in case you find the charging port.
 
-## Steps##
+## Steps ##
 
 1. Take the gauge off of the recharge canister.
 2. Rotate the temperature dial around the gauge to match the outside temperature - this tells you the proper maximum pressure you can put in the system.

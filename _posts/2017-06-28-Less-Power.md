@@ -8,7 +8,7 @@ categories: Hurricane-Planning
 
 
 
-# To Do#
+# To Do #
 
 * Move/organize stones around shower area
 * Get extra 5 gallon water jugs
@@ -32,7 +32,7 @@ I have a refrigerator and an air conditioner - let's assume that if they're both
 So, this setup is toast for a hurricane situation
 
 
-# To Do#
+# To Do #
 
 * Move/organize stones around shower area
 * Get 2 more 5-gallon gas cans - need one extra to mix special fuel for the generator in
@@ -41,7 +41,7 @@ So, this setup is toast for a hurricane situation
 * Research pricing on sandbags
 * Buy an retrieve the 5.5KW generator
 
-# Costs So Far#
+# Costs So Far #
 
 1KW Inverter - Harbor Freight: $60 (after 25% off coupon)
 

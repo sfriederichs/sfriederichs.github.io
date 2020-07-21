@@ -6,20 +6,20 @@ date:   2017-05-18 22:35
 categories: headboard
 ---
 
-## Old Tasks#
+## Old Tasks #
 
 Previous next steps:
 
 * ~~Measure the bed frame to see how big the headboard needs to be~~
 * ~~Figure out how to mount the headboard to the frame~~
 
-## Bed Measurements##
+## Bed Measurements ##
 
 At the bed frame where the headboard will attach, outside edge to outside edge is 61.5"
 
 The distance between the bottom of the bed frame and the top of the mattress is 30"
 
-## Headboard Mounting##
+## Headboard Mounting ##
 
 There are two parallel mounting holes on each side of the frame where I can bolt the headboard on to. The headboard might hit the wall, so I'd like
 the head of the bolt to be flush with the piece of wood it's going through. That means I'll need to recess the holes for the bolts on the upright
@@ -33,7 +33,7 @@ non-marking as well.
 There are holes on the sides of the frame that may be able to provide some support. Tessa wants a bookshelf on this and if it sits too high we may
 need cross-supports to prevent sagging. In that case I'd have to bolt something to the sides of the bed.
 
-## New Ideas#
+## New Ideas #
 
 If there's books, then there should be a reading light. A nice, yellow-light dimmable reading light. LED strips? I'd need RGB LEDs and some means
 to control the color and intensity. 
@@ -61,7 +61,7 @@ a design for manufacture guy - maybe from China? I know people with contacts in 
 This could be interesting.
 
 
-## New Tasks#
+## New Tasks #
 
 * Determine what size bolts I need to fit the frame
 * Determine what height the top of the headboard should be from the ground

@@ -9,7 +9,7 @@ categories: hurricane
 It's quickly becoming hurricane season again in Florida. We had a very close call last year with Matthew
 so this year we're getting serious about preparing for the worst.
 
-## Evacuating#
+## Evacuating #
 
 Now, the 'worst' is variable depending on the circumstance. Our first and best plan is to pack everything up
 and evacuate. We didn't do a great job of this with Matthew - we planned to go to Tampa but didn't book the hotel
@@ -31,10 +31,10 @@ house has good shutters and I learned how to secure everything for the last hurr
 no real concern about a hurricane, but I know how to do everything I'm able to to secure the house as best is
 possible. What I can't handle as well is being stuck in a house with no power or clean water for a few weeks.
 
-## Shelter/Climate Control##
+## Shelter/Climate Control ##
 We need an air conditioner. 
 
-## Generator/Power##
+## Generator/Power ##
 
 [Small generator](https://www.harborfreight.com/engines-generators/gas-engine-generators/900-peak700-running-watts-2-hp-63cc-2-cycle-gas-generator-epacarb-63025.html) - 900W max, 700W running. 
 This will either power the refrigerator or a window air conditioner but not both at the same time. It looks pretty basic, but
@@ -45,14 +45,14 @@ work your way through the problems, and understand the maintenance and 'gotchas'
 Refrigerator power usage: 700-1000W 
 Window air conditioner power usage: ~500W
 
-## Water##
+## Water ##
 
 In the past I relied on 5-gallon water jugs for our emergency water supply. It was easy because we keep a 
 water cooler, so monthly I'd fill up a rack of eight 5-gallon jugs from Sams. I'd pair this with a nifty little
 [manual pump](https://www.amazon.com/gp/product/B00APU2Y8Q/ref=as_li_tl?ie=UTF8&tag=thanee-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B00APU2Y8Q&linkId=a872fbb234e498ff646a6354a8985b30)
 that I got from Amazon and it should work very well in an emergency.
 
-## To Do##
+## To Do ##
 
 * Call storm shutter company regarding sliding glass door shutter
 * Get quote for flood insurance

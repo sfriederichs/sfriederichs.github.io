@@ -6,7 +6,7 @@ date:   2017-05-27 21:35
 categories: hurricane
 ---
 
-## To Do - Old##
+## To Do - Old ##
 
 * Buy trailer hitch and cargo carrier
 * Get extra 5 gallon water jugs
@@ -25,12 +25,12 @@ categories: hurricane
 
 Okay, I've learned more about power, so here goes.
 
-## Refrigerator##
+## Refrigerator ##
 
 Turns out, it consumes 5.5KWH/day. If you assume perfect conversion from AC to DC, then that means 5.5KWH/12V = 458AH. That sort of capacity isn't
 happening with a battery.
 
-## Batteries on-hand##
+## Batteries on-hand ##
 I have two car jumpstarters: one with 17AH and another with 22AH. I also have an 8AH sealed lead acid battery on hand. The battery in my car is 
 about 30AH and the battery in my wife's car might be as high as 60AH. 
 
@@ -41,7 +41,7 @@ The big question in terms of battery capacity is how long can the refrigerator m
 The 22AH unit can power the refrigerator by itself for 260W/12 = 21.666 A - roughly one hour at full load. :( Will it always be running at full load? How long will it take to cool down at full load?
 
 
-## To Do##
+## To Do ##
 
 * Find a temperature sensor to put on the outside of the refrigerator - two of them: freezer and refrigerator side.
 * Get 4 more 5-gallon gas cans - need one extra to mix special fuel for the generator in

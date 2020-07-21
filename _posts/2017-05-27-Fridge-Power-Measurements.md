@@ -6,7 +6,7 @@ date:   2017-05-27 21:35
 categories: hurricane
 ---
 
-## To Do##
+## To Do ##
 
 * ~~Call storm shutter company regarding sliding glass door shutter~~
 * ~~Get quote for flood insurance~~
@@ -17,13 +17,13 @@ categories: hurricane
 * ~~Research how to connect the generator to my existing electrical (Without killing myself)~~
 * ~~Get more gas cans?~~
 
-## Flood Insurance##
+## Flood Insurance ##
 
 Most people don't think you need flood insurance unless you live in a flood zone. The truth is it's a good idea for everyone. Water is all around
 us in Florida and it rains all the time. Flooding is a real possibility. If you're not in a flood zone, it's fairly inexpensive. I just got quoted
 the same number from two different companies: $450/yearly  I've been told that no matter who I ask that's the number I'll get, so I'll probably just go with the company who has our homeowners insurance.
 
-## Refrigerator##
+## Refrigerator ##
 
 Apparently the refrigerator only uses 300W max. And 40W of that is the light bulb, so it's really sitting down near 260W most of the time. I'm
 suspicious, but it's safe to say I'll be able to power the refrigerator with a 700W continuous generator (which costs $90 at Harbor Freight or less 
@@ -78,11 +78,11 @@ inverter/battery/timer/charger combination to determine specific value for power
 
 UPDATE: Why did I do the calculation like that? It's wrong! DC amps != AC amps! I'm working more on it in the next post
 
-## Storm Shutters##
+## Storm Shutters ##
 
 Apparently the company that did our work no longer exists. I'll have to find another.
 
-## To Do##
+## To Do ##
 
 * Find a temperature sensor to put on the outside of the refrigerator - two of them: freezer and refrigerator side.
 * Get 4 more 5-gallon gas cans - need one extra to mix special fuel for the generator in
