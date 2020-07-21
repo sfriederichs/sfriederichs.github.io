@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Installing Python 3.8"
-updated: 2020-03-23 21:47
+
 date:   2020-03-23 21:47
 categories: how-to python python3
 

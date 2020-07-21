@@ -2,7 +2,7 @@
 layout: post
 title:  "How to Replace With Regex Matches in Notepad++"
 date:   2020-04-02 21:33
-updated: 2020-04-02 21:33
+
 categories: how-to regex notepad-pp
 ---
 

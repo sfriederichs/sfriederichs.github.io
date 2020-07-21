@@ -2,7 +2,7 @@
 layout: post
 title:  "How To Create a Repository on Github"
 date:   2017-12-27 21:55
-updated: 2020-03-27
+
 update-abstract: Added information on creating and adding SSH keys to Github
 categories: how-to git github cli
 ---

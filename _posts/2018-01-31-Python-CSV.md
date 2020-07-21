@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "How To Work With CSV Data in Python"
-updated: 2018-01-31 7:07
+
 date:   2018-01-31 7:07
 categories: how-to python csv
 ---

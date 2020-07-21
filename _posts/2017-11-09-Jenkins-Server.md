@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "How To Install a Jenkins Server"
-updated: 2017-11-09 8:42
+
 date:   2017-11-09 8:42
 categories: how-to jenkins
 ---

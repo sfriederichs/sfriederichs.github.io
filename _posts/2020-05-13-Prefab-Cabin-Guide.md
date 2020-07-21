@@ -2,7 +2,7 @@
 layout: post
 title:  "Prefab Cabin Project"
 date:   2020-04-29 21:33
-updated: 2020-04-29 21:33
+
 categories: homeimprovement
 ---
 

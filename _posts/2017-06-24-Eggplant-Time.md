@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Eggplant Time!"
-updated: 2017-06-24 20:49
+
 date:   2017-06-24 20:49
 categories: The-Garden
 ---

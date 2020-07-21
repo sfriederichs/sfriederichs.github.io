@@ -2,7 +2,7 @@
 layout: post
 title:  "How-to Access the Windows Clipboard with Python"
 date:   2020-07-14 8:58
-updated: 2020-07-14 8:58
+
 categories: how-to python3 clipboard
 ---
 

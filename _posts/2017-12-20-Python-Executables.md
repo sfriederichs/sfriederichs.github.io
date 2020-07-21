@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "How To Turn Python Scripts into Windows Executables"
-updated: 2017-12-20 10:19
+
 date:   2017-12-20 10:19
 categories: how-to python exe
 ---

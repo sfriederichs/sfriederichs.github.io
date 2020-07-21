@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Headboard Project"
-updated: 2017-05-17 20:29
+
 date:   2017-05-17 20:29
 categories: headboard
 ---

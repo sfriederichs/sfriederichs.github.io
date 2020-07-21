@@ -2,7 +2,7 @@
 layout: post
 title:  "Choosing and Installing a Murphy Bed"
 date:   2020-07-06 8:58
-updated: 2020-07-06 8:58
+
 categories: how-to murphy-bed
 ---
 

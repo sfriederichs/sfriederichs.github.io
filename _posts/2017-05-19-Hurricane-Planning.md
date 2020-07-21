@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Hurricane Planning"
-updated: 2017-05-19 10:35
+
 date:   2017-05-19 10:35
 categories: hurricane
 ---

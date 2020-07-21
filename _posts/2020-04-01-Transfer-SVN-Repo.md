@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Transferring SVN Repos Between Servers"
-updated: 2020-04-01 21:47
+
 date:   2020-04-01 21:47
 categories: how-to svn
 

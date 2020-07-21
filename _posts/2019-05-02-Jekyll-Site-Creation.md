@@ -2,7 +2,7 @@
 layout: post
 title:  "How To Create Jekyll Website"
 date:   2019-05-02 10:39
-updated: 2019-05-02 10:39
+
 categories: how-to jekyll
 ---
 

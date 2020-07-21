@@ -2,7 +2,7 @@
 layout: post
 title:  "How to Wipe a Hard Drive Before Selling it"
 date:   2020-07-01 8:58
-updated: 2020-07-01 8:58
+
 categories: how-to hdd ssd
 ---
 

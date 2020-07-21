@@ -2,7 +2,7 @@
 layout: post
 title:  "How-to Use Python and Excel Together"
 date:   2020-07-13 8:58
-updated: 2020-07-13 8:58
+
 categories: how-to python3 excel
 ---
 

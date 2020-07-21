@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "How To Support Command-Line Arguments in Python"
-updated: 2018-01-15 22:00
+
 date:   2018-01-15 22:00
 categories: how-to python cli
 ---

@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Business Best Practices"
-updated: 2020-03-23 21:47
+
 date:   2020-03-23 21:47
 categories: best-practices business 
 ---

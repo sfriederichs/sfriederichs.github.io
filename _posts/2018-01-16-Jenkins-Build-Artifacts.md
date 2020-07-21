@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "How To Archive and Retrieve Build Artifacts in Jenkins"
-updated: 2018-1-16 7:13
+
 date:   2018-1-16 7:13
 categories: how-to jenkins archive
 ---

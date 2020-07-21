@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "How To Develop GUI Applications in Python"
-updated: 2017-12-10 15:19
+
 date:   2017-12-10 15:19
 categories: how-to python gui tkinter
 ---

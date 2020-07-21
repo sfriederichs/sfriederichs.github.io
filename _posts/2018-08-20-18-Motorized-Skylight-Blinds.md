@@ -2,7 +2,7 @@
 layout: post
 title:  "How to Select and Install Motorized Skylight Blinds"
 date:   2018-08-20 8:59
-updated: 2018-10-11 9:17
+
 update-abstract: "Described ordering and installation"
 categories: home-improvement lighting
 ---

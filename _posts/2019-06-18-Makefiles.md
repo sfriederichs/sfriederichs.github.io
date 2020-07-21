@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "How To Write Makefiles"
-updated: 2019-06-18 9:25
+
 date:   2019-06-18 9:25
 categories: how-to make
 ---

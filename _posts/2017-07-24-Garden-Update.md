@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "7-24-17 Garden Update"
-updated: 2017-07-24 21:47
+
 date:   2017-07-24 21:47
 categories: The-Garden
 ---

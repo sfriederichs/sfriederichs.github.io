@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "How To Generate Fancy Documents with Markdown and Pandoc"
-updated: 2018-1-3 11:34
+
 date:   2018-1-3 11:34
 categories: how-to pandoc docx dox
 ---

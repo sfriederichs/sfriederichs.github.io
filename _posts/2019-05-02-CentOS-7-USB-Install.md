@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "How To Create CentOS7 Install Media on a usb"
-updated: 2019-05-02 11:39
+
 date:   2019-05-02 11:39
 categories: how-to centos
 ---

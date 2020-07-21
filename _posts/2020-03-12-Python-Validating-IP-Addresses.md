@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "How To Validate IP addresses in Python"
-updated: 2020-03-12 9:25
+
 date:   2020-03-12 9:25
 categories: how-to python ip
 ---

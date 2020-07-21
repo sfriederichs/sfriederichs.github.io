@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Git for Windows"
-updated: 2020-03-24 21:47
+
 date:   2020-03-24 21:47
 categories: how-to git windows
 
