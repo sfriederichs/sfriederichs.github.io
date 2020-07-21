@@ -175,8 +175,8 @@ Once the SSH key is added to Github you can use it to push code. Here's how you 
 3. Click on 'New SSH key'
 4. Set 'Title' to something descriptive for this particular PC
 5. Obtain your SSH key by typing the following in git-bash:
-> cat ~/.ssh/id_rsa.pub
-6. Copy the output and paste it into the 'Key' field
+> cat ~/.ssh/id_rsa.pub | clip
+6. Paste into the 'Key' field - the previous command saved the key to the clipboard
 7. Click 'Add Key'
 
 Your key is now stored on Github - when you try to push to Github you'll have to put in your passphrase.

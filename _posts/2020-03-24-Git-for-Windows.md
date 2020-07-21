@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Installing Git for Windows"
+title:  "Git for Windows"
 updated: 2020-03-24 21:47
 date:   2020-03-24 21:47
 categories: how-to git windows
@@ -121,6 +121,22 @@ The following steps can be performed to configure Git with your name and email a
 > git config --global user.email "hahaha.no@waywillItellthis.fin"
 > git config --global user.name "Stephen Friederichs"
 
+## Git Commands ##
+
+I just had an 'Oh crap' moment with Git that I was able to fix, so I decided I'd
+add some common commands that I use here.
+
+### Reverting Changes in a Working Copy ###
+
+Alright, I'm sure someone is going to browbeat me about the fact that 'revert' and 'working copy' are Subversion concepts that Git doesn't have. I will accept this punishment because I understand that I'm a dinosaur who can't learn new things. I will have to subsist on likening my new knowledge to my old knowledge instead of  actually learning new concepts. 
+
+So, in that spirit, let's discuss 'reverting' 'uncommitted' changes in git. If you've done something foolish in Git but haven't committed it yet, you can back out what you just did. With one simple command:
+
+{% highlight console %}
+C:\Users\sfrie\Dropbox\Projects\sfriederichs.github.io>git reset
+{% endhighlight %}
+
+That command will unstage all uncommitted changes in the local filesystem.
 
 ## Resources ##
 * [Git for Windows Installer Download](https://github.com/git-for-windows/git/releases/download/v2.26.0.windows.1/Git-2.26.0-64-bit.exe)
