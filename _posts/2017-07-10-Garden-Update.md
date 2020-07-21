@@ -7,7 +7,7 @@ categories: The-Garden
 ---
 I was gone for this week but the garden survived!
 
-## Garden Log##
+## Garden Log ##
 
 #### Container 1
 

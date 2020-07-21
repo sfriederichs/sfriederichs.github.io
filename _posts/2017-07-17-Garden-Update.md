@@ -8,7 +8,7 @@ categories: The-Garden
 
 Another week in the garden...
 
-## Garden Log##
+## Garden Log ##
 
 #### Container 1
 
@@ -42,7 +42,7 @@ This container is currently shaded.
 * Turmeric - The turmeric shoots are lovely and huge! Definitely healthy.
 
 
-## Fruit Trees##
+## Fruit Trees ##
 
 A friend at work generously brought a small papaya tree to me, so now we have this:
 

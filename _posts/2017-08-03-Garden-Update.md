@@ -10,7 +10,7 @@ I had a bit of a busy week so this update is late, but there's plenty to talk ab
 
 We had a wind storm this week, so a few things got blown around. No major damage.
 
-## Garden Log##
+## Garden Log ##
 
 #### Container 1
 
@@ -53,7 +53,7 @@ The remaining leaves are under the shade and hopefully will do nicely. There wer
 * Turmeric - Still big, still healthy.
 
 
-## Fruit Trees##
+## Fruit Trees ##
 
 ### Papaya ###
 

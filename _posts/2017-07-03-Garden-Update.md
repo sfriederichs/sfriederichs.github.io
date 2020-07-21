@@ -7,7 +7,7 @@ categories: The-Garden
 ---
 Nothing much to report this week - things just keep growing.
 
-## Garden Log##
+## Garden Log ##
 
 #### Container 1
 

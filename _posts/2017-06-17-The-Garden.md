@@ -10,7 +10,7 @@ categories: The-Garden
 
 I planted a garden. In fact, it's a container garden. I make self-watering garden containers from 55-gallon barrels and I grow things in them. I have three of them right now and want to expand. I'm going to use this blog to log my activities in my garden. I'm just going to jump right in - the story up to this point isn't very interesting. The short version is that I had a tomato plant and two bell pepper plants. The pepper plants produced very well until a windstorm broke one of the plants and generally disheveled the other one. The tomato plant was also doing very well - until the worms got to it. Between them and the increasing heat the plant was pretty much done for. We ended up getting more than a dozen tomatoes though. I made a third container and put bush beans in it. Most of them died, so I added a ginger plant. 
 
-## Garden Log##
+## Garden Log ##
 
 #### Container 1
 

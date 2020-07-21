@@ -8,7 +8,7 @@ categories: The-Garden
 
 We've had a lot of rain and overcast days this week, so very little watering was needed.
 
-## Garden Log##
+## Garden Log ##
 
 #### Container 1
 
@@ -39,7 +39,7 @@ This container is currently shaded.
 * Turmeric - Still big, still healthy.
 
 
-## Fruit Trees##
+## Fruit Trees ##
 
 ### Papaya ###
 

@@ -8,7 +8,7 @@ categories: The-Garden
 
 I'm getting back on track with Monday updates, so let's see what's going on in the garden.
 
-## Garden Log##
+## Garden Log ##
 
 #### Container 1
 
@@ -62,7 +62,7 @@ In addition to the sprouts I planted in container 3, the ones I was sprouting in
 
 Nice! Time to plant them!
 
-## Fruit Trees##
+## Fruit Trees ##
 
 ### Papaya ###
 

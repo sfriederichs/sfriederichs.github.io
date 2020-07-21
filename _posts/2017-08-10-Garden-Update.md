@@ -8,7 +8,7 @@ categories: The-Garden
 
 Little movement in the garden this week - summer heat is killer.
 
-## Garden Log##
+## Garden Log ##
 
 #### Container 1
 
@@ -58,7 +58,7 @@ We've been cutting up green onions, so I decided to sprout some:
 
 I just planted the sprouts outside in an out-of-the-way place where they won't get direct sunlight most of the day, so we'll see what happens. There's always more green onions to sprout if they don't make it.
 
-## Fruit Trees##
+## Fruit Trees ##
 
 ### Papaya ###
 

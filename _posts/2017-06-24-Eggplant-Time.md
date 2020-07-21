@@ -7,7 +7,7 @@ categories: The-Garden
 ---
 This week I tore out the old tomato plant, refitted the container a bit and put in a new eggplant.
 
-## Garden Log##
+## Garden Log ##
 
 #### Container 1
 
