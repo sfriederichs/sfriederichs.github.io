@@ -444,7 +444,7 @@ if __name__=="__main__":
 
 I will document anything interesting or unique about specific workflows with xlrd, xlwt and xlutils here.
 
-### Modifying Existing Excel Files With xlrd and xlwt###
+### Modifying Existing Excel Files With xlrd and xlwt ###
 
 So, it seems, according to [this](https://stackoverflow.com/a/26958437/39492) answer, that the way to do this is to:
 
