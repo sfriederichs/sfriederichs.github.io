@@ -60,7 +60,7 @@ print(subbedString)
 {% endhighlight %}
 
 That produces this output:
-{% highlight console % }
+{% highlight console %}
 Bonjour. My name is Inigo Montoya. You killed my father. Prepare to die. Say Bonjour to my little friend
 {% endhighlight %}
 
