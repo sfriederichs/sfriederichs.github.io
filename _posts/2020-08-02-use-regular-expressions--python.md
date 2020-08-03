@@ -2,7 +2,7 @@
 layout: post
 title: How to Use Regular Expressions in Python
 date: 2020-08-02 21:54
-categories:
+categories: how-to python regex
 ---
 
 ## Introduction ##
