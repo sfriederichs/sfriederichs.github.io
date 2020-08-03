@@ -90,9 +90,8 @@ You can optionally omit the --global option if you only want git to use the info
 
 ## Generating an SSH Key ##
 
-You'lll need an SSH key  to be able to push data to a github repo. Here's how to generate one;
-
-[Here](https://help.github.com/articles/generating-ssh-keys/) is a good resource from Github.
+You'lll need an SSH key  to be able to push data to a github repo. 
+[Here](https://help.github.com/articles/generating-ssh-keys/) is a good resource from Github. The steps I followed are:
 
 1. Start git bash from the start menu
 2. Type:

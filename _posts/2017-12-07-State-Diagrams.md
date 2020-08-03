@@ -153,7 +153,7 @@ digraph finite_state_machine {
 
 }
 {% endhighlight %}
-If the 
+
 ## Resources ##
 
 * [Graphviz Official Documentation](http://www.graphviz.org/documentation/)

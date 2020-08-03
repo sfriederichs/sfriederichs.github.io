@@ -48,7 +48,7 @@ I am doing that.
 F11 brings up the boot menu - it booted from the USB just fine.
 Defaults for most of the installation were good - I had to delete the existing partitions on the hard drive.
 
-Root password: moogslomv
+Root password: <redacted>
 
 I made no new users. 
 
@@ -70,7 +70,7 @@ Seems to work this time.
 
 I've created a new user:
 * Username: sfrieder
-* Password: steve$$$$
+* Password: <redacted>
 
 ## Resources ##
 * [Linoxide USB Install Media Creation Steps](https://linoxide.com/how-tos/centos-7-step-by-step-screenshots/)

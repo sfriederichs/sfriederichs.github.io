@@ -616,6 +616,19 @@ exception.
 Yes, I know - that's bad. But until that exception occurs I won't know what to look for specifically.
 Or I could do more research. But I won't right now.
 
+Also, I've had issues using os.linesep within log messages, as well as '\\r\\n'. The server I'm working on only wants the '\\n'.
+
+## Adding Files to a Working Copy ##
+
+If you have a newly-created file, you'll need to add it to your working copy and then commit
+to get the file into SVN. Here's how you do it.
+
+{% highlight python %}
+
+client.add(filePath)
+newRev = client.checkin(addressPath,"Added a new file")
+
+{% endhighlight %}
 
 ## Notes ##
 

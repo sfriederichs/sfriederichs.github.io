@@ -84,7 +84,7 @@ wb2 = load_workbook('test.xlsx')
 ws4 = wb2["New Title"]  
 {% endhighlight %}
 
-### Getting a List of Sheets by Name ###
+### Getting a List of Sheet Names ###
 
 This one's easy too. I'm beginning to think using OpenPyXL will be easy.
 
@@ -118,7 +118,60 @@ It's worth noting here that OpenPyXL uses 1-based indexing: the cell at row 2 co
 
 ### Getting a Range of Cells ###
 
+There are times when you want to pluck a range of cells and work with them. Here's how you can do that:
 
+You can do it by rows. This code retrieves all rows between 3 and 10 (inclusive) and returns them as a list of lists :
+
+{% highlight python %}
+import openpyxl
+
+wbPath = "test.xls"
+
+wb = openpyxl.load_workbook(wbPath)
+
+sheet = wb.sheets["Sheet1"]
+
+rows = testSheet.iter_rows(min_row = 3, max_row=10)
+
+for row in rows:
+    for cell in row:
+        print(str(cell.value))
+    
+{% endhighlight %}
+
+And, to do the same thing with columns:
+
+{% highlight python %}
+import openpyxl
+
+wbPath = "test.xls"
+
+wb = openpyxl.load_workbook(wbPath)
+
+sheet = wb.sheets["Sheet1"]
+
+cols = testSheet.iter_cols(min_col = 3, max_col=10)
+
+for col in cols:
+    for cell in col:
+        print(str(cell.value))
+    
+{% endhighlight %}
+
+### Retrieving Just Data (Not Formulas) From a Workbook ###
+
+I had a bit of a shock when I opened a workbook, specified a range of cells and tried to get values: I was getting formulas instead of the *result* of formulas. 
+There's a way to avoid this: load the workbook as 'data only'. You do that like this:
+
+{% highlight python %}
+
+import openpyxl
+
+wb = openpyxl.load_workbook(wbPath,data_only=True)
+
+{% endhighlight %}
+
+This way, when you acces the value of a cell, you get the result of the formula.
 
 ### OpenPyXL Notes ###
 

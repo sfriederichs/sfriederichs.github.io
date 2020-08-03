@@ -1,7 +1,6 @@
 ---
 layout: post
 title:  "The Garden"
-
 date:   2017-06-17 22:49
 categories: The-Garden
 ---
