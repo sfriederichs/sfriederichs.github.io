@@ -503,6 +503,12 @@ sudo docker run hello-world
 This successfully ran the Docker hello-world. This is, by the way, a 
 feature every piece of software should have.
 
+## Removing Docker Containers for a Fresh Re-Install ##
+
+More than once here I've had to completely wipe away and re-download a fresh Docker container. I figured I might as well document the steps so I know how to
+do it when I need to again.
+
+
 ## Setting up a Plex Server via Docker ##
 
 Apparently this should be somewhat straightforward.
@@ -543,6 +549,105 @@ pi@raspberrypi:/ $ sudo mount /dev/sda1 /mnt/usbdrive
 
 Then it mounts fine.
 
+
+#### Adding exFAT Support ####
+
+One of my external drives is exFAT-formatted. My RasPi can't mount
+that. 
+
+I've found a page [here](https://pimylifeup.com/raspberry-pi-exfat/).
+
+{% highlight console %}
+
+pi@raspberrypi:~ $ sudo apt-get update
+Hit:1 https://download.docker.com/linux/raspbian buster InRelease
+Get:2 http://archive.raspberrypi.org/debian buster InRelease [32.6 kB]
+Get:3 http://raspbian.raspberrypi.org/raspbian buster InRelease [15.0 kB]
+Get:4 http://raspbian.raspberrypi.org/raspbian buster/main armhf Packages [13.0 MB]
+Get:5 http://archive.raspberrypi.org/debian buster/main armhf Packages [330 kB]
+Fetched 13.4 MB in 8s (1,681 kB/s)
+Reading package lists... Done
+pi@raspberrypi:~ $ sudo apt-get upgrade
+
+---Waaaay too much to retain here---
+
+pi@raspberrypi:~ $ sudo apt-get install exfat-fuse
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following package was automatically installed and is no longer required:
+  rpi-eeprom-images
+Use 'sudo apt autoremove' to remove it.
+The following additional packages will be installed:
+  exfat-utils
+The following NEW packages will be installed:
+  exfat-fuse exfat-utils
+0 upgraded, 2 newly installed, 0 to remove and 5 not upgraded.
+Need to get 67.7 kB of archives.
+After this operation, 260 kB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf exfat-fuse armhf 1.3.0-1 [27.5 kB]
+Get:2 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf exfat-utils armhf 1.3.0-1 [40.3 kB]
+Fetched 67.7 kB in 1s (57.7 kB/s)
+Selecting previously unselected package exfat-fuse.
+(Reading database ... 41633 files and directories currently installed.)
+Preparing to unpack .../exfat-fuse_1.3.0-1_armhf.deb ...
+Unpacking exfat-fuse (1.3.0-1) ...
+Selecting previously unselected package exfat-utils.
+Preparing to unpack .../exfat-utils_1.3.0-1_armhf.deb ...
+Unpacking exfat-utils (1.3.0-1) ...
+Setting up exfat-utils (1.3.0-1) ...
+Setting up exfat-fuse (1.3.0-1) ...
+Processing triggers for man-db (2.8.5-2) ...
+pi@raspberrypi:~ $ sudo apt-get install exfat-utils
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+exfat-utils is already the newest version (1.3.0-1).
+exfat-utils set to manually installed.
+The following package was automatically installed and is no longer required:
+  rpi-eeprom-images
+Use 'sudo apt autoremove' to remove it.
+0 upgraded, 0 newly installed, 0 to remove and 5 not upgraded.
+
+pi@raspberrypi:/mnt/usbdrive $ sudo mount /dev/sda1 /mnt/usbdrive
+FUSE exfat 1.3.0
+WARN: volume was not unmounted cleanly.
+fuse: device not found, try 'modprobe fuse' first
+pi@raspberrypi:/mnt/usbdrive $ modprobe fuse
+modprobe: ERROR: ../libkmod/libkmod.c:586 kmod_search_moddep() could not open moddep file '/lib/modules/4.19.97-v7l+/modules.dep.bin'
+modprobe: FATAL: Module fuse not found in directory /lib/modules/4.19.97-v7l+
+pi@raspberrypi:/mnt/usbdrive $ sudo mount -t exfat /dev/sda1 /mnt/usbdrive/
+FUSE exfat 1.3.0
+WARN: volume was not unmounted cleanly.
+fuse: device not found, try 'modprobe fuse' first
+
+{% endhighlight %}
+
+Turns out you need to restart the Raspberry Pi after you do all that.
+
+Then, theoretically it could mount the drive, but I started having
+difficulties with my USB drive adapters.
+
+9/23/2020
+
+Okay, I finally fixed this problem by ordering a [powered USB 3.0 hub](https://www.amazon.com/gp/product/B00TPMEOYM/ref=ppx_yo_dt_b_asin_title_o04_s00?ie=UTF8&psc=1) to attach both drives to.
+
+The RasPi could power one drive on its own, but never two, so I needed the powered hub to attach them both at once.
+
+Now, I have both attached and mounted - the exFAT support works great.
+
+9/24/20
+Ha ha! Did you think a powered hub would solve my problems? YOU WERE WRONG!
+
+Turns out my powered hub is trying to feed power into my RasPI and IT DOESN'T LIKE IT!
+
+I need a different hub that won't backpower the RasPi.
+
+[Here](https://elinux.org/RPi_Powered_USB_Hubs) is a site that discusses the issue and provides some potentially compatible hubs.
+
+Really, after not looking too hard at the site, [this](https://www.amazon.com/Anker-7-Port-Adapter-Charging-iPhone/dp/B014ZQ07NE/ref=sr_1_1?dchild=1&keywords=anker+AH221&qid=1600991156&sr=8-1) is the only one that will suffice for me.
+s
 #### Automatically Mounting the Drive at Startup ####
 
 Possible set of directions [here](https://www.raspberrypi.org/documentation/configuration/external-storage.md).
@@ -551,7 +656,7 @@ I'm starting at the 'Setting up automatic mounting' section.
 
 I start off by doing this:
 {% highlight console %}
-pi@raspberrypi:~ $ sudo lsblk -o UUID,NAME,FSTYPE,PARTUUID,MOUNTPOINT
+pi@raspberrypi:~ $ Then
 UUID                                 NAME        FSTYPE PARTUUID                             MOUNTPOINT
                                      sda
 16E1-2724                            └─sda1      vfat   ed9bf8d7-01
@@ -614,6 +719,19 @@ Yes, the MOUNTPOINT for the /dev/sda1 device is as it should be.
 
 Muy. Bueno.
 
+### USB Drive Mounting Configuration ###
+
+Here's the fstab I'm using to mount both of my drives at once:
+
+{% highlight console %}
+proc            /proc           proc    defaults          0       0
+PARTUUID=738a4d67-01  /boot           vfat    defaults          0       2
+PARTUUID=738a4d67-02  /               ext4    defaults,noatime  0       1
+PARTUUID=4aaed96b-01  /mnt/nas        vfat    defaults,auto,users,rw,nofail 0 0
+PARTUUID=1de59ff2-01  /mnt/torrents   exfat   defaults,auto,users,rw,nofail 0 0
+
+{% endhighlight %}
+
 ### Installing Plex via Docker ###
 
 Now, I have a Docker command-line to run:
@@ -635,6 +753,138 @@ And it works.
 
 Wow. That was straightforward.
 
+### Running Plex With External HD ###
+
+Okay, so I've got my media drive connected to the RasPi now. How do I re-run Plex with the new configuration?
+
+{% highlight console %}
+pi@raspberrypi:~ $ docker stop plex
+plex
+pi@raspberrypi:~ $ docker ps
+CONTAINER ID        IMAGE                                       COMMAND                  CREATED             STATUS                    PORTS                    NAMES
+d8d39033ecc1        haugene/transmission-openvpn:latest-armhf   "/usr/bin/entry.sh d…"   10 days ago         Up 14 minutes (healthy)   0.0.0.0:9091->9091/tcp   angry_goldstine
+pi@raspberrypi:~ $ docker run -d --restart=always --name plex -v /mnt/torrents:/media --net=host jaymoulin/plex
+docker: Error response from daemon: Conflict. The container name "/plex" is already in use by container "c2065d31b4f0ca3e740315a06b9535748bd947baa58acba46f1e91626732f298". You have to remove (or rename) that container to be able to reuse that name.
+
+{% endhighlight %}
+
+Okay.. that wasn't correct...
+
+{% highlight console %}
+pi@raspberrypi:~ $ docker run -d --restart=always -v /mnt/torrents:/media jaymoulin/plex
+1a0600f158d30e6ee35c7342f5995bc97b213982c96e13a3a087ad2f43e54aff
+
+{% endhighlight %}
+
+Okay! That worked!
+
+Except that I can't access the server from my laptop. Is it running?
+
+{% highlight console %}
+pi@raspberrypi:~ $ docker ps
+CONTAINER ID        IMAGE                                       COMMAND                  CREATED             STATUS                    PORTS                    NAMES
+1a0600f158d3        jaymoulin/plex                              "daemon-pms"             3 minutes ago       Up 3 minutes              32400/tcp                serene_goldberg
+d8d39033ecc1        haugene/transmission-openvpn:latest-armhf   "/usr/bin/entry.sh d…"   10 days ago         Up 22 minutes (healthy)   0.0.0.0:9091->9091/tcp   angry_goldstine
+
+{% endhighlight %}
+
+It's running. Is the port forwarding working correctly? Why don't I try adding the port forwarding explicitly to the command line?
+
+{% highlight console %}
+docker run -d --restart=always -v /mnt/torrents:/media jaymoulin/plex -p 32400:32400
+{% endhighlight %}
+
+{% highlight console %}
+pi@raspberrypi:~ $ docker run -d --restart=always -v /mnt/torrents:/media -p 32400:32400 jaymoulin/plex
+dad08c59e0f66764b8aa4a7c7dddbae98e1d6938acc7e2ade8eb3d483c1e8163
+
+{% endhighlight %}
+
+THAT worked.
+
+Except...
+
+There must be more. I can't make a proper connection to the Plex server. I can go to http://192.168.50.44:32400/manage and it loads, but it also claims it can't contact my Raspberry Pi.  I'm missing something else here.
+
+What if I remove that container and reinstall it?
+
+{% highlight console %}
+pi@raspberrypi:~ $ docker images
+REPOSITORY                     TAG                 IMAGE ID            CREATED             SIZE
+jaymoulin/plex                 latest              5eb3d5ff1080        3 weeks ago         202MB
+haugene/transmission-openvpn   latest-armhf        2adda52281cd        4 weeks ago         309MB
+haugene/transmission-openvpn   latest              ee7968739e88        4 weeks ago         434MB
+jaymoulin/transmission         latest              b023adfd1e43        5 months ago        18.4MB
+hello-world                    latest              851163c78e4a        8 months ago        4.85kB
+pi@raspberrypi:~ $ docker rm
+cranky_gauss      focused_wiles     laughing_villani  plex              quirky_bhabha     serene_goldberg   stupefied_jones   zealous_gauss
+pi@raspberrypi:~ $ docker rm plex
+plex
+pi@raspberrypi:~ $ sudo docker run -d --restart=always --name plex -v /mnt/torrents:/media --net=host jaymoulin/plex
+c125429ff26e7c9a65d6ba1c190b95b00a09011f49ac780a8a8bb0efaf13d995
+
+{% endhighlight %}
+
+Mmmm, no dice. It's the same behavior.
+
+Maybe I didn't delete it correctly. I'm trying this:
+
+{% highlight console %}
+pi@raspberrypi:~ $ docker rmi jaymoulin/plex -f
+Untagged: jaymoulin/plex:latest
+Untagged: jaymoulin/plex@sha256:53abfee666150e18a4ca6a49e14942b7b93f18984d410fa98ee3a05bc45b03e3
+Deleted: sha256:5eb3d5ff108078e2dd8f32b61f58f262c0edd1574fd03fa9cb60a02e54466e5d
+pi@raspberrypi:~ $ sudo docker run -d --restart=always --name plex -v /mnt/torrents:/media --net=host jaymoulin/plex
+Unable to find image 'jaymoulin/plex:latest' locally
+latest: Pulling from jaymoulin/plex
+e68f2aaec91c: Already exists
+adbe693323bb: Already exists
+18214b7504c5: Already exists
+c2974ca466f5: Already exists
+9e99806a6d24: Already exists
+Digest: sha256:53abfee666150e18a4ca6a49e14942b7b93f18984d410fa98ee3a05bc45b03e3
+Status: Downloaded newer image for jaymoulin/plex:latest
+docker: Error response from daemon: Conflict. The container name "/plex" is already in use by container "c125429ff26e7c9a65d6ba1c190b95b00a09011f49ac780a8a8bb0efaf13d995". You have to remove (or rename) that container to be able to reuse that name.
+See 'docker run --help'.
+
+{% endhighlight %}
+
+Oof it just doesn't get easier does it?
+
+Looking up that error [here](https://stackoverflow.com/questions/31697828/docker-error-name-is-already-in-use-by-container).
+
+Okay, let's see what its steps do:
+
+{% highlight console %}
+pi@raspberrypi:~ $ docker ps -a
+CONTAINER ID        IMAGE                                       COMMAND                  CREATED             STATUS                      PORTS                    NAMES
+c125429ff26e        jaymoulin/plex                              "daemon-pms"             11 minutes ago      Exited (0) 9 minutes ago                             plex
+dad08c59e0f6        jaymoulin/plex                              "daemon-pms"             19 minutes ago      Exited (0) 10 minutes ago                            ecstatic_hamilton
+40235647b1c2        jaymoulin/plex                              "-p 32400:32400"         21 minutes ago      Created                     32400/tcp                quirky_bhabha
+1a0600f158d3        jaymoulin/plex                              "daemon-pms"             29 minutes ago      Exited (0) 22 minutes ago                            serene_goldberg
+d8d39033ecc1        haugene/transmission-openvpn:latest-armhf   "/usr/bin/entry.sh d…"   10 days ago         Up 48 minutes (healthy)     0.0.0.0:9091->9091/tcp   angry_goldstine
+5a31a1162635        haugene/transmission-openvpn:latest-armhf   "/usr/bin/entry.sh d…"   2 weeks ago         Exited (0) 11 days ago                               zealous_gauss
+adbe9ba4ac34        ee7968739e88                                "dumb-init /etc/open…"   2 weeks ago         Exited (1) 2 weeks ago                               cranky_gauss
+858aef494521        ee7968739e88                                "dumb-init /etc/open…"   2 weeks ago         Exited (1) 2 weeks ago                               laughing_villani
+883598a1c459        ee7968739e88                                "dumb-init /etc/open…"   2 weeks ago         Exited (1) 2 weeks ago                               focused_wiles
+a6193863727c        hello-world                                 "/hello"                 3 weeks ago         Exited (0) 3 weeks ago                               stupefied_jones
+
+{% endhighlight %}
+
+Okay, I need to remove all of the containers associated with jaymoulin/plex.
+
+Then I re-run the command:
+
+{% highlight console %}
+pi@raspberrypi:~ $ sudo docker run -d --restart=always --name plex -v /mnt/torrents:/media --net=host jaymoulin/plex
+edfb618a400520b0ebd234d957beb78fead1e867733536b083ed59a4523895e0
+
+{% endhighlight %}
+
+And I go to 192.168.50.44:32400/manage....
+
+And it's the initial setup again!
+
 ### Transferring Metadata From Windows to Linux ###
 
 I have a Plex server on Windows already. I will be transferring all of the media files by attaching the external hard drive to the RasPi, but 
@@ -644,6 +894,251 @@ I need also to transfer all of the metadata such as whether or not a file has be
 
 [This](https://www.reddit.com/r/PleX/comments/7amo55/move_plex_from_windows_to_linux_while_keeping_all/) is another.
 
+[here](https://support.plex.tv/articles/202915258-where-is-the-plex-media-server-data-directory-located/)
+
+Ok, the first thing I need to do is identify where on the plex container I need to copy these files.
+
+I can get a shell on the plex container with this command:
+
+{% highlight console %}
+pi@raspberrypi:~ $ docker exec -it plex /bin/sh
+/ # ls
+bin    dev    etc    home   lib    media  mnt    proc   root   run    sbin   srv    sys    tmp    usr    var
+
+{% endhighlight %}
+
+Okie dokie....
+
+It's late. TIme to stop for tonight.
+
+I found them. Not where anyone said they'd be, but here:
+
+{% highlight console %}
+/Library/Application Support/Plex Media Server
+{% endhighlight %}
+
+On the topic of gathering the files from my current Plex server, I've hit something
+that's not a snag, but a difficulty.
+
+You're supposed to zip up the whole Plex directory - maybe without the Cache folder.
+My problem is that the Updates folder is liek 6GB. Huge. It will take 20 hours to zip that so I can send it to the hard drive. Some people (in the Reddit thread) say
+that you don't even need all of those folders, you can get by with one. 
+
+Sooo.... maybe I don't have to copy the Updates folder.
+
+It's worth a shot.
+
+Heck, my Linux Plex server doesn't even have an Updates folder.
+
+So, how do I stop the Plex server on the Docker?
+
+I listed the processes on a hunch:
+
+{% highlight console %}
+~/Library/Application Support/Plex Media Server # ps
+PID   USER     TIME   COMMAND
+    1 root       0:00 {daemon-pms} /bin/sh /usr/sbin/daemon-pms
+    7 root       0:00 {start_pms} /bin/sh /usr/sbin/start_pms
+    8 root       1:53 ./Plex Media Server
+   22 root       0:21 {Plex Script Hos} Plex Plug-in [com.plexapp.system] /usr/
+   68 root       0:00 /usr/lib/plexmediaserver/Plex Tuner Service /usr/lib/plex
+ 7478 root       0:00 /bin/sh
+ 7492 root       0:00 ps
+
+{% endhighlight %}
+
+So, I'll kill those.
+
+Here's how I'm going to do this:
+
+1. Zip the Plex config directories on my current server into a zip
+2. Put the zip on the external hard drive
+3. Attach the external hard drive to the RasPi
+4. Reboot the RasPi
+5. SSH into the RasPi
+6. Get a shell on the Plex Docker
+7. Kill Plex on the Docker
+8. Unzip the files from the external hard drive to the Plex config directory
+9. Restart the RasPi or at least the Plex docker container
+10. Verify that I can see the new Plex server on all of my TVs and that the watched status looks the same as on my previous server.
+
+Then, I just have to get torrents working from RSS and I can get rid of that old computer.
+
+I... cannot kill Plex on the Docker with ps alone. 
+
+I will have to find another way.
+
+Every time that I try to kill the Plex process, ALL of my shell sessions on the Docker are ended.
+
+Okay... how is it started at startup?
+
+Nothing in init.d.
+
+This is my /etc/inittab:
+
+{% highlight console %}
+# /etc/inittab
+
+::sysinit:/sbin/openrc sysinit
+::sysinit:/sbin/openrc boot
+::wait:/sbin/openrc default
+
+# Set up a couple of getty's
+tty1::respawn:/sbin/getty 38400 tty1
+tty2::respawn:/sbin/getty 38400 tty2
+tty3::respawn:/sbin/getty 38400 tty3
+tty4::respawn:/sbin/getty 38400 tty4
+tty5::respawn:/sbin/getty 38400 tty5
+tty6::respawn:/sbin/getty 38400 tty6
+
+# Put a getty on the serial port
+#ttyS0::respawn:/sbin/getty -L ttyS0 115200 vt100
+
+# Stuff to do for the 3-finger salute
+::ctrlaltdel:/sbin/reboot
+
+# Stuff to do before rebooting
+::shutdown:/sbin/openrc shutdown
+
+{% endhighlight %}
+
+Nothing Plex in there...
+
+Here's something:
+{% highlight console %}
+
+/usr/sbin # cat start_pms
+#!/bin/sh
+
+#change these parameters in /etc/default/plexmediaserver
+export PLEX_MEDIA_SERVER_MAX_PLUGIN_PROCS=6
+export PLEX_MEDIA_SERVER_HOME=/usr/lib/plexmediaserver
+export PLEX_MEDIA_SERVER_MAX_STACK_SIZE=3000
+export PLEX_MEDIA_SERVER_TMPDIR=/tmp
+export PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR="${HOME}/Library/Application Support"
+
+test -f /etc/default/plexmediaserver && . /etc/default/plexmediaserver
+
+if [ ! -d "$PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR" ]
+then
+  mkdir -p "$PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR"
+  if [ ! $? -eq 0 ]
+  then
+    echo "WARNING COULDN'T CREATE $PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR, MAKE SURE I HAVE PERMISSON TO DO THAT!"
+    exit 1
+  fi
+fi
+
+export LD_LIBRARY_PATH="${PLEX_MEDIA_SERVER_HOME}/lib"
+export TMPDIR="${PLEX_MEDIA_SERVER_TMPDIR}"
+
+echo $PLEX_MEDIA_SERVER_MAX_PLUGIN_PROCS $PLEX_MEDIA_SERVER_MAX_STACK_SIZE $PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR
+
+ulimit -s $PLEX_MAX_STACK_SIZE
+
+(cd /usr/lib/plexmediaserver; ./Plex\ Media\ Server)
+
+{% endhighlight %}
+
+This looks like the important line:
+
+{% highlight console %}
+(cd /usr/lib/plexmediaserver; ./Plex\ Media\ Server)
+{% endhighlight %}
+
+That's the executable. It must start the others. It's definitely the one to kill.
+
+Maybe I can just comment out that line in the script and then restart the docker and then copy everything.
+
+Well, I did the edit and now the container is stuck in a restart loop.
+
+*Sigh* Time to wipe it out and start over.
+
+Okay, I'm wiping it out and starting over with a twist: I'm going to map the configuration directory in the Plex Docker to a local folder where I unzipped the zip file of my
+old Plex server's configuration.
+
+I started it with this line:
+
+{% highlight console %}
+docker run -d --restart=always --name plex -v /mnt/torrents:/media --net=host -v /mnt/torrents/PlexLib:/root/Library jaymoulin/plex
+{% endhighlight %}
+
+And I'm going through initial setup again. Fingers crossed.
+
+And it doesn't look like it took. I'm going to stop the Docker and unzip the zip file back where I mapped the paths, then start it again.
+
+Tried that. No dice.
+
+I went on to the Docker and couldn't even find the configuration library where I left it last time.
+
+It's late. I have to put this to bed.
+
+9/30/20
+
+Okay, I've realized something: I cannot work with the entire Plex metadata directory. It's just too damn large, even without some of the suspicious folders in there. It takes forever to zip, unzip, transfer, etc.
+I just can't do it. It won't work.
+
+All I need is the watched status. Plugins? I probably chose the wrong ones last time. I'll get new ones. Logs? No. Settings? Probably not.
+
+I just want watched status, nothing else. How?
+
+[This](https://support.plex.tv/articles/201154527-move-viewstate-ratings-from-one-install-to-another/) maybe.
+
+I needed to download the sqlite command line tools [here](https://sqlite.org/2020/sqlite-tools-win32-x86-3330000.zip).
+
+Then I've done this:
+
+{% highlight console %}
+echo ".dump metadata_item_settings" | sqlite3 com.plexapp.plugins.library.db | grep -v TABLE | grep -v INDEX > settings.sql
+{% endhighlight %}
+
+That seems to have done it. I now have a settings.sql file.
+
+Now I have to get sqlite3 on the RasPi?
+
+I do this:
+
+{% highlight console %}
+pi@raspberrypi:~ $ sudo apt-get install sqlite3
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following package was automatically installed and is no longer required:
+  rpi-eeprom-images
+Use 'sudo apt autoremove' to remove it.
+Suggested packages:
+  sqlite3-doc
+The following NEW packages will be installed:
+  sqlite3
+0 upgraded, 1 newly installed, 0 to remove and 17 not upgraded.
+Need to get 839 kB of archives.
+After this operation, 2,278 kB of additional disk space will be used.
+Get:1 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf sqlite3 armhf 3.27.2-3 [839 kB]
+Fetched 839 kB in 1s (855 kB/s)
+Selecting previously unselected package sqlite3.
+(Reading database ... 43130 files and directories currently installed.)
+Preparing to unpack .../sqlite3_3.27.2-3_armhf.deb ...
+Unpacking sqlite3 (3.27.2-3) ...
+Setting up sqlite3 (3.27.2-3) ...
+Processing triggers for man-db (2.8.5-2) ...
+pi@raspberrypi:~ $ sqlite3
+SQLite version 3.27.2 2019-02-25 16:06:06
+Enter ".help" for usage hints.
+Connected to a transient in-memory database.
+Use ".open FILENAME" to reopen on a persistent database.
+sqlite>
+{% endhighlight %}
+
+That looks like it works.
+
+So I should be able to do this:
+
+{% highlight console %}
+cat settings.sql | sqlite3 com.plexapp.plugins.library.db
+{% endhighlight %}
+
+
+
 ### Settings Changes ###
 
 If I change any of the settings in the Plex server, I'll list them
@@ -652,6 +1147,26 @@ here.
 ### Plex Plugins ###
 
 If I add any Plex plugins I'll list them here.
+
+### Impressions of Plex on the RasPi ###
+
+I got my Plex server set up and am trying out a movie right now. 
+
+I'm looking at the output of top and the processor sure is pegged. However, it's running the media scanner and that's what's taking most of the CPU.
+
+It must take a long while to download the episode descriptions and cover art and such. The TV shows are taking forever.
+
+Only certain movies are working. The broken ones just say that the movie isn't available. It's not predicated on the playback mode.
+
+Maybe it will even out.
+
+It's playing HD just fine. No long loading times or anything.
+
+Once the cover art is downloaded it seems that when browsing the movies everything loads pretty quickly.
+
+TV art and descriptions are starting to come in. 
+
+Missing sound on a couple of new downloads. Older TV shows are working fine though.
 
 ## Setting up VPN on a RasPi ##
 
@@ -1086,7 +1601,20 @@ So I'll use this command to pull the correct Docker container:
 
 
 {% highlight console %}
- docker run --cap-add=NET_ADMIN -d               -v /mnt/usbdrive/torrents/:/data               -v /etc/localtime:/etc/localtime:ro               -e CREATE_TUN_DEVICE=true               -e OPENVPN_PROVIDER=PIA               -e OPENVPN_CONFIG=CA\ Denver               -e OPENVPN_USERNAME=user               -e OPENVPN_PASSWORD=pass               -e WEBPROXY_ENABLED=false               -e LOCAL_NETWORK=192.168.50.0/24               --log-driver json-file               --log-opt max-size=10m               -p 9091:9091               haugene/transmission-openvpn:latest-armhf
+ docker run --cap-add=NET_ADMIN -d               		\
+            -v /mnt/usbdrive/torrents/:/data        	\       
+			-v /etc/localtime:/etc/localtime:ro      	\	         
+			-e CREATE_TUN_DEVICE=true               	\
+			-e OPENVPN_PROVIDER=PIA               		\
+			-e OPENVPN_CONFIG=CA\ Denver           		\    
+			-e OPENVPN_USERNAME=user               		\
+			-e OPENVPN_PASSWORD=pass               		\
+			-e WEBPROXY_ENABLED=false               	\	
+			-e LOCAL_NETWORK=192.168.50.0/24         	\      
+			--log-driver json-file               		\
+			--log-opt max-size=10m               		\
+			-p 9091:9091               					\
+			haugene/transmission-openvpn:latest-armhf
 
 Unable to find image 'haugene/transmission-openvpn:latest-armhf' locally
 latest-armhf: Pulling from haugene/transmission-openvpn
@@ -1261,11 +1789,585 @@ placed into '/mnt/usbdrive/torrents/transmission-home/torrents'.  The actual
 file is downloaded (temporarily) to '/mnt/usbdrive/torrents/transmission-home/resume'
 and will be copied when it's finished to...?
 
+### Getting the Torrent Docker Container to Start Automatically ###
 
+Turns out my docker container is not starting automatically. Let's figure out how 
+to do that.
+
+I'm working from instructions [here](https://docs.docker.com/config/containers/start-containers-automatically/).
+
+Turns out all you need to do is add -restart always to the command
+
+{% highlight console %}
+docker run --restart always --cap-add=NET_ADMIN -d     	\
+            -v /mnt/usbdrive/torrents/:/data        	\       
+			-v /etc/localtime:/etc/localtime:ro      	\	         
+			-e CREATE_TUN_DEVICE=true               	\
+			-e OPENVPN_PROVIDER=PIA               		\
+			-e OPENVPN_CONFIG=CA\ Denver           		\    
+			-e OPENVPN_USERNAME=user               		\
+			-e OPENVPN_PASSWORD=pass               		\
+			-e WEBPROXY_ENABLED=false               	\	
+			-e LOCAL_NETWORK=192.168.50.0/24         	\      
+			--log-driver json-file               		\
+			--log-opt max-size=10m               		\
+			-p 9091:9091               					\
+			haugene/transmission-openvpn:latest-armhf
+{% endhighlight %}
 
 ### Setting up Torrent Client to Read an RSS Feed ###
 
 Found something [here](https://github.com/nning/transmission-rss).
+
+Okay, from that page I *want* to do the Docker setup, but I have a sneaking suspicion that will create a whole new Docker container that will
+include Transmission as well.  I just want to download RSS feeds into the directory that my existing Transmission-VPN.
+
+Maybe I can use one of the other set of steps.
+
+Okay, I will need ruby within the transmission docker
+
+so I do this:
+
+{% highlight console %}
+pi@raspberrypi:/etc $ docker exec -it angry_goldstine /bin/bash
+root@d8d39033ecc1:/# ls
+bin  boot  config  data  dev  etc  home  lib  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+root@d8d39033ecc1:/# gem
+bash: gem: command not found
+root@d8d39033ecc1:/# apt-get
+apt 1.8.2.1 (armhf)
+Usage: apt-get [options] command
+       apt-get [options] install|remove pkg1 [pkg2 ...]
+       apt-get [options] source pkg1 [pkg2 ...]
+
+apt-get is a command line interface for retrieval of packages
+and information about them from authenticated sources and
+for installation, upgrade and removal of packages together
+with their dependencies.
+
+Most used commands:
+  update - Retrieve new lists of packages
+  upgrade - Perform an upgrade
+  install - Install new packages (pkg is libc6 not libc6.deb)
+  reinstall - Reinstall packages (pkg is libc6 not libc6.deb)
+  remove - Remove packages
+  purge - Remove packages and config files
+  autoremove - Remove automatically all unused packages
+  dist-upgrade - Distribution upgrade, see apt-get(8)
+  dselect-upgrade - Follow dselect selections
+  build-dep - Configure build-dependencies for source packages
+  clean - Erase downloaded archive files
+  autoclean - Erase old downloaded archive files
+  check - Verify that there are no broken dependencies
+  source - Download source archives
+  download - Download the binary package into the current directory
+  changelog - Download and display the changelog for the given package
+
+See apt-get(8) for more information about the available commands.
+Configuration options and syntax is detailed in apt.conf(5).
+Information about how to configure sources can be found in sources.list(5).
+Package and version choices can be expressed via apt_preferences(5).
+Security details are available in apt-secure(8).
+                                        This APT has Super Cow Powers.
+root@d8d39033ecc1:/# apt-get install ruby
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+E: Unable to locate package ruby
+root@d8d39033ecc1:/# apt-get update
+Get:1 http://archive.raspberrypi.org/debian buster InRelease [32.6 kB]
+Get:2 http://archive.raspbian.org/raspbian buster InRelease [15.0 kB]
+Get:3 http://archive.raspbian.org/raspbian buster/main armhf Packages [18.3 MB]
+Get:4 http://archive.raspberrypi.org/debian buster/main armhf Packages [331 kB]
+Get:5 http://archive.raspbian.org/raspbian buster/rpi armhf Packages [1299 B]
+Get:6 http://archive.raspbian.org/raspbian buster/non-free armhf Packages [126 kB]
+Get:7 http://archive.raspbian.org/raspbian buster/firmware armhf Packages [1201 B]
+Get:8 http://archive.raspbian.org/raspbian buster/contrib armhf Packages [68.6 kB]
+Fetched 18.9 MB in 4min 40s (67.4 kB/s)
+Reading package lists... Done
+root@d8d39033ecc1:/# apt-get install ruby
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following additional packages will be installed:
+  libruby2.5 libyaml-0-2 rake ruby-did-you-mean ruby-minitest ruby-net-telnet ruby-power-assert ruby-test-unit ruby-xmlrpc ruby2.5 rubygems-integration
+Suggested packages:
+  ri ruby-dev bundler
+Recommended packages:
+  zip fonts-lato libjs-jquery
+The following NEW packages will be installed:
+  libruby2.5 libyaml-0-2 rake ruby ruby-did-you-mean ruby-minitest ruby-net-telnet ruby-power-assert ruby-test-unit ruby-xmlrpc ruby2.5 rubygems-integration
+0 upgraded, 12 newly installed, 0 to remove and 4 not upgraded.
+Need to get 3858 kB of archives.
+After this operation, 15.3 MB of additional disk space will be used.
+Get:1 http://archive.raspbian.org/raspbian buster/main armhf rubygems-integration all 1.11+deb10u1 [5212 B]
+Get:2 http://archive.raspbian.org/raspbian buster/main armhf ruby2.5 armhf 2.5.5-3+deb10u2 [400 kB]
+Get:3 http://archive.raspbian.org/raspbian buster/main armhf ruby armhf 1:2.5.1+b1 [11.6 kB]
+Get:4 http://archive.raspbian.org/raspbian buster/main armhf rake all 12.3.1-3+deb10u1 [67.1 kB]
+Get:5 http://archive.raspbian.org/raspbian buster/main armhf ruby-did-you-mean all 1.2.1-1 [14.4 kB]
+Get:6 http://archive.raspbian.org/raspbian buster/main armhf ruby-minitest all 5.11.3-1 [54.8 kB]
+Get:7 http://archive.raspbian.org/raspbian buster/main armhf ruby-net-telnet all 0.1.1-2 [12.5 kB]
+Get:8 http://archive.raspbian.org/raspbian buster/main armhf ruby-power-assert all 1.1.1-1 [10.9 kB]
+Get:9 http://archive.raspbian.org/raspbian buster/main armhf ruby-test-unit all 3.2.8-1 [72.4 kB]
+Get:10 http://archive.raspbian.org/raspbian buster/main armhf ruby-xmlrpc all 0.3.0-2 [23.7 kB]
+Get:11 http://archive.raspbian.org/raspbian buster/main armhf libyaml-0-2 armhf 0.2.1-1 [38.8 kB]
+Get:12 http://archive.raspbian.org/raspbian buster/main armhf libruby2.5 armhf 2.5.5-3+deb10u2 [3146 kB]
+Fetched 3858 kB in 28s (138 kB/s)
+Selecting previously unselected package rubygems-integration.
+(Reading database ... 11950 files and directories currently installed.)
+Preparing to unpack .../00-rubygems-integration_1.11+deb10u1_all.deb ...
+Unpacking rubygems-integration (1.11+deb10u1) ...
+Selecting previously unselected package ruby2.5.
+Preparing to unpack .../01-ruby2.5_2.5.5-3+deb10u2_armhf.deb ...
+Unpacking ruby2.5 (2.5.5-3+deb10u2) ...
+Selecting previously unselected package ruby.
+Preparing to unpack .../02-ruby_1%3a2.5.1+b1_armhf.deb ...
+Unpacking ruby (1:2.5.1+b1) ...
+Selecting previously unselected package rake.
+Preparing to unpack .../03-rake_12.3.1-3+deb10u1_all.deb ...
+Unpacking rake (12.3.1-3+deb10u1) ...
+Selecting previously unselected package ruby-did-you-mean.
+Preparing to unpack .../04-ruby-did-you-mean_1.2.1-1_all.deb ...
+Unpacking ruby-did-you-mean (1.2.1-1) ...
+Selecting previously unselected package ruby-minitest.
+Preparing to unpack .../05-ruby-minitest_5.11.3-1_all.deb ...
+Unpacking ruby-minitest (5.11.3-1) ...
+Selecting previously unselected package ruby-net-telnet.
+Preparing to unpack .../06-ruby-net-telnet_0.1.1-2_all.deb ...
+Unpacking ruby-net-telnet (0.1.1-2) ...
+Selecting previously unselected package ruby-power-assert.
+Preparing to unpack .../07-ruby-power-assert_1.1.1-1_all.deb ...
+Unpacking ruby-power-assert (1.1.1-1) ...
+Selecting previously unselected package ruby-test-unit.
+Preparing to unpack .../08-ruby-test-unit_3.2.8-1_all.deb ...
+Unpacking ruby-test-unit (3.2.8-1) ...
+Selecting previously unselected package ruby-xmlrpc.
+Preparing to unpack .../09-ruby-xmlrpc_0.3.0-2_all.deb ...
+Unpacking ruby-xmlrpc (0.3.0-2) ...
+Selecting previously unselected package libyaml-0-2:armhf.
+Preparing to unpack .../10-libyaml-0-2_0.2.1-1_armhf.deb ...
+Unpacking libyaml-0-2:armhf (0.2.1-1) ...
+Selecting previously unselected package libruby2.5:armhf.
+Preparing to unpack .../11-libruby2.5_2.5.5-3+deb10u2_armhf.deb ...
+Unpacking libruby2.5:armhf (2.5.5-3+deb10u2) ...
+Setting up ruby-power-assert (1.1.1-1) ...
+Setting up libyaml-0-2:armhf (0.2.1-1) ...
+Setting up rubygems-integration (1.11+deb10u1) ...
+Setting up ruby-minitest (5.11.3-1) ...
+Setting up ruby-test-unit (3.2.8-1) ...
+Setting up ruby-net-telnet (0.1.1-2) ...
+Setting up ruby-did-you-mean (1.2.1-1) ...
+Setting up ruby-xmlrpc (0.3.0-2) ...
+Setting up ruby2.5 (2.5.5-3+deb10u2) ...
+Setting up ruby (1:2.5.1+b1) ...
+Setting up rake (12.3.1-3+deb10u1) ...
+Setting up libruby2.5:armhf (2.5.5-3+deb10u2) ...
+Processing triggers for libc-bin (2.28-10+rpi1) ...
+root@d8d39033ecc1:/#
+root@d8d39033ecc1:/# gem install transmission-rss
+Fetching: open_uri_redirections-0.2.1.gem (100%)
+Successfully installed open_uri_redirections-0.2.1
+Fetching: ffi-1.13.1.gem (100%)
+Building native extensions. This could take a while...
+ERROR:  Error installing transmission-rss:
+        ERROR: Failed to build gem native extension.
+
+    current directory: /var/lib/gems/2.5.0/gems/ffi-1.13.1/ext/ffi_c
+/usr/bin/ruby2.5 -r ./siteconf20201012-350-1cfd7g5.rb extconf.rb
+mkmf.rb can't find header files for ruby at /usr/lib/ruby/include/ruby.h
+
+extconf failed, exit code 1
+
+Gem files will remain installed in /var/lib/gems/2.5.0/gems/ffi-1.13.1 for inspection.
+Results logged to /var/lib/gems/2.5.0/extensions/arm-linux/2.5.0/ffi-1.13.1/gem_make.out
+
+{% endhighlight %}
+
+Okay, that's fun.
+
+Regardless, I have some work to do with my /etc/ folder.
+
+I need to create a configuration file with the proper RSS feed URLs in it.
+
+It will look like this:
+
+{% highlight text %}
+feeds:
+  - url: http://example.com/feed1
+    download_path: /home/user/Downloads
+{% endhighlight %}
+
+
+and this file will be called....
+
+/etc/transmission-rss.conf
+
+Okie. Let's do it.
+And thank God this Docker has nano.
+
+One of the questions is... where are the paths that map to my drive supposed to be?
+
+So, I check this file: /data/transmission-home/transmission-log
+
+And I see this:
+
+{% highlight console %}
+[2020-10-12 03:32:38.135] watchdir Failed to open directory "/data/watch" (2): No such file or directory (watchdir.c:354)
+
+{% endhighlight %}
+
+This tells me that, perhaps, my directoreis are not properly configured for mapping.
+Indeed, poking around the Docker, I do not see a damn thing in the folders that should contain my TV shows do not... contain any shows.
+
+So, I've done something wrong.....
+
+Okay, I've updated my command line for running docker to this:
+
+{% highlight console %}
+docker run --restart always --cap-add=NET_ADMIN -d -v /mnt/torrents/:/data -v /mnt/torrents/torrentFiles:/data/watch -v /etc/localtime:/etc/localtime:ro -e CREATE_TUN_DEVICE=true -e OPENVPN_PROVIDER=PIA -e OPENVPN_CONFIG=CA\ Denver -e OPENVPN_USERNAME=uname -e OPENVPN_PASSWORD=pass -e WEBPROXY_ENABLED=false -e LOCAL_NETWORK=192.168.50.0/24 --log-driver json-file --log-opt max-size=10m -p 9091:9091 haugene/transmission-openvpn:latest-armhf
+{% endhighlight %}
+And.. it seems to work. I see the file where they're supposed to be. And I see where the watch files are supposed to be.
+
+So, what about that error we found?
+
+Okay, I found [this](https://stackoverflow.com/questions/20559255/error-while-installing-json-gem-mkmf-rb-cant-find-header-files-for-ruby).
+
+It wants me to do this sort of thing:
+
+{% highlight console %}
+sudo apt-get install ruby2.0-dev
+sudo apt-get install ruby2.2-dev
+sudo apt-get install ruby2.3-dev
+{% endhighlight %}
+
+But sadly, it doesn't recognize any of those packages.
+
+So I'm stuck.
+Wait, I had to do another apt-get update
+Then, it recognized ruby-dev
+
+And it installed. What next?
+
+We try the gem install transmission-rss again - and watch it fail again like this:
+
+{% highlight console %}
+root@72d64126b585:/data/watch# apt-get install ruby-dev
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+E: Unable to locate package ruby-dev
+root@72d64126b585:/data/watch# apt-get install ruby-dev2.0
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+E: Unable to locate package ruby-dev2.0
+E: Couldn't find any package by glob 'ruby-dev2.0'
+E: Couldn't find any package by regex 'ruby-dev2.0'
+root@72d64126b585:/data/watch# apt-get install ruby2.0-dev
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+E: Unable to locate package ruby2.0-dev
+E: Couldn't find any package by glob 'ruby2.0-dev'
+E: Couldn't find any package by regex 'ruby2.0-dev'
+root@72d64126b585:/data/watch# apt-get update
+Get:1 http://archive.raspberrypi.org/debian buster InRelease [32.6 kB]
+Get:2 http://archive.raspbian.org/raspbian buster InRelease [15.0 kB]
+Get:3 http://archive.raspberrypi.org/debian buster/main armhf Packages [331 kB]
+Get:4 http://archive.raspbian.org/raspbian buster/rpi armhf Packages [1299 B]
+Get:5 http://archive.raspbian.org/raspbian buster/contrib armhf Packages [68.6 kB]
+Get:6 http://archive.raspbian.org/raspbian buster/non-free armhf Packages [126 kB]
+Get:7 http://archive.raspbian.org/raspbian buster/firmware armhf Packages [1201 B]
+Get:8 http://archive.raspbian.org/raspbian buster/main armhf Packages [18.3 MB]
+Fetched 18.9 MB in 3min 35s (87.7 kB/s)
+Reading package lists... Done
+root@72d64126b585:/data/watch# apt-get install rubydev
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+E: Unable to locate package rubydev
+root@72d64126b585:/data/watch# apt-get install ruby-dev
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following additional packages will be installed:
+  libgmp-dev libgmpxx4ldbl libruby2.5 libyaml-0-2 rake ruby ruby-did-you-mean ruby-minitest ruby-net-telnet ruby-power-assert ruby-test-unit ruby-xmlrpc ruby2.5 ruby2.5-dev
+  rubygems-integration
+Suggested packages:
+  gmp-doc libgmp10-doc libmpfr-dev ri bundler
+Recommended packages:
+  zip fonts-lato libjs-jquery ruby2.5-doc
+The following NEW packages will be installed:
+  libgmp-dev libgmpxx4ldbl libruby2.5 libyaml-0-2 rake ruby ruby-dev ruby-did-you-mean ruby-minitest ruby-net-telnet ruby-power-assert ruby-test-unit ruby-xmlrpc ruby2.5 ruby2.5-dev
+  rubygems-integration
+0 upgraded, 16 newly installed, 0 to remove and 4 not upgraded.
+Need to get 4875 kB of archives.
+After this operation, 17.5 MB of additional disk space will be used.
+Get:1 http://archive.raspbian.org/raspbian buster/main armhf libgmpxx4ldbl armhf 2:6.1.2+dfsg-4 [21.8 kB]
+Get:2 http://archive.raspbian.org/raspbian buster/main armhf libgmp-dev armhf 2:6.1.2+dfsg-4 [570 kB]
+Get:3 http://archive.raspbian.org/raspbian buster/main armhf rubygems-integration all 1.11+deb10u1 [5212 B]
+Get:4 http://archive.raspbian.org/raspbian buster/main armhf ruby2.5 armhf 2.5.5-3+deb10u2 [400 kB]
+Get:5 http://archive.raspbian.org/raspbian buster/main armhf ruby armhf 1:2.5.1+b1 [11.6 kB]
+Get:6 http://archive.raspbian.org/raspbian buster/main armhf rake all 12.3.1-3+deb10u1 [67.1 kB]
+Get:7 http://archive.raspbian.org/raspbian buster/main armhf ruby-did-you-mean all 1.2.1-1 [14.4 kB]
+Get:8 http://archive.raspbian.org/raspbian buster/main armhf ruby-minitest all 5.11.3-1 [54.8 kB]
+Get:9 http://archive.raspbian.org/raspbian buster/main armhf ruby-net-telnet all 0.1.1-2 [12.5 kB]
+Get:10 http://archive.raspbian.org/raspbian buster/main armhf ruby-power-assert all 1.1.1-1 [10.9 kB]
+Get:11 http://archive.raspbian.org/raspbian buster/main armhf ruby-test-unit all 3.2.8-1 [72.4 kB]
+Get:12 http://archive.raspbian.org/raspbian buster/main armhf ruby-xmlrpc all 0.3.0-2 [23.7 kB]
+Get:13 http://archive.raspbian.org/raspbian buster/main armhf libyaml-0-2 armhf 0.2.1-1 [38.8 kB]
+Get:14 http://archive.raspbian.org/raspbian buster/main armhf libruby2.5 armhf 2.5.5-3+deb10u2 [3146 kB]
+Get:15 http://archive.raspbian.org/raspbian buster/main armhf ruby2.5-dev armhf 2.5.5-3+deb10u2 [415 kB]
+Get:16 http://archive.raspbian.org/raspbian buster/main armhf ruby-dev armhf 1:2.5.1+b1 [10.4 kB]
+Fetched 4875 kB in 1min 25s (57.4 kB/s)
+Selecting previously unselected package libgmpxx4ldbl:armhf.
+(Reading database ... 11950 files and directories currently installed.)
+Preparing to unpack .../00-libgmpxx4ldbl_2%3a6.1.2+dfsg-4_armhf.deb ...
+Unpacking libgmpxx4ldbl:armhf (2:6.1.2+dfsg-4) ...
+Selecting previously unselected package libgmp-dev:armhf.
+Preparing to unpack .../01-libgmp-dev_2%3a6.1.2+dfsg-4_armhf.deb ...
+Unpacking libgmp-dev:armhf (2:6.1.2+dfsg-4) ...
+Selecting previously unselected package rubygems-integration.
+Preparing to unpack .../02-rubygems-integration_1.11+deb10u1_all.deb ...
+Unpacking rubygems-integration (1.11+deb10u1) ...
+Selecting previously unselected package ruby2.5.
+Preparing to unpack .../03-ruby2.5_2.5.5-3+deb10u2_armhf.deb ...
+Unpacking ruby2.5 (2.5.5-3+deb10u2) ...
+Selecting previously unselected package ruby.
+Preparing to unpack .../04-ruby_1%3a2.5.1+b1_armhf.deb ...
+Unpacking ruby (1:2.5.1+b1) ...
+Selecting previously unselected package rake.
+Preparing to unpack .../05-rake_12.3.1-3+deb10u1_all.deb ...
+Unpacking rake (12.3.1-3+deb10u1) ...
+Selecting previously unselected package ruby-did-you-mean.
+Preparing to unpack .../06-ruby-did-you-mean_1.2.1-1_all.deb ...
+Unpacking ruby-did-you-mean (1.2.1-1) ...
+Selecting previously unselected package ruby-minitest.
+Preparing to unpack .../07-ruby-minitest_5.11.3-1_all.deb ...
+Unpacking ruby-minitest (5.11.3-1) ...
+Selecting previously unselected package ruby-net-telnet.
+Preparing to unpack .../08-ruby-net-telnet_0.1.1-2_all.deb ...
+Unpacking ruby-net-telnet (0.1.1-2) ...
+Selecting previously unselected package ruby-power-assert.
+Preparing to unpack .../09-ruby-power-assert_1.1.1-1_all.deb ...
+Unpacking ruby-power-assert (1.1.1-1) ...
+Selecting previously unselected package ruby-test-unit.
+Preparing to unpack .../10-ruby-test-unit_3.2.8-1_all.deb ...
+Unpacking ruby-test-unit (3.2.8-1) ...
+Selecting previously unselected package ruby-xmlrpc.
+Preparing to unpack .../11-ruby-xmlrpc_0.3.0-2_all.deb ...
+Unpacking ruby-xmlrpc (0.3.0-2) ...
+Selecting previously unselected package libyaml-0-2:armhf.
+Preparing to unpack .../12-libyaml-0-2_0.2.1-1_armhf.deb ...
+Unpacking libyaml-0-2:armhf (0.2.1-1) ...
+Selecting previously unselected package libruby2.5:armhf.
+Preparing to unpack .../13-libruby2.5_2.5.5-3+deb10u2_armhf.deb ...
+Unpacking libruby2.5:armhf (2.5.5-3+deb10u2) ...
+Selecting previously unselected package ruby2.5-dev:armhf.
+Preparing to unpack .../14-ruby2.5-dev_2.5.5-3+deb10u2_armhf.deb ...
+Unpacking ruby2.5-dev:armhf (2.5.5-3+deb10u2) ...
+Selecting previously unselected package ruby-dev:armhf.
+Preparing to unpack .../15-ruby-dev_1%3a2.5.1+b1_armhf.deb ...
+Unpacking ruby-dev:armhf (1:2.5.1+b1) ...
+Setting up ruby-power-assert (1.1.1-1) ...
+Setting up libyaml-0-2:armhf (0.2.1-1) ...
+Setting up rubygems-integration (1.11+deb10u1) ...
+Setting up ruby-minitest (5.11.3-1) ...
+Setting up libgmpxx4ldbl:armhf (2:6.1.2+dfsg-4) ...
+Setting up ruby-test-unit (3.2.8-1) ...
+Setting up ruby-net-telnet (0.1.1-2) ...
+Setting up ruby-did-you-mean (1.2.1-1) ...
+Setting up ruby-xmlrpc (0.3.0-2) ...
+Setting up libgmp-dev:armhf (2:6.1.2+dfsg-4) ...
+Setting up ruby2.5 (2.5.5-3+deb10u2) ...
+Setting up ruby (1:2.5.1+b1) ...
+Setting up rake (12.3.1-3+deb10u1) ...
+Setting up libruby2.5:armhf (2.5.5-3+deb10u2) ...
+Setting up ruby2.5-dev:armhf (2.5.5-3+deb10u2) ...
+Setting up ruby-dev:armhf (1:2.5.1+b1) ...
+Processing triggers for libc-bin (2.28-10+rpi1) ...
+root@72d64126b585:/data/watch# apt-get install ruby
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+ruby is already the newest version (1:2.5.1+b1).
+ruby set to manually installed.
+0 upgraded, 0 newly installed, 0 to remove and 4 not upgraded.
+root@72d64126b585:/data/watch# gem install transmission-rss
+Fetching: open_uri_redirections-0.2.1.gem (100%)
+Successfully installed open_uri_redirections-0.2.1
+Fetching: ffi-1.13.1.gem (100%)
+Building native extensions. This could take a while...
+ERROR:  Error installing transmission-rss:
+        ERROR: Failed to build gem native extension.
+
+    current directory: /var/lib/gems/2.5.0/gems/ffi-1.13.1/ext/ffi_c
+/usr/bin/ruby2.5 -r ./siteconf20201012-459-7qd6op.rb extconf.rb
+checking for ffi.h... *** extconf.rb failed ***
+Could not create Makefile due to some reason, probably lack of necessary
+libraries and/or headers.  Check the mkmf.log file for more details.  You may
+need configuration options.
+
+Provided configuration options:
+        --with-opt-dir
+        --without-opt-dir
+        --with-opt-include
+        --without-opt-include=${opt-dir}/include
+        --with-opt-lib
+        --without-opt-lib=${opt-dir}/lib
+        --with-make-prog
+        --without-make-prog
+        --srcdir=.
+        --curdir
+        --ruby=/usr/bin/$(RUBY_BASE_NAME)2.5
+        --with-ffi_c-dir
+        --without-ffi_c-dir
+        --with-ffi_c-include
+        --without-ffi_c-include=${ffi_c-dir}/include
+        --with-ffi_c-lib
+        --without-ffi_c-lib=${ffi_c-dir}/lib
+        --enable-system-libffi
+        --disable-system-libffi
+        --with-libffi-config
+        --without-libffi-config
+        --with-pkg-config
+        --without-pkg-config
+/usr/lib/ruby/2.5.0/mkmf.rb:456:in `try_do': The compiler failed to generate an executable file. (RuntimeError)
+You have to install development tools first.
+        from /usr/lib/ruby/2.5.0/mkmf.rb:590:in `try_cpp'
+        from /usr/lib/ruby/2.5.0/mkmf.rb:1098:in `block in have_header'
+        from /usr/lib/ruby/2.5.0/mkmf.rb:948:in `block in checking_for'
+        from /usr/lib/ruby/2.5.0/mkmf.rb:350:in `block (2 levels) in postpone'
+        from /usr/lib/ruby/2.5.0/mkmf.rb:320:in `open'
+        from /usr/lib/ruby/2.5.0/mkmf.rb:350:in `block in postpone'
+        from /usr/lib/ruby/2.5.0/mkmf.rb:320:in `open'
+        from /usr/lib/ruby/2.5.0/mkmf.rb:346:in `postpone'
+        from /usr/lib/ruby/2.5.0/mkmf.rb:947:in `checking_for'
+        from /usr/lib/ruby/2.5.0/mkmf.rb:1097:in `have_header'
+        from extconf.rb:10:in `system_libffi_usable?'
+        from extconf.rb:42:in `<main>'
+
+To see why this extension failed to compile, please check the mkmf.log which can be found here:
+
+  /var/lib/gems/2.5.0/extensions/arm-linux/2.5.0/ffi-1.13.1/mkmf.log
+
+extconf failed, exit code 1
+
+Gem files will remain installed in /var/lib/gems/2.5.0/gems/ffi-1.13.1 for inspection.
+Results logged to /var/lib/gems/2.5.0/extensions/arm-linux/2.5.0/ffi-1.13.1/gem_make.out
+
+{% endhighlight %}
+
+Oof. Da. 
+
+I have been working for 2.5 hours now. How usually effective is my time In 2.5 hours I can break apart a logjam that has afflicated a 100 million dollar project. Or I can fail to correct something that costs $0.
+
+Well, those $100 million folks are just plain wrong about the valuation of their project.
+
+Mine is much more important.
+
+And more expensive.
+
+Am I going to have fun at any point here?
+
+Anyway, the log file they want me to look at (mkmf.log) looks like this:
+
+{% highlight console %}
+package configuration for libffi is not found
+"gcc -o conftest -I/usr/include/arm-linux-gnueabihf/ruby-2.5.0 -I/usr/include/ruby-2.5.0/ruby/backward -I/usr/include/ruby-2.5.0 -I. -Wdate-time -D_FORTIFY_SOURCE=2 -D_FILE_OFFSET_BITS=64  -g -O2 -fdebug-prefix-map=/build/ruby2.5-cMKrLr/ruby2.5-2.5.5=. -fstack-protector-strong -Wformat -Werror=format-security -fPIC conftest.c  -L. -L/usr/lib/arm-linux-gnueabihf -L. -Wl,-z,relro -Wl,-z,now -fstack-protector -rdynamic -Wl,-export-dynamic     -lruby-2.5  -lpthread -lgmp -ldl -lcrypt -lm   -lc"
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2:
+3: int main(int argc, char **argv)
+4: {
+5:   return 0;
+6: }
+/* end */
+
+{% endhighlight %}
+
+At least one link says to install gcc
+So I do
+apt-get install gcc
+
+It's always something, now this:
+
+{% highlight console %}
+ERROR: Failed to build gem native extension.
+{% endhighlight %}
+
+so what now?
+
+Supposedly, I should install ruby-dev, then maybe make.
+
+So I do this:
+
+{% highlight console %}
+root@72d64126b585:/var/lib/gems/2.5.0/extensions/arm-linux/2.5.0/ffi-1.13.1# apt-get install make
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+Suggested packages:
+  make-doc
+The following NEW packages will be installed:
+  make
+0 upgraded, 1 newly installed, 0 to remove and 4 not upgraded.
+Need to get 321 kB of archives.
+After this operation, 1279 kB of additional disk space will be used.
+Get:1 http://archive.raspbian.org/raspbian buster/main armhf make armhf 4.2.1-1.2 [321 kB]
+Fetched 321 kB in 2s (156 kB/s)
+sh: 0: getcwd() failed: No such file or directory
+Selecting previously unselected package make.
+(Reading database ... 13749 files and directories currently installed.)
+Preparing to unpack .../make_4.2.1-1.2_armhf.deb ...
+Unpacking make (4.2.1-1.2) ...
+Setting up make (4.2.1-1.2) ...
+root@72d64126b585:/var/lib/gems/2.5.0/extensions/arm-linux/2.5.0/ffi-1.13.1# gem install transmission-rss
+ERROR:  While executing gem ... (Errno::ENOENT)
+    No such file or directory - getcwd
+root@72d64126b585:/var/lib/gems/2.5.0/extensions/arm-linux/2.5.0/ffi-1.13.1#
+
+{% endhighlight %}
+
+And... I got nothing here.
+
+I'm just rebooting.
+
+Nope. Same thing. It just won't install.
+
+okay, i'm installing build-essential
+
+then i'm trying to install the gem again.
+
+it DOESN'T IMMEDIATELY FAIL.
+And it doesn't fail at all.
+
+Do I just need that configuration file now?
+
+It will look like this:
+
+{% highlight text %}
+feeds:
+  - url: http://showrss.info/user/127411.rss?magnets=true&namespaces=true&name=null&quality=null&re=null
+    download_path: /data/torrents
+{% endhighlight %}
+
+
+and this file will be called....
+
+/etc/transmission-rss.conf
+
+
+But... I have no clue whether this is working or not.
+
+Time to put this HD babck on the other laptop.
+
+I have utterly failed to get this working again.
+
+
+
+
 
 ## Setting up a Subversion Server on a RasPi ##
 
@@ -1284,8 +2386,673 @@ TBD
 TBD
 
 ## Setting up a NAS on a RasPi ##
-TBD
 
+I've got an old hard drive that I'd like access to from my network. At this point, I sadly think Samba sharing may be the best option for file sharing with
+Windows 10.  I wonder if I'm right?
+
+[This](https://www.fosslinux.com/19265/how-to-share-and-transfer-files-between-linux-and-windows.htm) site offers some alternatives.
+
+1. SSH Sharing - This looks to be pretty command-line oriented. Not really what I'm looking for.
+2. Samba - This is what I'm assuming I'll have to use
+3. Shared Folders - This... looks like Samba again to me...
+
+So, it's Samba for me.
+
+I'm using [this](https://magpi.raspberrypi.org/articles/samba-file-server) site
+for instructions on installing Samba.
+
+### Installing Samba ###
+
+Here's what I do:
+
+{% highlight console %}
+pi@raspberrypi:~ $ sudo apt-get update
+Get:1 https://download.docker.com/linux/raspbian buster InRelease [29.7 kB]
+Get:2 http://archive.raspberrypi.org/debian buster InRelease [32.6 kB]
+Get:3 http://raspbian.raspberrypi.org/raspbian buster InRelease [15.0 kB]
+Get:4 https://download.docker.com/linux/raspbian buster/stable armhf Packages [7,361 B]
+Get:5 http://raspbian.raspberrypi.org/raspbian buster/main armhf Packages [13.0 MB]
+Get:6 http://archive.raspberrypi.org/debian buster/main armhf Packages [331 kB]
+Fetched 13.4 MB in 13s (1,071 kB/s)
+Reading package lists... Done
+pi@raspberrypi:~ $ sudo apt-get install samba samba-common-bin
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following package was automatically installed and is no longer required:
+  rpi-eeprom-images
+Use 'sudo apt autoremove' to remove it.
+The following additional packages will be installed:
+  attr ibverbs-providers libavahi-client3 libboost-atomic1.67.0 libboost-iostreams1.67.0
+  libboost-regex1.67.0 libboost-system1.67.0 libboost-thread1.67.0 libcephfs2 libcups2 libgfapi0
+  libgfrpc0 libgfxdr0 libglusterfs0 libgpgme11 libibverbs1 libjansson4 libldb1 libnspr4 libnss3
+  libpython2.7 librados2 libtdb1 libtevent0 python-crypto python-dnspython python-gpg python-ldb
+  python-samba python-talloc python-tdb samba-common samba-dsdb-modules samba-libs samba-vfs-modules
+  tdb-tools
+Suggested packages:
+  cups-common python-crypto-doc bind9 bind9utils ctdb ldb-tools smbldap-tools ufw winbind heimdal-clients
+The following NEW packages will be installed:
+  attr ibverbs-providers libavahi-client3 libboost-atomic1.67.0 libboost-iostreams1.67.0
+  libboost-regex1.67.0 libboost-system1.67.0 libboost-thread1.67.0 libcephfs2 libcups2 libgfapi0
+  libgfrpc0 libgfxdr0 libglusterfs0 libgpgme11 libibverbs1 libjansson4 libldb1 libnspr4 libnss3
+  libpython2.7 librados2 libtdb1 libtevent0 python-crypto python-dnspython python-gpg python-ldb
+  python-samba python-talloc python-tdb samba samba-common samba-common-bin samba-dsdb-modules samba-libs
+  samba-vfs-modules tdb-tools
+0 upgraded, 38 newly installed, 0 to remove and 17 not upgraded.
+Need to get 26.8 MB of archives.
+After this operation, 101 MB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf python-dnspython all 1.16.0-1 [90.1 kB]
+Get:2 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf python-crypto armhf 2.6.1-9+b1 [248 kB]
+Get:3 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf libtdb1 armhf 1.3.16-2+b1 [39.0 kB]
+Get:4 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf libtevent0 armhf 0.9.37-1 [27.6 kB]
+Get:5 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf libldb1 armhf 2:1.5.1+really1.4.6-3 [109 kB]
+Get:6 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf libpython2.7 armhf 2.7.16-2+deb10u1 [873 kB]
+Get:7 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf python-ldb armhf 2:1.5.1+really1.4.6-3 [33.1 kB]
+Get:8 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf python-tdb armhf 1.3.16-2+b1 [16.0 kB]
+Get:9 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf libavahi-client3 armhf 0.7-4+b1 [54.0 kB]
+Get:10 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf libcups2 armhf 2.2.10-6+deb10u3 [287 kB]
+Get:11 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf libjansson4 armhf 2.12-1 [34.6 kB]
+Get:12 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf python-talloc armhf 2.1.14-2 [12.3 kB]
+Get:13 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf samba-libs armhf 2:4.9.5+dfsg-5+deb10u1+rpi1 [4,700 kB]
+Get:14 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf python-samba armhf 2:4.9.5+dfsg-5+deb10u1+rpi1 [1,794 kB]
+Get:15 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf samba-common all 2:4.9.5+dfsg-5+deb10u1+rpi1 [170 kB]
+Get:16 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf samba-common-bin armhf 2:4.9.5+dfsg-5+deb10u1+rpi1 [570 kB]
+Get:17 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf tdb-tools armhf 1.3.16-2+b1 [26.9 kB]
+Get:18 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf samba armhf 2:4.9.5+dfsg-5+deb10u1+rpi1 [1,010 kB]
+Get:19 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf attr armhf 1:2.4.48-4 [39.4 kB]
+Get:20 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf libibverbs1 armhf 22.1-1 [43.5 kB]
+Get:21 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf ibverbs-providers armhf 22.1-1 [20.2 kB]
+Get:22 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf libboost-atomic1.67.0 armhf 1.67.0-13+deb10u1 [226 kB]
+Get:23 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf libboost-iostreams1.67.0 armhf 1.67.0-13+deb10u1 [245 kB]
+Get:24 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf libboost-regex1.67.0 armhf 1.67.0-13+deb10u1 [430 kB]
+Get:25 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf libboost-system1.67.0 armhf 1.67.0-13+deb10u1 [229 kB]
+Get:26 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf libboost-thread1.67.0 armhf 1.67.0-13+deb10u1 [260 kB]
+Get:27 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf libnspr4 armhf 2:4.20-1 [89.6 kB]
+Get:28 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf libnss3 armhf 2:3.42.1-1+deb10u3 [944 kB]
+Get:29 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf librados2 armhf 12.2.11+dfsg1-2.1+rpi1 [2,337 kB]
+Get:30 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf libcephfs2 armhf 12.2.11+dfsg1-2.1+rpi1 [380 kB]
+Get:31 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf libglusterfs0 armhf 5.5-3 [2,724 kB]
+Get:32 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf libgfxdr0 armhf 5.5-3 [2,488 kB]
+Get:33 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf libgfrpc0 armhf 5.5-3 [2,506 kB]
+Get:34 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf libgfapi0 armhf 5.5-3 [2,524 kB]
+Get:35 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf libgpgme11 armhf 1.12.0-6 [230 kB]
+Get:36 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf python-gpg armhf 1.12.0-6 [275 kB]
+Get:37 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf samba-dsdb-modules armhf 2:4.9.5+dfsg-5+deb10u1+rpi1 [345 kB]
+Get:38 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf samba-vfs-modules armhf 2:4.9.5+dfsg-5+deb10u1+rpi1 [400 kB]
+Fetched 26.8 MB in 36s (739 kB/s)
+Extracting templates from packages: 100%
+Preconfiguring packages ...
+Selecting previously unselected package python-dnspython.
+(Reading database ... 41657 files and directories currently installed.)
+Preparing to unpack .../00-python-dnspython_1.16.0-1_all.deb ...
+Unpacking python-dnspython (1.16.0-1) ...
+Selecting previously unselected package python-crypto.
+Preparing to unpack .../01-python-crypto_2.6.1-9+b1_armhf.deb ...
+Unpacking python-crypto (2.6.1-9+b1) ...
+Selecting previously unselected package libtdb1:armhf.
+Preparing to unpack .../02-libtdb1_1.3.16-2+b1_armhf.deb ...
+Unpacking libtdb1:armhf (1.3.16-2+b1) ...
+Selecting previously unselected package libtevent0:armhf.
+Preparing to unpack .../03-libtevent0_0.9.37-1_armhf.deb ...
+Unpacking libtevent0:armhf (0.9.37-1) ...
+Selecting previously unselected package libldb1:armhf.
+Preparing to unpack .../04-libldb1_2%3a1.5.1+really1.4.6-3_armhf.deb ...
+Unpacking libldb1:armhf (2:1.5.1+really1.4.6-3) ...
+Selecting previously unselected package libpython2.7:armhf.
+Preparing to unpack .../05-libpython2.7_2.7.16-2+deb10u1_armhf.deb ...
+Unpacking libpython2.7:armhf (2.7.16-2+deb10u1) ...
+Selecting previously unselected package python-ldb.
+Preparing to unpack .../06-python-ldb_2%3a1.5.1+really1.4.6-3_armhf.deb ...
+Unpacking python-ldb (2:1.5.1+really1.4.6-3) ...
+Selecting previously unselected package python-tdb.
+Preparing to unpack .../07-python-tdb_1.3.16-2+b1_armhf.deb ...
+Unpacking python-tdb (1.3.16-2+b1) ...
+Selecting previously unselected package libavahi-client3:armhf.
+Preparing to unpack .../08-libavahi-client3_0.7-4+b1_armhf.deb ...
+Unpacking libavahi-client3:armhf (0.7-4+b1) ...
+Selecting previously unselected package libcups2:armhf.
+Preparing to unpack .../09-libcups2_2.2.10-6+deb10u3_armhf.deb ...
+Unpacking libcups2:armhf (2.2.10-6+deb10u3) ...
+Selecting previously unselected package libjansson4:armhf.
+Preparing to unpack .../10-libjansson4_2.12-1_armhf.deb ...
+Unpacking libjansson4:armhf (2.12-1) ...
+Selecting previously unselected package python-talloc:armhf.
+Preparing to unpack .../11-python-talloc_2.1.14-2_armhf.deb ...
+Unpacking python-talloc:armhf (2.1.14-2) ...
+Selecting previously unselected package samba-libs:armhf.
+Preparing to unpack .../12-samba-libs_2%3a4.9.5+dfsg-5+deb10u1+rpi1_armhf.deb ...
+Unpacking samba-libs:armhf (2:4.9.5+dfsg-5+deb10u1+rpi1) ...
+Selecting previously unselected package python-samba.
+Preparing to unpack .../13-python-samba_2%3a4.9.5+dfsg-5+deb10u1+rpi1_armhf.deb ...
+Unpacking python-samba (2:4.9.5+dfsg-5+deb10u1+rpi1) ...
+Selecting previously unselected package samba-common.
+Preparing to unpack .../14-samba-common_2%3a4.9.5+dfsg-5+deb10u1+rpi1_all.deb ...
+Unpacking samba-common (2:4.9.5+dfsg-5+deb10u1+rpi1) ...
+Selecting previously unselected package samba-common-bin.
+Preparing to unpack .../15-samba-common-bin_2%3a4.9.5+dfsg-5+deb10u1+rpi1_armhf.deb ...
+Unpacking samba-common-bin (2:4.9.5+dfsg-5+deb10u1+rpi1) ...
+Selecting previously unselected package tdb-tools.
+Preparing to unpack .../16-tdb-tools_1.3.16-2+b1_armhf.deb ...
+Unpacking tdb-tools (1.3.16-2+b1) ...
+Selecting previously unselected package samba.
+Preparing to unpack .../17-samba_2%3a4.9.5+dfsg-5+deb10u1+rpi1_armhf.deb ...
+Unpacking samba (2:4.9.5+dfsg-5+deb10u1+rpi1) ...
+Selecting previously unselected package attr.
+Preparing to unpack .../18-attr_1%3a2.4.48-4_armhf.deb ...
+Unpacking attr (1:2.4.48-4) ...
+Selecting previously unselected package libibverbs1:armhf.
+Preparing to unpack .../19-libibverbs1_22.1-1_armhf.deb ...
+Unpacking libibverbs1:armhf (22.1-1) ...
+Selecting previously unselected package ibverbs-providers:armhf.
+Preparing to unpack .../20-ibverbs-providers_22.1-1_armhf.deb ...
+Unpacking ibverbs-providers:armhf (22.1-1) ...
+Selecting previously unselected package libboost-atomic1.67.0:armhf.
+Preparing to unpack .../21-libboost-atomic1.67.0_1.67.0-13+deb10u1_armhf.deb ...
+Unpacking libboost-atomic1.67.0:armhf (1.67.0-13+deb10u1) ...
+Selecting previously unselected package libboost-iostreams1.67.0:armhf.
+Preparing to unpack .../22-libboost-iostreams1.67.0_1.67.0-13+deb10u1_armhf.deb ...
+Unpacking libboost-iostreams1.67.0:armhf (1.67.0-13+deb10u1) ...
+Selecting previously unselected package libboost-regex1.67.0:armhf.
+Preparing to unpack .../23-libboost-regex1.67.0_1.67.0-13+deb10u1_armhf.deb ...
+Unpacking libboost-regex1.67.0:armhf (1.67.0-13+deb10u1) ...
+Selecting previously unselected package libboost-system1.67.0:armhf.
+Preparing to unpack .../24-libboost-system1.67.0_1.67.0-13+deb10u1_armhf.deb ...
+Unpacking libboost-system1.67.0:armhf (1.67.0-13+deb10u1) ...
+Selecting previously unselected package libboost-thread1.67.0:armhf.
+Preparing to unpack .../25-libboost-thread1.67.0_1.67.0-13+deb10u1_armhf.deb ...
+Unpacking libboost-thread1.67.0:armhf (1.67.0-13+deb10u1) ...
+Selecting previously unselected package libnspr4:armhf.
+Preparing to unpack .../26-libnspr4_2%3a4.20-1_armhf.deb ...
+Unpacking libnspr4:armhf (2:4.20-1) ...
+Selecting previously unselected package libnss3:armhf.
+Preparing to unpack .../27-libnss3_2%3a3.42.1-1+deb10u3_armhf.deb ...
+Unpacking libnss3:armhf (2:3.42.1-1+deb10u3) ...
+Selecting previously unselected package librados2:armhf.
+Preparing to unpack .../28-librados2_12.2.11+dfsg1-2.1+rpi1_armhf.deb ...
+Unpacking librados2:armhf (12.2.11+dfsg1-2.1+rpi1) ...
+Selecting previously unselected package libcephfs2:armhf.
+Preparing to unpack .../29-libcephfs2_12.2.11+dfsg1-2.1+rpi1_armhf.deb ...
+Unpacking libcephfs2:armhf (12.2.11+dfsg1-2.1+rpi1) ...
+Selecting previously unselected package libglusterfs0:armhf.
+Preparing to unpack .../30-libglusterfs0_5.5-3_armhf.deb ...
+Unpacking libglusterfs0:armhf (5.5-3) ...
+Selecting previously unselected package libgfxdr0:armhf.
+Preparing to unpack .../31-libgfxdr0_5.5-3_armhf.deb ...
+Unpacking libgfxdr0:armhf (5.5-3) ...
+Selecting previously unselected package libgfrpc0:armhf.
+Preparing to unpack .../32-libgfrpc0_5.5-3_armhf.deb ...
+Unpacking libgfrpc0:armhf (5.5-3) ...
+Selecting previously unselected package libgfapi0:armhf.
+Preparing to unpack .../33-libgfapi0_5.5-3_armhf.deb ...
+Unpacking libgfapi0:armhf (5.5-3) ...
+Selecting previously unselected package libgpgme11:armhf.
+Preparing to unpack .../34-libgpgme11_1.12.0-6_armhf.deb ...
+Unpacking libgpgme11:armhf (1.12.0-6) ...
+Selecting previously unselected package python-gpg.
+Preparing to unpack .../35-python-gpg_1.12.0-6_armhf.deb ...
+Unpacking python-gpg (1.12.0-6) ...
+Selecting previously unselected package samba-dsdb-modules:armhf.
+Preparing to unpack .../36-samba-dsdb-modules_2%3a4.9.5+dfsg-5+deb10u1+rpi1_armhf.deb ...
+Unpacking samba-dsdb-modules:armhf (2:4.9.5+dfsg-5+deb10u1+rpi1) ...
+Selecting previously unselected package samba-vfs-modules:armhf.
+Preparing to unpack .../37-samba-vfs-modules_2%3a4.9.5+dfsg-5+deb10u1+rpi1_armhf.deb ...
+Unpacking samba-vfs-modules:armhf (2:4.9.5+dfsg-5+deb10u1+rpi1) ...
+Setting up python-crypto (2.6.1-9+b1) ...
+Setting up libibverbs1:armhf (22.1-1) ...
+Setting up libpython2.7:armhf (2.7.16-2+deb10u1) ...
+Setting up libboost-regex1.67.0:armhf (1.67.0-13+deb10u1) ...
+Setting up ibverbs-providers:armhf (22.1-1) ...
+Setting up attr (1:2.4.48-4) ...
+Setting up libtdb1:armhf (1.3.16-2+b1) ...
+Setting up samba-common (2:4.9.5+dfsg-5+deb10u1+rpi1) ...
+
+Creating config file /etc/samba/smb.conf with new version
+Setting up libgpgme11:armhf (1.12.0-6) ...
+Setting up libjansson4:armhf (2.12-1) ...
+Setting up libglusterfs0:armhf (5.5-3) ...
+Setting up libtevent0:armhf (0.9.37-1) ...
+Setting up libnspr4:armhf (2:4.20-1) ...
+Setting up tdb-tools (1.3.16-2+b1) ...
+update-alternatives: using /usr/bin/tdbbackup.tdbtools to provide /usr/bin/tdbbackup (tdbbackup) in auto mode
+Setting up libboost-iostreams1.67.0:armhf (1.67.0-13+deb10u1) ...
+Setting up python-tdb (1.3.16-2+b1) ...
+Setting up libboost-atomic1.67.0:armhf (1.67.0-13+deb10u1) ...
+Setting up python-dnspython (1.16.0-1) ...
+Setting up libboost-system1.67.0:armhf (1.67.0-13+deb10u1) ...
+Setting up python-gpg (1.12.0-6) ...
+Setting up python-talloc:armhf (2.1.14-2) ...
+Setting up libavahi-client3:armhf (0.7-4+b1) ...
+Setting up libgfxdr0:armhf (5.5-3) ...
+Setting up libldb1:armhf (2:1.5.1+really1.4.6-3) ...
+Setting up libboost-thread1.67.0:armhf (1.67.0-13+deb10u1) ...
+Setting up libnss3:armhf (2:3.42.1-1+deb10u3) ...
+Setting up python-ldb (2:1.5.1+really1.4.6-3) ...
+Setting up libcups2:armhf (2.2.10-6+deb10u3) ...
+Setting up libgfrpc0:armhf (5.5-3) ...
+Setting up librados2:armhf (12.2.11+dfsg1-2.1+rpi1) ...
+Setting up samba-libs:armhf (2:4.9.5+dfsg-5+deb10u1+rpi1) ...
+Setting up libcephfs2:armhf (12.2.11+dfsg1-2.1+rpi1) ...
+Setting up libgfapi0:armhf (5.5-3) ...
+Setting up samba-dsdb-modules:armhf (2:4.9.5+dfsg-5+deb10u1+rpi1) ...
+Setting up python-samba (2:4.9.5+dfsg-5+deb10u1+rpi1) ...
+Setting up samba-vfs-modules:armhf (2:4.9.5+dfsg-5+deb10u1+rpi1) ...
+Setting up samba-common-bin (2:4.9.5+dfsg-5+deb10u1+rpi1) ...
+Checking smb.conf with testparm
+Load smb config files from /etc/samba/smb.conf
+Loaded services file OK.
+Server role: ROLE_STANDALONE
+
+Done
+Setting up samba (2:4.9.5+dfsg-5+deb10u1+rpi1) ...
+Adding group `sambashare' (GID 116) ...
+Done.
+Samba is not being run as an AD Domain Controller: Masking samba-ad-dc.service
+Please ignore the following error about deb-systemd-helper not finding those services.
+(samba-ad-dc.service masked)
+Created symlink /etc/systemd/system/multi-user.target.wants/nmbd.service → /lib/systemd/system/nmbd.service.
+Failed to preset unit: Unit file /etc/systemd/system/samba-ad-dc.service is masked.
+/usr/bin/deb-systemd-helper: error: systemctl preset failed on samba-ad-dc.service: No such file or directory
+Created symlink /etc/systemd/system/multi-user.target.wants/smbd.service → /lib/systemd/system/smbd.service.
+Processing triggers for systemd (241-7~deb10u4+rpi1) ...
+Processing triggers for man-db (2.8.5-2) ...
+Processing triggers for libc-bin (2.28-10+rpi1) ...
+
+{% endhighlight %}
+
+It's worth noting that in the middle of this, a screen came up offering to change 
+my configuration to allow my DHCP server to populate the WINS server address for
+my network.
+
+I'm fairly sure that I don't have one of those, but I allowed it.
+
+The next step from that website is to create the directory that I will share things
+from and to set its permissions to '1777'. That would allow everyone full access.
+
+I don't think I want that, and anyway, my directory already exists, so I'm somewhat
+unsure of just what to do in this situation. What I will do is ignore this part
+of the instructions, try to share my hard drive and then see if I have permissions
+issues regarding it later.
+
+### Configuring Samba ###
+
+There's a text file that holds the settings for Samba and will allow us to define 
+a new share. Here's the command I used to edit the file:
+
+{% highlight console %}
+
+pi@raspberrypi:~ $ sudo nano /etc/samba/smb.conf
+
+{% endhighlight %}
    
+Then, I add the following lines at the end of the file:
+
+{% highlight console %}
+[share]
+Comment = NAS Files
+Path = /mnt/nas
+Browseable = yes
+Writeable = no
+only guest = no
+create mask = 0777
+directory mask = 0777
+Public = yes
+Guest ok = yes
+
+{% endhighlight %}
+
+Next, apparently I have to create a user and start Samba.
+
+### Creating a User and Starting Samba ###
+
+I start off by doing the same thing that they do on the website:
+
+{% highlight console %}
+pi@raspberrypi:/mnt/nas $ sudo smbpasswd -a pi
+New SMB password: xxxx 
+Retype new SMB password: xxxx
+Added user pi.
+pi@raspberrypi:/mnt/nas $ sudo /etc/init.d/samba restart
+sudo: /etc/init.d/samba: command not found
+
+{% endhighlight %}
+
+Hmm, that last bit is interesting. Do I need a reboot?
+
+Let's try!
+
+Hmm, no, that didn't help either.
+
+Let's see if we can access the share....
+
+Yes, in fact I can. I log in with my pi username.  
+
+The share is at \\192.168.50.44\share
+
+And I can transfer at about 2MB/s.
+
+I've seen worse.  
+
+Okay.... I don't really want to be logging in to the share with the admin password for my RasPi.  I'll need to create another user and give it access to the
+share.
+
+Also, I need to change the name from [share].
+
+Hmm, in other bad news, I detect a slowdown in the terminal while I'm transferring
+this file. Interesting....
+
+Here's how I added the user:
+
+{% highlight console %}
+pi@raspberrypi:/mnt/nas $ sudo adduser smbuser
+Adding user `smbuser' ...
+Adding new group `smbuser' (1001) ...
+Adding new user `smbuser' (1001) with group `smbuser' ...
+Creating home directory `/home/smbuser' ...
+Copying files from `/etc/skel' ...
+New password:
+Retype new password:
+No password supplied
+New password:
+Retype new password:
+passwd: password updated successfully
+Changing the user information for smbuser
+Enter the new value, or press ENTER for the default
+        Full Name []:
+        Room Number []:
+        Work Phone []:
+        Home Phone []:
+        Other []:
+Is the information correct? [Y/n]
+
+{% endhighlight %}
+
+I used a password of 'guest' since I couldn't do blank.
+
+And... I'm not sure that I want to go much further here. I'm not sure I want to make the share writeable at all. 
+
+I think for now I can hold off on this.
+
+## Setting up a Scans Folder ##
+
+1. Make a folder on the NAS called 'Scans'
+{% highlight console %}
+pi@raspberrypi:~ $ cd /mnt/nas
+pi@raspberrypi:/mnt/nas $ sudo mkdir Scans
+{% endhighlight %}
+2. Change the permissions of the directory to allow the smbuser to write to it
+{% highlight console %}
+pi@raspberrypi:/mnt/nas $ sudo chown smbuser: Scans
+chown: changing ownership of 'Scans': Operation not permitted
+{% endhighlight %}
+
+It's possible we can't do this with an exFAT formatted hard drive.
+
+Let's just try adding a new share that is writeable for the smbuser.
+
+I added this to /etc/samba/smb.conf:
+
+{% highlight console %}
+[Scans]
+Path = /mnt/nas/Scans
+Browseable = yes
+Writeable = yes
+only guest = no
+create mask = 0777
+directory mask = 0777
+Public = yes
+Guest ok = yes
+
+{% endhighlight %}
+
+Then I reboot the RasPi.
+
+But sadly, I can't create a file from Windows when I log in as smbuser.
+
+Working from a website [here](https://www.raspberrypi.org/forums/viewtopic.php?t=109428).
+
+First thing I do is try to add a read only field, so it looks like this:
+
+{% highlight console %}
+[Scans]
+Path = /mnt/nas/Scans
+Browseable = yes
+Writeable = yes
+only guest = no
+create mask = 0777
+directory mask = 0777
+Public = yes
+Guest ok = yes
+read only = no
+
+{% endhighlight %}
+
+Nope, doesn't work.
+
+Okay, what next?
+
+I'd really like to fix the exFAT user permissions issue. [This](https://raspberrypi.stackexchange.com/a/81989) says it should do the trick.
+
+Okay... doing that doesn't immediately solve the problem. Can I chown now?
+
+No, it does not
+
+Okay, I think we want to mount the drive as smbuser, then it should be writeable.
+
+Okay, usmbuser is uid 1001.
+
+My fstab now looks like this:
+
+{% highlight console %}
+
+proc            /proc           proc    defaults          0       0
+PARTUUID=738a4d67-01  /boot           vfat    defaults          0       2
+PARTUUID=738a4d67-02  /               ext4    defaults,noatime  0       1
+PARTUUID=4aaed96b-01  /mnt/nas        vfat    defaults,auto,users,rw,nofail 0 0
+PARTUUID=1de59ff2-01  /mnt/torrents   exfat   defaults,auto,users,rw,nofail,uid=1001,gid=1001,umask=022 0 0
+
+# a swapfile is not a swap partition, no line here
+#   use  dphys-swapfile swap[on|off]  for that
+
+{% endhighlight %}
+
+I ended up just using force user = root in the smb.conf file. 
+
+Feels like defeat.
+
+Anyway, now I need a document management system.
+
+I'm going with [Paperless](https://github.com/the-paperless-project/paperless).
+
+I start it off like this:
+
+First, I needed to install git and for that I needed up do an apt-get update.
+
+So I did both of those...
+
+{% highlight console %}
+pi@raspberrypi:~ $ sudo apt-get install git
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following package was automatically installed and is no longer required:
+  rpi-eeprom-images
+Use 'sudo apt autoremove' to remove it.
+The following additional packages will be installed:
+  git-man libcurl3-gnutls liberror-perl
+Suggested packages:
+  git-daemon-run | git-daemon-sysvinit git-doc git-el git-email git-gui gitk
+  gitweb git-cvs git-mediawiki git-svn
+The following NEW packages will be installed:
+  git git-man libcurl3-gnutls liberror-perl
+0 upgraded, 4 newly installed, 0 to remove and 17 not upgraded.
+Need to get 6,137 kB of archives.
+After this operation, 32.9 MB of additional disk space will be used.
+Do you want to continue? [Y/n]
+Get:1 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf libcurl3-gnutls armhf 7.64.0-4+deb10u1 [292 kB]
+Get:2 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf liberror-perl all 0.17027-2 [30.9 kB]
+Get:3 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf git-man all 1:2.20.1-2+deb10u3 [1,620 kB]
+Err:4 http://raspbian.raspberrypi.org/raspbian buster/main armhf git armhf 1:2.20.1-2+deb10u3
+  Connection failed [IP: 93.93.128.193 80]
+Fetched 1,943 kB in 2min 34s (12.7 kB/s)
+E: Failed to fetch http://raspbian.raspberrypi.org/raspbian/pool/main/g/git/git_2.20.1-2+deb10u3_armhf.deb  Connection failed [IP: 93.93.128.193 80]
+E: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?
+pi@raspberrypi:~ $ sudo apt-get update
+Get:1 http://raspbian.raspberrypi.org/raspbian buster InRelease [15.0 kB]
+Get:2 https://download.docker.com/linux/raspbian buster InRelease [29.7 kB]
+Get:3 http://archive.raspberrypi.org/debian buster InRelease [32.6 kB]
+Get:4 http://archive.raspberrypi.org/debian buster/main armhf Packages [331 kB]
+Get:5 http://raspbian.raspberrypi.org/raspbian buster/main armhf Packages [13.0 MB]
+Get:6 http://raspbian.raspberrypi.org/raspbian buster/contrib armhf Packages [58.7 kB]
+Fetched 13.5 MB in 2min 54s (77.4 kB/s)
+Reading package lists... Done
+pi@raspberrypi:~ $ sudo apt-get install git
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following package was automatically installed and is no longer required:
+  rpi-eeprom-images
+Use 'sudo apt autoremove' to remove it.
+The following additional packages will be installed:
+  git-man libcurl3-gnutls liberror-perl
+Suggested packages:
+  git-daemon-run | git-daemon-sysvinit git-doc git-el git-email git-gui gitk
+  gitweb git-cvs git-mediawiki git-svn
+The following NEW packages will be installed:
+  git git-man libcurl3-gnutls liberror-perl
+0 upgraded, 4 newly installed, 0 to remove and 29 not upgraded.
+Need to get 4,194 kB/6,137 kB of archives.
+After this operation, 32.9 MB of additional disk space will be used.
+Do you want to continue? [Y/n]
+Get:1 http://mirror.sjc02.svwh.net/raspbian/raspbian buster/main armhf git armhf 1:2.20.1-2+deb10u3 [4,194 kB]
+Fetched 4,194 kB in 18s (233 kB/s)
+Selecting previously unselected package libcurl3-gnutls:armhf.
+(Reading database ... 43138 files and directories currently installed.)
+Preparing to unpack .../libcurl3-gnutls_7.64.0-4+deb10u1_armhf.deb ...
+Unpacking libcurl3-gnutls:armhf (7.64.0-4+deb10u1) ...
+Selecting previously unselected package liberror-perl.
+Preparing to unpack .../liberror-perl_0.17027-2_all.deb ...
+Unpacking liberror-perl (0.17027-2) ...
+Selecting previously unselected package git-man.
+Preparing to unpack .../git-man_1%3a2.20.1-2+deb10u3_all.deb ...
+Unpacking git-man (1:2.20.1-2+deb10u3) ...
+Selecting previously unselected package git.
+Preparing to unpack .../git_1%3a2.20.1-2+deb10u3_armhf.deb ...
+Unpacking git (1:2.20.1-2+deb10u3) ...
+Setting up libcurl3-gnutls:armhf (7.64.0-4+deb10u1) ...
+Setting up liberror-perl (0.17027-2) ...
+Setting up git-man (1:2.20.1-2+deb10u3) ...
+Setting up git (1:2.20.1-2+deb10u3) ...
+Processing triggers for man-db (2.8.5-2) ...
+Processing triggers for libc-bin (2.28-10+rpi1) ...
+{% endhighlight %}
+
+{% highlight console %}
+pi@raspberrypi:~ $ git clone https://github.com/the-paperless-project/paperless.git
+{% endhighlight %}
+
+This creates a 'paperless' folder into which I change the working directory.
+
+Then, I try to follow these directions [here](https://paperless.readthedocs.io/en/latest/setup.html#setup-installation-docker).
+
+Step 3 is what I'm on considering that I already have Docker installed and Docker-Compose installed.
+
+So, luckily in the paperless folder there are the two basic files that I need to create and customize.
+
+So I follow its advice.
+
+I'm to modify docker-compose.yml to my liking. My likings are:
+
+* Modified restart to always: restart: always
+* Left the web server port as was: 8000
+* The healthcheck stuff looks interesting, but I'll leave it as is
+
+Now, we get into something actionable: volumes.
+
+There's a data and media folder and a consume folder. What do they do?
+The website says that the only thing I need to change is the consume directory - I'll set it to /mnt/nas/Scans
+Apparently I had to do this in two places: under webserver and consumer.
+
+So I did that. Then I saved the file as docker-compose.yml.
+
+Next, on to Docker-compose.env
+
+I didn't change anything there.
+
+Now, I do this:
+
+{% highlight console %}
+docker-compose up -d
+{% endhighlight %}
+
+And, ha! I don't have docker-compose installed. I guess I was wrong.
+
+So I did this:
+
+{% highlight console %}
+pi@raspberrypi:~/paperless $ sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100     9  100     9    0     0     31      0 --:--:-- --:--:-- --:--:--    31
+pi@raspberrypi:~/paperless $ sudo chmod +x /usr/local/bin/docker-compose
+pi@raspberrypi:~/paperless $ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+
+{% endhighlight %}
+
+Yeah... that didn't work. The download specifically.
+
+Turns out the Raspberyy Pi doesn't have a ready-made version of Compose on the official site.
+So I try this [here](https://dev.to/rohansawant/installing-docker-and-docker-compose-on-the-raspberry-pi-in-5-simple-steps-3mgl)
+
+So I try:
+{% highlight console %}
+sudo pip3 -v install docker-compose
+{% endhighlight %}
+
+And it does stuff for a while...
+Okay, doesn't look like it failed anywhere.
+
+Time to try the Docker command again.
+
+And it works!
+
+Working for a while....
+
+Okay, what's the next step?
+
+{% highlight console %}
+docker-compose run --rm webserver createsuperuser
+{% endhighlight %}
+
+It makes me put in a password, so I do.
+
+Now I can log into the web interface on port 8000 @ http://192.168.50.44:8000
+
+Well, what do I do with this?
+
+It doesn't specify what formats it can ingest.  My scanner can do JPEG.
+
+Okay, I have a JPEG there, I had to do some messing to get the consume directory - my source and dest were switched. Once I fixed my docker-compose file and restarted I was able to get a shell on the paperless consumer docker and cd to './consume' and see the files I expected.
+
+I even saw unpaper running via top
+
+But I dont' see any documents.
+
+I look in /usr/src/paperless/media/documents/originals and I see a PDF.  You'd think that was it.
+
+But it's not even unskewed or anything. Doesn't look complete by any means.
+
+I'm wondering if my files are crashing the script?
+
+It might be the JPEG. I removed everything except it and I still get kicked out of the consumer docker shell.
+
+tesseract is always the last thing to run.
+
+It looks like it finished. There's a new .jpg in the originals folder. But no, it's not fixed. And somehow the old pdf showed up again.
+
+Oof. All my projects end up like this.
+
+
+
 
 ## Resources ##
