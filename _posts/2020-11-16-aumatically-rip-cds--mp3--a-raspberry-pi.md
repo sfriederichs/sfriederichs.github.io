@@ -371,6 +371,45 @@ The following tests FAILED:
 Errors while running CTest
 {% endhighlight %}
 
+Eh, I'm going to ignore it.
+
+Finally this:
+
+{% highlight console %}
+sudo make install
+{% endhighlight %}
+
+Then, I find an unknown MP3 and:
+{% highlight console %}
+pi@raspberrypi:/mnt/nas/Tessa CD Imports/Unknown_Artist/Unknown_Album $ idntag 01.Track_1.mp3
+/mnt/nas/Tessa CD Imports/Unknown_Artist/Unknown_Album/01.Track_1.mp3 : Traceback (most recent call last):
+  File "/usr/local/bin/idntag", line 94, in <module>
+    main()
+  File "/usr/local/bin/idntag", line 90, in main
+    identify_and_update_file(path, args.keepname)
+  File "/usr/local/bin/idntag", line 53, in identify_and_update_file
+    song.save()
+  File "src/taglib.pyx", line 122, in taglib.File.save
+OSError: Unable to save tags: file is read-only
+{% endhighlight %}
+
+Oops, trying sudo...
+{% highlight console %}
+pi@raspberrypi:/mnt/nas/Tessa CD Imports/Unknown_Artist/Unknown_Album $ sudo idntag 01.Track_1.mp3
+Traceback (most recent call last):
+  File "/usr/local/bin/idntag", line 8, in <module>
+    import acoustid
+ModuleNotFoundError: No module named 'acoustid'
+
+{% endhighlight %}
+
+Hmm, maybe sudo pip3 install acoustid?
+
+Maybe, but I copied the file and got it to work. Sadly, pyacoustid (the library we
+use to identify songs) doesn't return the album as well.
+
+Maybe I can figure out what the album is from the artist and song, then copy and rename the thing to a proper directory structure and completely fill out the ID3 tags.
+
 ## Resources ##
 
 [SteveB's Guide](http://www.questions4steveb.co.uk/html/Raspberry_Pi/Pi-CD-auto-Rip)
