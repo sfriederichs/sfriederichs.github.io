@@ -656,7 +656,7 @@ I'm starting at the 'Setting up automatic mounting' section.
 
 I start off by doing this:
 {% highlight console %}
-pi@raspberrypi:~ $ Then
+pi@raspberrypi:~ $ sudo blkid
 UUID                                 NAME        FSTYPE PARTUUID                             MOUNTPOINT
                                      sda
 16E1-2724                            └─sda1      vfat   ed9bf8d7-01
