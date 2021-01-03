@@ -20,3 +20,5 @@ include: ['_pages']
 
 
 google_analytics: UA-72482016-1
+
+exclude: tools
