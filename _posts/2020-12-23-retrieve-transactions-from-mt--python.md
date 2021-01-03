@@ -120,7 +120,7 @@ Let's navigate there and try again.
 
 Here's another wrinkle:
 
-{% highlight %}
+{% highlight console %}
 
 C:\Users\sfrie\AppData\Local\Programs\Python\Python38-32\Lib\site-packages>python mintapi/api.py --keyring --headless sfriederichs@gmail.com
 usage: api.py [-h] [--session-path [SESSION_PATH]] [--accounts] [--budgets] [--budget_hist] [--net-worth]
@@ -256,7 +256,7 @@ Hmm, that's interesting. I wonder if there's an API reference that I can use...
 
 No, not a written one. I can look at the API code though. I see this:
 
-{% highilght python %}
+{% highlight python %}
 def get_transactions_csv(self, include_investment=False, acct=0):
 {% endhighlight %}
 
