@@ -2,7 +2,7 @@
 layout: post
 title:  "Introductory Programming in AppleSoft BASIC"
 
-date:   2022-09-22 14:11
+date:   2020-09-22 14:11
 categories: basic
 ---
 
