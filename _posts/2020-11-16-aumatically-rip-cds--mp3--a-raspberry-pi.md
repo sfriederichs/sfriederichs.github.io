@@ -188,8 +188,6 @@ I think I'll go with -V 0 then, like this:
 # with a target bitrate of ~245 Kbps and a bitrate range of 220...260 Kbps.
 LAMEOPTS='-V 0'
 
-{% endhighlight %}
-
 ### CD Database Options ###
 
 # CDDB options

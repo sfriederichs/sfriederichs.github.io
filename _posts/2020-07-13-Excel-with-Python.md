@@ -116,6 +116,32 @@ book.save('write2cell.xlsx')
 
 It's worth noting here that OpenPyXL uses 1-based indexing: the cell at row 2 column 2 is "B2", not "C3".
 
+### Creating a Sheet ###
+
+Here's how to create a new sheet in a workbook:
+
+{% highlight python %}
+import openpyxl
+
+wb = openpyxl.load_workbook("example.xlsx")
+wb.create_sheet("Sheet2")
+
+{% endhighlight %}
+
+### Writing a List of Values Into a Sheet ###
+
+A good way to do this is:
+
+{% highlight console %}
+sheet = budgetWb.sheets["My Sheet"]
+header = ["Date","Description","Amount","Category","Comment"]
+    for col,value in enumerate(headereader):
+        sheet.cell(column = col+1,row = 1,value=str(value))
+{% endhighlight %}
+
+### Looping Over All Rows in a Sheet ###
+
+
 ### Getting a Range of Cells ###
 
 There are times when you want to pluck a range of cells and work with them. Here's how you can do that:
