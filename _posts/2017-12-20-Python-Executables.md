@@ -56,6 +56,27 @@ Once you run that executable, you'll get the output you expect:
 
 > Hello World!
 
+## Generating a Single Executable File ##
+
+Normally, when using Py2Exe, it will generate a big directory of miscellaneous files that are kinda messy alongside the executable you want.
+There's a way you can slim it all down to just one executable file.
+
+[This](http://www.py2exe.org/index.cgi/ListOfOptions) site discusses the options that you can pass to py2exe when you invoke it. The script that generates a single executable is here:
+
+{% highlight python %}
+from distutils.core import setup
+import py2exe, sys, os
+
+sys.argv.append('py2exe')
+
+setup(
+    options = {'py2exe': {'optimize': 2,'bundle_files':1}},
+    console=['src/pyCli.py']
+    )
+{% endhighlight %}
+
+
+
 ## Issues ##
 
 ### Missing Modules ###
