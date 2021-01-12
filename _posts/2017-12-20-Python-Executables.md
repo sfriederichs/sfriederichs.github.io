@@ -92,6 +92,17 @@ setup(console=['src/pcApp.py'])
 {% endhighlight %}
 
 Once done, the script finds all of my custom modules, imports them and the EXE runs fine.
+
+### Dropbox, Virus Scanners, and WinError 110 ###
+
+Sometimes, you'll get an error like this:
+
+{% highlight console %}
+error: [WinError 110] The system cannot open the device or file specified.
+{% endhighlight %}
+
+This sort of error is caused by another program trying to access the files that py2exe is trying to access. Usually, this is an antivirus program or (in my case) Dropbox. I remedied this error by turning off Dropbox or by moving the folder outside of my Dropbox folder.
+
 ## Resources ##
 
 * [Py2Exe Tutorial](http://www.py2exe.org/index.cgi/Tutorial)

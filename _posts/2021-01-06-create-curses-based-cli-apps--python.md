@@ -56,6 +56,10 @@ print("Window ended.")
 All this does is show a blank window for a few seconds, but it's a start!
 
 
+## Repo ##
+
+[Ever-evolving curses script](https://github.com/sfriederichs/pyCurses)
+
 ## Resources ##
 
 * [Python curses library documentation](https://docs.python.org/3/library/curses.html)

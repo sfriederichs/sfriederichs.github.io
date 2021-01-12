@@ -310,7 +310,7 @@ mint.close()
 reader = csv.reader(csvDataHandle,delimiter = ',')
 
 for date,desc,amount,transType,classification,account,burn1,burn2,burn3 in reader:
-    print(str(date)+"\t"+str(desc) + "\t" + str(transType) + "\t" + str(classification) + "\t" +str(account) + "\t" + str(burn1) + "\t" + str(burn2) + "\t" + str(burn3))
+    print(str(date)+","+str(desc) + "," + str(transType) + "," + str(classification) + "," +str(account) + "," + str(burn1) + "," + str(burn2) + "," + str(burn3))
 
 {% endhighlight %}
 
