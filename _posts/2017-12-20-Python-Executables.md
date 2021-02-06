@@ -142,6 +142,14 @@ This produced dist/pyCli.exe - one file only!
 
 I'm kind of sad how easy that was.
 
+### Issues ###
+
+With my version of PyInstaller Windows Defender flags it as a virus: Trojan:Win32/Wacatac.B!ml
+
+This is a false alarm.
+
+There's a StackOverflow detailing the issue and fixes [here](https://stackoverflow.com/questions/43777106/program-made-with-pyinstaller-now-seen-as-a-trojan-horse-by-avg).
+
 ## Py2Exe - Deprecated ##
 
 You probably shouldn't even bother reading any of this, but it's retained here for completeness. Also, maybe it'll be useful someday. Who knows.
