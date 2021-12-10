@@ -719,6 +719,65 @@ Yes, the MOUNTPOINT for the /dev/sda1 device is as it should be.
 
 Muy. Bueno.
 
+#### Formatting a New Drive ####
+
+I've recently bought a new external drive since my media server drive is
+getting full. So I need to get it ready to work with Plex on the 
+Raspberry Pi. It came formatted as NTFS but I don't really want that.
+I need to figure out what filesystem I should use and how to forma tit.
+
+Several people on [this](https://serverfault.com/questions/14235/best-file-system-for-media-server) thread are suggesting XFS. They say it's good for large files.
+
+Okay, [this](https://raspberrytips.com/format-mount-usb-drive/) site
+suggests that all I need to do is to is this:
+{% highlight console %}
+sudo mkfs.xfs /dev/sdc1
+{% endhighlight %}
+
+Let's try it.
+
+Well it does not have mkfs.xfs. Here's what I think I have to install 
+to get that:
+
+{% highlight console %}
+pi@raspberrypi:~ $ sudo apt-get install xfsprogs
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following package was automatically installed and is no longer required:
+  rpi-eeprom-images
+Use 'sudo apt autoremove' to remove it.
+The following additional packages will be installed:
+  libreadline5
+Suggested packages:
+  xfsdump acl quota
+The following NEW packages will be installed:
+  libreadline5 xfsprogs
+0 upgraded, 2 newly installed, 0 to remove and 29 not upgraded.
+Need to get 912 kB of archives.
+After this operation, 3,388 kB of additional disk space will be used.
+Do you want to continue? [Y/n] Y
+Get:1 http://raspbian.mirror.axinja.net/raspbian buster/main armhf libreadline5 armhf 5.2+dfsg-3 [103 kB]
+Get:2 http://raspbian.mirror.axinja.net/raspbian buster/main armhf xfsprogs armhf 4.20.0-1 [809 kB]
+Fetched 912 kB in 2s (451 kB/s)
+Selecting previously unselected package libreadline5:armhf.
+(Reading database ... 52676 files and directories currently installed.)
+Preparing to unpack .../libreadline5_5.2+dfsg-3_armhf.deb ...
+Unpacking libreadline5:armhf (5.2+dfsg-3) ...
+Selecting previously unselected package xfsprogs.
+Preparing to unpack .../xfsprogs_4.20.0-1_armhf.deb ...
+Unpacking xfsprogs (4.20.0-1) ...
+Setting up libreadline5:armhf (5.2+dfsg-3) ...
+Setting up xfsprogs (4.20.0-1) ...
+update-initramfs: deferring update (trigger activated)
+Processing triggers for man-db (2.8.5-2) ...
+Processing triggers for libc-bin (2.28-10+rpi1) ...
+Processing triggers for initramfs-tools (0.133+deb10u1) ...
+
+{% endhighlight %}
+
+
+
 ### USB Drive Mounting Configuration ###
 
 Here's the fstab I'm using to mount both of my drives at once:
