@@ -35,7 +35,14 @@ You can't get the output of the script as a variable or anything else cool with 
 
 When I need this approach, I'll document it. For now, you can just look at the site in Resources for all of the information.
 
+Start [jere](https://stackoverflow.com/questions/6657690/python-getoutput-equivalent-in-subprocess)
 
+{% highlight python %}
+import subprocess
+process = subprocess.Popen(['ls', '-a'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+out, err = process.communicate()
+print(out)
+{% endhighlight %}
 ## Resources ##
 
 [How to Execute Shell Commands with Python](https://janakiev.com/blog/python-shell-commands/)

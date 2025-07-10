@@ -527,8 +527,6 @@ the drive plugged in, and then again without it:
 {% highlight console %}
 pi@raspberrypi:~ $ ls /dev/sd*
 /dev/sda  /dev/sda1
-pi@raspberrypi:~ $ ls /dev/sd*
-ls: cannot access '/dev/sd*': No such file or directory
 
 {% endhighlight %}
 
@@ -776,7 +774,14 @@ Processing triggers for initramfs-tools (0.133+deb10u1) ...
 
 {% endhighlight %}
 
+So, now I try this:
+{% highlight console %}
+pi@raspberrypi:~ $ sudo mkfs.xfs /dev/sdc1
+mkfs.xfs: /dev/sdc1 appears to contain an existing filesystem (ntfs).
 
+{% endhighlight %}
+
+Okay, makes sense. Let's try this:
 
 ### USB Drive Mounting Configuration ###
 
@@ -3112,6 +3117,37 @@ It looks like it finished. There's a new .jpg in the originals folder. But no, i
 Oof. All my projects end up like this.
 
 
+## Encoding Video to x264 for Plex Using Hardware Acceleration ##
 
+{% highlight console %}
+ffmpeg -i <input> -c:v h264_v4l2m2m -preset superfast -crf 23 -tune film -b:v 8M -maxrate:v 8M -bufsize:v 8M -c:a aac -ac 2 -ab 256K -strict experimental -threads 4 -loglevel info -y <output>.mp4
+{% endhighlight %}
+
+
+## Mounting a Remote Samba Share to a Local Path ##
+
+[Thread](https://forums.raspberrypi.com/viewtopic.php?t=276537).
+
+His final solution:
+{% highlight console %}
+//192.168.2.7/Videos /mnt/Videos cifs _netdev,credentials=/home/pi/.andycreds,uid=pi,gid=pi,x-systemd.automount 0 0
+{% endhighlight %}
+
+His initial solution:
+{% highlight console %}
+//PC/Share /mnt/share cifs username=username,password=password 0 0
+{% endhighlight %}
+
+An intermediate solution:
+{% highlight console %}
+//PC/Share /mnt/share cifs _netdev,username=username,password=password 0 0
+{% endhighlight %}
+
+So if I had to guess I'd say that my fstab entry would be:
+
+{% highlight console %}
+//192.168.50.122/Torrents /mnt/remote-torrents cifs _netdev,username=guest,password= 0 0
+{% endhighlight %}
 
 ## Resources ##
+
