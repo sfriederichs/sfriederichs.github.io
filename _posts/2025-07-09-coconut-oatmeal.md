@@ -14,20 +14,26 @@ And it turns out you can. Coconut milk adds some nice fat to oatmeal and it tast
 # Materials #
 
 Large Measuring Glass
+
 Large Pot
+
 1-cup measure
+
 Large, coverable bowl for storage
+
 Stirring spoon
 
 # Ingredients #
 
 ## Pantry ##
-3 C Oatmeal
+
+2 C Oatmeal
+
 1 14-ounce can of coconut milk
 
 # Steps #
 
-Pour the can of coconut milk into your large measuring glass, then fill with water until you have 9C total of liquid. My measuring glass only goes to 8C, so I just eyeball it. 
+Pour the can of coconut milk into your large measuring glass, then fill with water until you have 5 1/2C total of liquid. 
 
 The only concern with the total volume of liquid here is the creaminess or dryness of the oatmeal. The amount of liquid is well above what most oatmeals recommend (most I've found use a 2:1 ratio). A fair amount of experimentation lead me to prefer creamier oatmeal, and determined that 9C of liquid gives me a creamier oatmeal. Less liquid makes it a little drier and tougher. You can feel free to experiment with the amount of liquid to suit your tastes.
 
